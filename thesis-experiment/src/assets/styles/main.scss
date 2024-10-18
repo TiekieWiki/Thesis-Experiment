@@ -1,0 +1,19 @@
+@import 'reset.scss';
+@import 'transitions.scss';
+@import 'variables.scss';
+
+// Pages
+@import 'pages/end.scss';
+@import 'pages/experiment.scss';
+@import 'pages/start.scss';
+
+// Components
+@import 'components/form.scss';
+@import 'components/hyperlink.scss';
+@import 'components/keyboard.scss';
+@import 'components/list.scss';
+@import 'components/menu.scss';
+@import 'components/picture.scss';
+@import 'components/popUp.scss';
+@import 'components/slider.scss';
+@import 'components/text.scss';

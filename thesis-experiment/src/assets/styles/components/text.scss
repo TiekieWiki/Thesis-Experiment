@@ -17,3 +17,13 @@ h2 {
 p {
   font-size: 18px;
 }
+
+.select-text {
+  user-select: text;
+
+  ::-moz-selection,
+  ::selection {
+    color: $color-primary;
+    background: $color-secondary;
+  }
+}

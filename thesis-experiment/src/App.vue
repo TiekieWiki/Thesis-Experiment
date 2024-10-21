@@ -1,2 +1,2 @@
-<template><p>Test</p></template>
+<template><a href="#">Test</a></template>
 <script setup lang="ts"></script>

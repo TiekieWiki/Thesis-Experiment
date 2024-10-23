@@ -1,0 +1,8 @@
+button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-small;
+  padding: $spacing-small $spacing-medium;
+  background-color: $color-tertiary;
+  border: 2px solid $color-primary;
+}

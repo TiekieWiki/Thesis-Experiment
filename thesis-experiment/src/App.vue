@@ -3,16 +3,14 @@
   ><img src="./assets/images/Test.jpg" alt="Photo by Greg Becker on Unsplash" />
   <div class="menu">
     <transition name="switch" mode="out-in">
-      <font-awesome-icon
-        v-if="!menuOpen"
-        @click="menuOpen = true"
-        :icon="['fas', 'bars']"
-      />
-      <font-awesome-icon
-        v-else
-        @click="menuOpen = false"
-        :icon="['fas', 'xmark']"
-      />
+      <button v-if="!menuOpen" @click="menuOpen = true">
+        <font-awesome-icon :icon="['fas', 'bars']" />
+        <p>Menu</p>
+      </button>
+      <button v-else>
+        <font-awesome-icon @click="menuOpen = false" :icon="['fas', 'xmark']" />
+        <p>Menu</p>
+      </button>
     </transition>
     <ul v-if="menuOpen">
       <li v-for="item in menuItems" :key="item">

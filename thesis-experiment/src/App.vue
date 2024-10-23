@@ -23,10 +23,22 @@
     explicabo sapiente similique expedita culpa beatae magni eveniet alias ad!
     Corrupti modi atque eos, optio dolorem aspernatur rem molestiae animi.
   </p>
+  <button @click="popUpOpen = true">Open pop-up</button>
+  <teleport to="body" v-if="popUpOpen">
+    <div class="pop-up-background">
+      <div class="pop-up">
+        <button @click="popUpOpen = false">
+          <font-awesome-icon :icon="['fas', 'times']" />
+        </button>
+        <p>Content</p>
+      </div>
+    </div>
+  </teleport>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 
 const menuOpen = ref<boolean>(false)
 const menuItems: string[] = ['A', 'B', 'C']
+const popUpOpen = ref<boolean>(false)
 </script>

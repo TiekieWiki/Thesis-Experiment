@@ -1,0 +1,32 @@
+.slider {
+  position: relative;
+  width: 100%;
+  padding: calc($spacing-small / 4);
+  border: $size-border solid $color-primary;
+  border-radius: 25px;
+
+  input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: $size-large;
+    background: transparent;
+    outline: none;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: $size-large;
+      height: $size-large;
+      background: url('/src/assets/images/Phone.svg') no-repeat center center;
+      background-size: contain;
+    }
+
+    &::-moz-range-thumb {
+      width: $size-large;
+      height: $size-large;
+      background: url('/src/assets/images/Phone.svg') no-repeat center center;
+      background-size: contain;
+    }
+  }
+}

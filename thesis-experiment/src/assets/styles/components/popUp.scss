@@ -17,6 +17,6 @@
     margin-left: calc(-25vw - (2 * #{$spacing-medium} - 4px));
     padding: $spacing-medium;
     background-color: $color-tertiary;
-    border: 2px solid $color-primary;
+    border: $size-border solid $color-primary;
   }
 }

@@ -1,0 +1,125 @@
+@import '../mixins/interactions.scss';
+
+@mixin form-element {
+  width: 100%;
+  padding: $spacing-small $spacing-medium;
+  background-color: transparent;
+  border: $size-border solid $color-primary;
+
+  &:not(:disabled) {
+    @include outline-on-focus;
+  }
+}
+
+form {
+  display: grid;
+  gap: $spacing-medium;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='number'] {
+  @include form-element;
+}
+
+.label-group {
+  label {
+    display: grid;
+    grid-template-columns: $size-icon-small auto;
+    gap: $spacing-small;
+
+    input[type='checkbox'],
+    input[type='radio'] {
+      -webkit-appearance: none;
+      appearance: none;
+      display: grid;
+      place-content: center;
+      width: calc($size-icon-small + 0.2em);
+      height: calc($size-icon-small + 0.2em);
+      background-color: transparent;
+      color: $color-primary;
+      border: $size-border solid $color-primary;
+      cursor: pointer;
+
+      @include outline-on-focus;
+
+      &::before {
+        content: '';
+        width: calc($size-icon-small - 0.3em);
+        height: calc($size-icon-small - 0.3em);
+        transform: scale(0);
+        transition: $speed-medium transform ease-in-out;
+        box-shadow: inset $size-icon-small $size-icon-small $color-primary;
+      }
+
+      &:checked::before {
+        transform: scale(1);
+      }
+    }
+
+    input[type='checkbox'] {
+      border-radius: 5px;
+    }
+
+    input[type='radio'] {
+      border-radius: 10px;
+
+      &::before {
+        border-radius: 10px;
+      }
+    }
+
+    &:not(:first-child) {
+      margin-top: $spacing-small;
+    }
+  }
+}
+
+.select {
+  @include form-element;
+
+  display: grid;
+  grid-template-areas: 'select';
+  align-items: center;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    grid-area: select;
+    justify-self: end;
+    width: $size-icon-small;
+    height: calc($size-icon-small / 3 * 2);
+    background-color: $color-primary;
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  }
+
+  select {
+    appearance: none;
+    z-index: 1;
+    grid-area: select;
+    width: 100%;
+    padding: 0 $size-icon-small 0 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    cursor: inherit;
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+}
+
+.error {
+  padding: $spacing-small $spacing-medium;
+  background-color: $color-error;
+}
+
+.success {
+  padding: $spacing-small $spacing-medium;
+  background-color: $color-success;
+}

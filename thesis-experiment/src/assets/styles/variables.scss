@@ -2,8 +2,19 @@
 $color-primary: #000;
 $color-secondary: #777;
 $color-tertiary: #fff;
+$color-success: #20a957;
+$color-error: #be1b16;
 
 // Spacing
 $spacing-small: 8px;
 $spacing-medium: 16px;
 $size-medium: 7mm;
+
+// Sizing
+$size-icon-small: 1em;
+$size-border: 2px;
+
+// Transition
+$scale-small: 1.008;
+$scale-medium: 1.1;
+$speed-medium: 0.5s;

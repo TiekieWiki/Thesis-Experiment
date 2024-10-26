@@ -16,6 +16,7 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
+  max-width: 100%;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
   background-color: $color-tertiary;

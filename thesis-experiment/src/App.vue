@@ -1,10 +1,10 @@
 <template>
   <main>
-    <a href="#">Test</a
+    <!-- <a href="#">Test</a
     ><img
       src="./assets/images/Test.jpg"
       alt="Photo by Greg Becker on Unsplash"
-    />
+    /> -->
     <div class="menu">
       <transition name="switch" mode="out-in">
         <button v-if="!menuOpen" @click="menuOpen = true">
@@ -54,6 +54,9 @@
       <p class="error">Test</p>
       <p class="success">Test</p>
     </form>
+    <div class="slider">
+      <input type="range" min="1" max="100" value="1" />
+    </div>
   </main>
 </template>
 <script setup lang="ts">

@@ -1,0 +1,36 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xxsmall;
+
+  .row-1,
+  .row-2,
+  .row-3,
+  .row-4 {
+    display: flex;
+    gap: $spacing-xxsmall;
+    justify-content: center;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: $size-medium;
+      height: $size-medium;
+      border: $size-border solid $color-primary;
+      border-radius: 5px;
+
+      &.key-medium {
+        width: calc($size-large + $spacing-xxsmall);
+      }
+
+      &.spacebar {
+        width: calc($size-medium * 6 + $spacing-xxsmall * 5);
+      }
+
+      &:active {
+        background-color: $color-secondary;
+      }
+    }
+  }
+}

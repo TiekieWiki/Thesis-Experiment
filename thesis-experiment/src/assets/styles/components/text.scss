@@ -1,5 +1,6 @@
 html,
-body {
+body,
+::placeholder {
   font-family: Verdana, Georgia, Arial, 'Times New Roman', sans-serif;
   font-weight: normal;
   line-height: 1;
@@ -17,6 +18,11 @@ h2 {
 
 p {
   font-size: 18px;
+}
+
+::placeholder {
+  font-size: 16px;
+  color: $color-secondary;
 }
 
 .select-text {

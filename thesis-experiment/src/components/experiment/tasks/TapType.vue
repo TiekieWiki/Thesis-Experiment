@@ -1,4 +1,5 @@
 <template>
+  <textarea placeholder="Test"></textarea>
   <div class="keyboard">
     <div class="row-1">
       <div>Q</div>

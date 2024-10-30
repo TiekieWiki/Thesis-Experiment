@@ -1,15 +1,17 @@
 <template>
-  <draggable
-    v-model="dragList"
-    @start="drag = true"
-    @end="drag = false"
-    item-key="id"
-    class="list"
-  >
-    <template #item="{ element }">
-      <div class="list-item">{{ element.name }}</div>
-    </template>
-  </draggable>
+  <div class="drag-list">
+    <draggable
+      v-model="dragList"
+      @start="drag = true"
+      @end="drag = false"
+      item-key="id"
+      class="list"
+    >
+      <template #item="{ element }">
+        <div class="list-item">{{ element.name }}</div>
+      </template>
+    </draggable>
+  </div>
 </template>
 
 <script setup lang="ts">

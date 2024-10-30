@@ -1,0 +1,36 @@
+.tap-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  textarea {
+    width: 65vw;
+  }
+
+  .keyboard {
+    position: absolute;
+    bottom: $spacing-medium;
+  }
+
+  &.standard {
+    textarea {
+      align-self: flex-end;
+    }
+
+    .keyboard {
+      right: $spacing-medium;
+    }
+  }
+
+  &.mirrored {
+    textarea {
+      align-self: flex-start;
+    }
+
+    .keyboard {
+      left: $spacing-medium;
+    }
+  }
+}

@@ -1,14 +1,5 @@
+@import '../mixins/orientation.scss';
+
 .multi-touch-rotate {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-
-  &.standard {
-    justify-content: end;
-  }
-
-  &.mirrored {
-    justify-content: start;
-  }
+  @include center-orientation;
 }

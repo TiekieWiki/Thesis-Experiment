@@ -1,7 +1,10 @@
 button {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: $spacing-small;
+  min-width: $size-medium;
+  min-height: $size-medium;
   padding: $spacing-small $spacing-medium;
   background-color: $color-tertiary;
   border: $size-border solid $color-primary;

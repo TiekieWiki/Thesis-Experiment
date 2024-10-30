@@ -2,6 +2,8 @@
 
 @mixin form-element {
   width: 100%;
+  min-width: $size-medium;
+  min-height: $size-medium;
   padding: $spacing-small $spacing-medium;
   background-color: transparent;
   border: $size-border solid $color-primary;
@@ -116,11 +118,13 @@ textarea {
 }
 
 .error {
-  padding: $spacing-small $spacing-medium;
+  @include form-element;
+  border: none;
   background-color: $color-error;
 }
 
 .success {
-  padding: $spacing-small $spacing-medium;
+  @include form-element;
+  border: none;
   background-color: $color-success;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="tap-menu">
+  <div :class="['tap-menu', interfaceOrientation]">
     <div class="menu">
       <transition name="switch" mode="out-in">
         <button v-if="!menuOpen" @click="menuOpen = true">
@@ -25,6 +25,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+
+defineProps<{
+  interfaceOrientation: string
+}>()
 
 const menuOpen = ref<boolean>(false)
 const menuItems: string[] = ['A', 'B', 'C']

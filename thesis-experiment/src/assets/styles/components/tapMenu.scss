@@ -1,0 +1,11 @@
+.tap-menu {
+  display: flex;
+
+  &.standard {
+    justify-content: end;
+  }
+
+  &.mirrored {
+    justify-content: start;
+  }
+}

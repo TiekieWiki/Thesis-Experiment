@@ -2,6 +2,7 @@
   .list-item {
     display: flex;
     align-items: center;
+    width: 40vw;
     min-width: $size-medium;
     min-height: $size-medium;
     padding: $spacing-small;

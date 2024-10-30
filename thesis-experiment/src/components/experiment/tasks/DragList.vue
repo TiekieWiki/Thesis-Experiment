@@ -1,5 +1,5 @@
 <template>
-  <div class="drag-list">
+  <div :class="['drag-list', interfaceOrientation]">
     <draggable
       v-model="dragList"
       @start="drag = true"
@@ -17,6 +17,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
+
+defineProps<{
+  interfaceOrientation: string
+}>()
 
 const drag = ref<boolean>(false)
 const dragList = ref<{ id: number; name: string }[]>([

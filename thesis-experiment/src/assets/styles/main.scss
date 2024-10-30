@@ -8,13 +8,27 @@
 @import 'pages/start.scss';
 
 // Components
-@import 'components/button.scss';
-@import 'components/form.scss';
-@import 'components/hyperlink.scss';
-@import 'components/keyboard.scss';
-@import 'components/list.scss';
-@import 'components/menu.scss';
-@import 'components/picture.scss';
-@import 'components/popUp.scss';
-@import 'components/slider.scss';
-@import 'components/text.scss';
+@import 'components/doubleTapZoomIn.scss';
+@import 'components/doubleTapZoomOut.scss';
+@import 'components/dragList.scss';
+@import 'components/dragSlider.scss';
+@import 'components/flickLeft.scss';
+@import 'components/flickRight.scss';
+@import 'components/longTapHyperlink.scss';
+@import 'components/longTapSelect.scss';
+@import 'components/multiTouchRotate.scss';
+@import 'components/multiTouchZoom.scss';
+@import 'components/tapMenu.scss';
+@import 'components/tapType.scss';
+
+// Elements
+@import 'elements/button.scss';
+@import 'elements/form.scss';
+@import 'elements/hyperlink.scss';
+@import 'elements/keyboard.scss';
+@import 'elements/list.scss';
+@import 'elements/menu.scss';
+@import 'elements/picture.scss';
+@import 'elements/popUp.scss';
+@import 'elements/slider.scss';
+@import 'elements/text.scss';

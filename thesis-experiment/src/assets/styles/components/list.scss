@@ -1,5 +1,9 @@
 .list {
   .list-item {
+    display: flex;
+    align-items: center;
+    min-width: $size-medium;
+    min-height: $size-medium;
     padding: $spacing-small;
     border: $size-border solid $color-primary;
 

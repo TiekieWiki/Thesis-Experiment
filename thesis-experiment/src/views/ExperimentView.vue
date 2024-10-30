@@ -1,6 +1,6 @@
 <template>
-  <main :class="interfaceOrientation">
-    <DoubleTapZoomIn />
+  <main>
+    <DoubleTapZoomIn :interface-orientation="interfaceOrientation" />
   </main>
 </template>
 

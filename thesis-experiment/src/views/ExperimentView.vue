@@ -1,11 +1,11 @@
 <template>
   <main>
-    <TapMenu :interface-orientation="interfaceOrientation" />
+    <TapType :interface-orientation="interfaceOrientation" />
   </main>
 </template>
 
 <script setup lang="ts">
-import TapMenu from '@/components/experiment/tasks/TapMenu.vue'
+import TapType from '@/components/experiment/tasks/TapType.vue'
 import { ref } from 'vue'
 
 const interfaceOrientation = ref<string>('standard')

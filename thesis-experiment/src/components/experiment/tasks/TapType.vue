@@ -1,5 +1,5 @@
 <template>
-  <div class="tap-type">
+  <div :class="['tap-type', interfaceOrientation]">
     <textarea placeholder="Test"></textarea>
     <div class="keyboard">
       <div class="row-1">
@@ -51,3 +51,9 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+defineProps<{
+  interfaceOrientation: string
+}>()
+</script>

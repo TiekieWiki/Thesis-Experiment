@@ -1,5 +1,5 @@
 <template>
-  <div class="long-tap-select">
+  <div :class="['long-tap-select', interfaceOrientation]">
     <p class="select-text">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro suscipit
       explicabo sapiente similique expedita culpa beatae magni eveniet alias ad!
@@ -7,3 +7,9 @@
     </p>
   </div>
 </template>
+
+<script setup lang="ts">
+defineProps<{
+  interfaceOrientation: string
+}>()
+</script>

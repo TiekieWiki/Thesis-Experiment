@@ -1,0 +1,14 @@
+.drag-slider {
+  display: flex;
+  align-items: end;
+  width: 100%;
+  height: 80%;
+
+  &.standard {
+    justify-content: end;
+  }
+
+  &.mirrored {
+    justify-content: start;
+  }
+}

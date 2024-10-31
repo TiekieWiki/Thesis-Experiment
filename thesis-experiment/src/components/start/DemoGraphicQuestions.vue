@@ -3,7 +3,7 @@
     <h1>Personal information</h1>
     <label>Birth date <input type="date" /> </label>
     <div class="label-group">
-      <p>Gender</p>
+      Gender
       <label><input type="radio" />Male</label>
       <label><input type="radio" />Female</label>
       <label><input type="radio" />Other</label>

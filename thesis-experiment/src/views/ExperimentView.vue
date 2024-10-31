@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="experiment">
     <MultiTouchRotate :interface-orientation="interfaceOrientation" />
   </main>
 </template>

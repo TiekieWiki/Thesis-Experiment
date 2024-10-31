@@ -1,0 +1,17 @@
+main.start {
+  width: 100vw;
+  height: auto;
+  padding: $spacing-medium;
+
+  .laterality-test {
+    .question {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      p {
+        grid-column: 1 / -1;
+        margin-bottom: $spacing-small;
+      }
+    }
+  }
+}

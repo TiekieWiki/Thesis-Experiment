@@ -1,7 +1,7 @@
 <template>
-  <main><DemoGraphicQuestions /></main>
+  <main class="start"><LateralityTest /></main>
 </template>
 
 <script setup lang="ts">
-import DemoGraphicQuestions from '@/components/start/DemoGraphicQuestions.vue'
+import LateralityTest from '@/components/start/LateralityTest.vue'
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div :class="['tap-type', interfaceOrientation]">
-    <textarea placeholder="Test"></textarea>
+    <textarea placeholder="Test" readonly></textarea>
     <div class="keyboard">
       <div class="row-1">
         <div>Q</div>

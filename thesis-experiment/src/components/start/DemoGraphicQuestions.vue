@@ -1,15 +1,18 @@
 <template>
   <form>
-    <label for="">Test <input type="text" placeholder="test" /> </label>
+    <h1>Personal information</h1>
+    <label>Birth date <input type="date" /> </label>
     <div class="label-group">
-      <label for=""><input type="radio" name="" id="" />Test</label>
+      <p>Gender</p>
+      <label><input type="radio" />Male</label>
+      <label><input type="radio" />Female</label>
+      <label><input type="radio" />Other</label>
     </div>
-    <div class="select">
-      <select name="" id="">
-        <option value="">Test</option>
-      </select>
+    <div class="label-group">
+      <label><input type="checkbox" />I agree</label>
     </div>
     <p class="error">Test</p>
     <p class="success">Test</p>
+    <button type="submit">Continue</button>
   </form>
 </template>

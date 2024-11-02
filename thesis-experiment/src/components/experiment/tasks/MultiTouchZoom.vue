@@ -5,6 +5,7 @@
       alt="Photo by Greg Becker on Unsplash"
     />
   </div>
+  <button @click="next">Next</button>
 </template>
 
 <script setup lang="ts">
@@ -12,4 +13,9 @@ defineProps<{
   interfaceOrientation: string
   hand: string
 }>()
+
+const emit = defineEmits(['finishedTask'])
+function next() {
+  emit('finishedTask', 'DoubleTapZoomIn')
+}
 </script>

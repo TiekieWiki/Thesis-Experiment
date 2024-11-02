@@ -12,6 +12,7 @@
       </template>
     </draggable>
   </div>
+  <button @click="next">Next</button>
 </template>
 
 <script setup lang="ts">
@@ -22,6 +23,11 @@ defineProps<{
   interfaceOrientation: string
   hand: string
 }>()
+
+const emit = defineEmits(['finishedTask'])
+function next() {
+  emit('finishedTask', 'DoubleTapZoomIn')
+}
 
 const drag = ref<boolean>(false)
 const dragList = ref<{ id: number; name: string }[]>([

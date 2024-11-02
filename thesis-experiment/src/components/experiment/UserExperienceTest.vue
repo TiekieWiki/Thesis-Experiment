@@ -27,6 +27,17 @@
     </div>
     <p class="error">Test</p>
     <p class="success">Test</p>
-    <button type="submit">Continue</button>
+    <button type="button" @click="next">Continue</button>
   </form>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{
+  taskSet: string
+}>()
+
+const emit = defineEmits(['finishedTaskSet'])
+function next() {
+  emit('finishedTaskSet', props.taskSet)
+}
+</script>

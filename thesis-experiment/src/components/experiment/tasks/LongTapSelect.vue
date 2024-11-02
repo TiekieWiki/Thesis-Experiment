@@ -6,6 +6,7 @@
       Corrupti modi atque eos, optio dolorem aspernatur rem molestiae animi.
     </p>
   </div>
+  <button @click="next">Next</button>
 </template>
 
 <script setup lang="ts">
@@ -13,4 +14,9 @@ defineProps<{
   interfaceOrientation: string
   hand: string
 }>()
+
+const emit = defineEmits(['finishedTask'])
+function next() {
+  emit('finishedTask', 'DoubleTapZoomIn')
+}
 </script>

@@ -1,9 +1,9 @@
 <template>
   <main class="end">
-    <UserExperienceTest />
+    <ThankParticipant />
   </main>
 </template>
 
 <script setup lang="ts">
-import UserExperienceTest from '@/components/end/UserExperienceTest.vue'
+import ThankParticipant from '@/components/end/ThankParticipant.vue'
 </script>

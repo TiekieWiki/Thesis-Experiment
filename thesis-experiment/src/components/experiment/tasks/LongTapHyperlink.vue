@@ -20,6 +20,7 @@ import { vOnLongPress } from '@vueuse/components'
 
 defineProps<{
   interfaceOrientation: string
+  hand: string
 }>()
 
 const popUpOpen = ref<boolean>(false)

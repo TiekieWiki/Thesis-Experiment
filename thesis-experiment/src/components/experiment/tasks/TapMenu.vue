@@ -28,6 +28,7 @@ import { ref } from 'vue'
 
 defineProps<{
   interfaceOrientation: string
+  hand: string
 }>()
 
 const menuOpen = ref<boolean>(false)

@@ -12,6 +12,7 @@
       </div>
     </teleport>
   </div>
+  <button @click="next">Next</button>
 </template>
 
 <script setup lang="ts">
@@ -22,6 +23,11 @@ defineProps<{
   interfaceOrientation: string
   hand: string
 }>()
+
+const emit = defineEmits(['finishedTask'])
+function next() {
+  emit('finishedTask', 'DoubleTapZoomIn')
+}
 
 const popUpOpen = ref<boolean>(false)
 function openPopUp() {

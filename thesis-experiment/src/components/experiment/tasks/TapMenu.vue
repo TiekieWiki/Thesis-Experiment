@@ -21,6 +21,7 @@
       </ul>
     </div>
   </div>
+  <button @click="next">Next</button>
 </template>
 
 <script setup lang="ts">
@@ -30,6 +31,11 @@ defineProps<{
   interfaceOrientation: string
   hand: string
 }>()
+
+const emit = defineEmits(['finishedTask'])
+function next() {
+  emit('finishedTask', 'DoubleTapZoomIn')
+}
 
 const menuOpen = ref<boolean>(false)
 const menuItems: string[] = ['A', 'B', 'C']

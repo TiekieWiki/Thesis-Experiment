@@ -55,5 +55,6 @@
 <script setup lang="ts">
 defineProps<{
   interfaceOrientation: string
+  hand: string
 }>()
 </script>

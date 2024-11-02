@@ -1,9 +1,5 @@
 <template>
-  <main class="end">
-    <ThankParticipant />
-  </main>
+  <main class="end"></main>
 </template>
 
-<script setup lang="ts">
-import ThankParticipant from '@/components/end/ThankParticipant.vue'
-</script>
+<script setup lang="ts"></script>

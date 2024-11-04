@@ -1,21 +1,25 @@
 <template>
   <main class="experiment">
     <TaskSetInstructions
-      v-if="showTaskSetInstructions && !showUXTest && currentTaskSet"
-      :hand="currentTaskSet.includes('Left') ? 'left' : 'right'"
-      @finished-instructions="() => (showTaskSetInstructions = false)"
+      v-if="showComponent == 'taskSetInstructions' && currentTaskSet"
+      :hand="currentHand"
+      @finished-instructions="() => (showComponent = 'taskInstructions')"
+    />
+    <TaskInstructions
+      v-else-if="showComponent == 'taskInstructions' && currentTaskSet"
+      :hand="currentHand"
+      :task="currentTask"
+      @finished-instructions="() => (showComponent = 'task')"
     />
     <component
-      v-else-if="!showUXTest && currentTask"
+      v-else-if="showComponent == 'task' && currentTask"
       :is="getComponent(currentTask)"
-      :interface-orientation="
-        currentTaskSet.includes('Standard') ? 'standard' : 'mirrored'
-      "
-      :hand="currentTaskSet.includes('Left') ? 'left' : 'right'"
+      :interface-orientation="currentInterfaceOrientation"
+      :hand="currentHand"
       @finished-task="() => nextTask()"
     />
     <UserExperienceTest
-      v-else
+      v-else-if="showComponent == 'userExperienceTest'"
       :task-set="currentTaskSet"
       @finished-task-set="() => nextTaskSet()"
     />
@@ -24,6 +28,7 @@
 
 <script setup lang="ts">
 import TaskSetInstructions from '@/components/experiment/taskInstructions/TaskSetInstructions.vue'
+import TaskInstructions from '@/components/experiment/taskInstructions/TaskInstructions.vue'
 import UserExperienceTest from '@/components/experiment/UserExperienceTest.vue'
 import router from '@/router'
 import {
@@ -32,15 +37,14 @@ import {
   selectRandomItem,
 } from '@/utils/logic/selectTask'
 import { tasks, taskSet } from '@/utils/types/tasks'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 // Set task and task set on component mount
 const partialTaskSet = ref<string[]>(taskSet)
 const currentTaskSet = ref<string>('')
 const partialTasks = ref<string[]>(tasks)
 const currentTask = ref<string>('')
-const showTaskSetInstructions = ref<boolean>(true)
-const showUXTest = ref<boolean>(false)
+const showComponent = ref<string>('taskSetInstructions')
 
 onMounted(() => {
   // Select first task set
@@ -54,6 +58,16 @@ onMounted(() => {
     selectRandomItem(partialTasks.value))
 })
 
+// Compute current hand
+const currentHand = computed((): string => {
+  return currentTaskSet.value.includes('Left') ? 'left' : 'right'
+})
+
+// Compute current interface orientation
+const currentInterfaceOrientation = computed((): string => {
+  return currentTaskSet.value.includes('Standard') ? 'standard' : 'mirrored'
+})
+
 /**
  * Go to next task
  */
@@ -63,9 +77,10 @@ function nextTask() {
     // Select next task
     ;({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
       selectRandomItem(partialTasks.value))
+    showComponent.value = 'taskInstructions'
   } else {
     // Show user experience questionnaire
-    showUXTest.value = true
+    showComponent.value = 'userExperienceTest'
   }
 }
 
@@ -73,9 +88,6 @@ function nextTask() {
  * Go to next task set
  */
 function nextTaskSet() {
-  // Show tasks again
-  showUXTest.value = false
-
   // Check if task sets are finished
   if (partialTaskSet.value.length !== 0) {
     // Select next task set
@@ -86,7 +98,7 @@ function nextTaskSet() {
       partialTaskSet.value,
       currentTaskSet.value.includes('Left') ? 'left' : 'right',
     ))
-    showTaskSetInstructions.value = true
+    showComponent.value = 'taskSetInstructions'
 
     // Reset partial tasks
     partialTasks.value = tasks
@@ -96,6 +108,7 @@ function nextTaskSet() {
       selectRandomItem(partialTasks.value))
   } else {
     // Go to end page
+    showComponent.value = ''
     router.push('/finishing-up')
   }
 }

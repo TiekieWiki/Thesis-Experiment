@@ -26,7 +26,7 @@ defineProps<{
 
 const emit = defineEmits(['finishedTask'])
 function next() {
-  emit('finishedTask', 'DoubleTapZoomIn')
+  emit('finishedTask')
 }
 
 const popUpOpen = ref<boolean>(false)

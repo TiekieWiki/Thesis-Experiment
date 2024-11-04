@@ -1,7 +1,12 @@
 <template>
   <main class="experiment">
+    <TaskSetInstructions
+      v-if="showTaskSetInstructions && !showUXTest && currentTaskSet"
+      :hand="currentTaskSet.includes('Left') ? 'left' : 'right'"
+      @finished-instructions="() => (showTaskSetInstructions = false)"
+    />
     <component
-      v-if="!showUXTest && currentTask"
+      v-else-if="!showUXTest && currentTask"
       :is="getComponent(currentTask)"
       :interface-orientation="
         currentTaskSet.includes('Standard') ? 'standard' : 'mirrored'
@@ -18,6 +23,7 @@
 </template>
 
 <script setup lang="ts">
+import TaskSetInstructions from '@/components/experiment/taskInstructions/TaskSetInstructions.vue'
 import UserExperienceTest from '@/components/experiment/UserExperienceTest.vue'
 import router from '@/router'
 import {
@@ -33,6 +39,7 @@ const partialTaskSet = ref<string[]>(taskSet)
 const currentTaskSet = ref<string>('')
 const partialTasks = ref<string[]>(tasks)
 const currentTask = ref<string>('')
+const showTaskSetInstructions = ref<boolean>(true)
 const showUXTest = ref<boolean>(false)
 
 onMounted(() => {
@@ -71,7 +78,7 @@ function nextTaskSet() {
 
   // Check if task sets are finished
   if (partialTaskSet.value.length !== 0) {
-    // Select next task set (left and right following each other)
+    // Select next task set
     ;({
       selectedItem: currentTaskSet.value,
       remainingItems: partialTaskSet.value,
@@ -79,6 +86,7 @@ function nextTaskSet() {
       partialTaskSet.value,
       currentTaskSet.value.includes('Left') ? 'left' : 'right',
     ))
+    showTaskSetInstructions.value = true
 
     // Reset partial tasks
     partialTasks.value = tasks

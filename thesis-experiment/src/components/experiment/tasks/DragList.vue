@@ -26,7 +26,7 @@ defineProps<{
 
 const emit = defineEmits(['finishedTask'])
 function next() {
-  emit('finishedTask', 'DoubleTapZoomIn')
+  emit('finishedTask')
 }
 
 const drag = ref<boolean>(false)

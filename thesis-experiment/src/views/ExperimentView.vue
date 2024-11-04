@@ -1,18 +1,18 @@
 <template>
   <main class="experiment">
     <component
-      v-if="!showUXTest"
+      v-if="!showUXTest && currentTask"
       :is="getComponent(currentTask)"
       :interface-orientation="
         currentTaskSet.includes('Standard') ? 'standard' : 'mirrored'
       "
       :hand="currentTaskSet.includes('Left') ? 'left' : 'right'"
-      @finished-task="(f: string) => nextTask(f)"
+      @finished-task="() => nextTask()"
     />
     <UserExperienceTest
       v-else
       :task-set="currentTaskSet"
-      @finished-task-set="(f: string) => nextTaskSet(f)"
+      @finished-task-set="() => nextTaskSet()"
     />
   </main>
 </template>
@@ -24,7 +24,7 @@ import {
   getComponent,
   selectRandomFiltered,
   selectRandomItem,
-} from '@/utils/logic/selectRandom'
+} from '@/utils/logic/selectTask'
 import { tasks, taskSet } from '@/utils/types/tasks'
 import { onMounted, ref } from 'vue'
 
@@ -49,12 +49,8 @@ onMounted(() => {
 
 /**
  * Go to next task
- * @param finishedTask String of finished task
  */
-function nextTask(finishedTask: string) {
-  // Remove finished task from tasks
-  partialTasks.value = partialTasks.value.filter(task => task !== finishedTask)
-
+function nextTask() {
   // Check if all tasks are finished
   if (partialTasks.value.length !== 0) {
     // Select next task
@@ -68,13 +64,10 @@ function nextTask(finishedTask: string) {
 
 /**
  * Go to next task set
- * @param finishedTaskSet String of finished task set
  */
-function nextTaskSet(finishedTaskSet: string) {
-  // Remove finished task set from task sets
-  partialTaskSet.value = partialTaskSet.value.filter(
-    taskSet => taskSet !== finishedTaskSet,
-  )
+function nextTaskSet() {
+  // Show tasks again
+  showUXTest.value = false
 
   // Check if task sets are finished
   if (partialTaskSet.value.length !== 0) {

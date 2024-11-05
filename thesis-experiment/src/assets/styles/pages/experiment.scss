@@ -3,3 +3,10 @@ main.experiment {
   height: 100vh;
   padding: $spacing-medium;
 }
+
+.task-instructions {
+  .pop-up {
+    display: grid;
+    gap: $spacing-small;
+  }
+}

@@ -24,6 +24,20 @@
       @finished-task-set="() => nextTaskSet()"
     />
   </main>
+  <teleport v-if="!isCorrectDevice || !isCorrectOrientation" to="body">
+    <div class="pop-up-background">
+      <div class="pop-up">
+        <p v-if="!isCorrectDevice">
+          The experiment needs to be conducted on a mobile device. Please reload
+          the experiment on another device.
+        </p>
+        <p v-else-if="!isCorrectOrientation">
+          The experiment needs to be conducted in portrait mode. Please rotate
+          your device to portrait mode.
+        </p>
+      </div>
+    </div>
+  </teleport>
 </template>
 
 <script setup lang="ts">
@@ -37,7 +51,27 @@ import {
   selectRandomItem,
 } from '@/utils/logic/selectTask'
 import { tasks, taskSet } from '@/utils/types/tasks'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import {
+  correctDeviceType,
+  correctScreenOrientation,
+} from '@/utils/logic/checkPhone'
+
+// Check if device and orientation is correct
+const isCorrectDevice = ref<boolean>(correctDeviceType())
+const isCorrectOrientation = ref<boolean>(correctScreenOrientation())
+
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    isCorrectOrientation.value = correctScreenOrientation()
+  })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', () => {
+    isCorrectOrientation.value = correctScreenOrientation()
+  })
+})
 
 // Set task and task set on component mount
 const partialTaskSet = ref<string[]>(taskSet)

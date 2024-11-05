@@ -16,8 +16,7 @@
       <li>Sit comfortably in an environment without distractions</li>
       <li>
         Use a smartphone device. The experiment will not start on a
-        non-smartphone device. You are currently
-        {{ correctDeviceType() ? '' : 'not' }} on a smartphone device
+        non-smartphone device
       </li>
       <li>Make sure there is no glare on your screen</li>
       <li>
@@ -29,17 +28,9 @@
       </li>
       <li>
         Complete the experiment with the phone in portrait mode. If not, the
-        experiment will pause. You are currently
-        {{ correctScreenOrientation() ? '' : 'not' }} in the correct orientation
+        experiment will pause
       </li>
       <li>Complete each task with only one hand</li>
     </ul>
   </div>
 </template>
-
-<script setup lang="ts">
-import {
-  correctDeviceType,
-  correctScreenOrientation,
-} from '@/utils/logic/checkPhone'
-</script>

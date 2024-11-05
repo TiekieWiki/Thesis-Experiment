@@ -43,3 +43,39 @@ export function getComponent(title: string): Component {
     () => import(`@/components/experiment/tasks/${title}.vue`),
   )
 }
+
+/**
+ * Get the task instruction based on the task
+ * @param task Task to get the instruction for
+ * @returns Instruction for the task
+ */
+export function getTaskInstruction(task: string): string {
+  switch (task) {
+    case 'DoubleTapZoomIn':
+      return 'Double tap to zoom in on the picture'
+    case 'DoubleTapZoomOut':
+      return 'Double tap to zoom out on the picture'
+    case 'DragList':
+      return 'Drag the first list item to the bottom of the list'
+    case 'DragSlider':
+      return 'Drag the slider to the right to answer the phone call'
+    case 'FlickLeft':
+      return 'Swipe the picture to the left'
+    case 'FlickRight':
+      return 'Swipe the picture to the right'
+    case 'LongTapHyperlink':
+      return 'Hold down on the hyperlink to open a pop-up'
+    case 'LongTapSelect':
+      return 'Hold down on the text to select it'
+    case 'MultiTouchRotate':
+      return 'Rotate the picture with two fingers'
+    case 'MultiTouchZoom':
+      return 'Zoom in on the picture with two fingers'
+    case 'TapMenu':
+      return 'Tap the menu, followed by the second menu item'
+    case 'TapType':
+      return 'Type the sentence shown on the screen'
+    default:
+      return ''
+  }
+}

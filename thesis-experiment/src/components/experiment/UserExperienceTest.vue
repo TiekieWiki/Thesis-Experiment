@@ -27,7 +27,7 @@
     </div>
     <p class="error">Test</p>
     <p class="success">Test</p>
-    <button @click="next">Continue</button>
+    <button @click.prevent="next">Continue</button>
   </form>
 </template>
 

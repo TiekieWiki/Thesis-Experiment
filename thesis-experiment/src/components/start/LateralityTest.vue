@@ -113,6 +113,13 @@
     </div>
     <p class="error">Test</p>
     <p class="success">Test</p>
-    <button type="submit">Continue</button>
+    <button @click.prevent="save">Continue</button>
   </form>
 </template>
+
+<script setup lang="ts">
+const emit = defineEmits(['finishedTest'])
+function save() {
+  emit('finishedTest')
+}
+</script>

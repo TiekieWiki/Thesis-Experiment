@@ -32,5 +32,13 @@
       </li>
       <li>Complete each task with only one hand</li>
     </ul>
+    <button @click="next">Continue</button>
   </div>
 </template>
+
+<script setup lang="ts">
+const emit = defineEmits(['finishedInstructions'])
+function next() {
+  emit('finishedInstructions')
+}
+</script>

@@ -3,6 +3,21 @@ main.start {
   height: auto;
   padding: $spacing-medium;
 
+  .start-instructions {
+    display: grid;
+    gap: $spacing-medium;
+
+    ul,
+    li {
+      list-style: inside;
+      list-style-type: disc;
+
+      &:not(:last-child) {
+        margin-bottom: $spacing-small;
+      }
+    }
+  }
+
   .laterality-test {
     .question {
       display: grid;

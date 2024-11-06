@@ -24,6 +24,7 @@ input[type='number'],
 input[type='date'],
 textarea {
   @include form-element;
+  margin-top: $spacing-small;
 }
 
 .label-group {
@@ -71,6 +72,10 @@ textarea {
       &::before {
         border-radius: 10px;
       }
+    }
+
+    &:first-child {
+      margin-top: $spacing-small;
     }
 
     &:not(:first-child) {

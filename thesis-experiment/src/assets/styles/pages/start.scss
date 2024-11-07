@@ -1,4 +1,4 @@
-@use "../variables";
+@use '../variables';
 
 main.start {
   width: 100vw;
@@ -27,7 +27,6 @@ main.start {
 
       p {
         grid-column: 1 / -1;
-        margin-bottom: variables.$spacing-small;
       }
     }
   }

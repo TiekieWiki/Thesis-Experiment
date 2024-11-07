@@ -1,9 +1,11 @@
+@use "../variables";
+
 @mixin outline-on-focus {
-  transition: border $speed-medium ease-in-out;
+  transition: border variables.$speed-medium ease-in-out;
 
   &:focus-visible,
   &:focus-within {
     outline: none;
-    box-shadow: 0 0 5px 1px $color-primary;
+    box-shadow: 0 0 5px 1px variables.$color-primary;
   }
 }

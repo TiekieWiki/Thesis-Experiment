@@ -1,15 +1,17 @@
+@use "../variables";
+
 .list {
   .list-item {
     display: flex;
     align-items: center;
     width: 40vw;
-    min-width: $size-medium;
-    min-height: $size-medium;
-    padding: $spacing-small;
-    border: $size-border solid $color-primary;
+    min-width: variables.$size-medium;
+    min-height: variables.$size-medium;
+    padding: variables.$spacing-small;
+    border: variables.$size-border solid variables.$color-primary;
 
     &:not(:first-child) {
-      margin-top: -$size-border;
+      margin-top: -(variables.$size-border);
     }
   }
 }

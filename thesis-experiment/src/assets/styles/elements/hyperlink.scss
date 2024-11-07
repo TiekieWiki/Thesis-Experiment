@@ -1,4 +1,6 @@
+@use "../variables";
+
 a {
-  color: $color-secondary;
+  color: variables.$color-secondary;
   text-decoration: underline;
 }

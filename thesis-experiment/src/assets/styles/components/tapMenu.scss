@@ -1,5 +1,5 @@
-@import '../mixins/orientation.scss';
+@use '../mixins/orientation.scss';
 
 .tap-menu {
-  @include basic-orientation;
+  @include orientation.basic-orientation;
 }

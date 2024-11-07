@@ -1,12 +1,14 @@
+@use "../variables";
+
 main.end {
   width: 100vw;
   height: auto;
-  padding: $spacing-medium;
+  padding: variables.$spacing-medium;
 
   .user-experience-test {
     .question {
       p {
-        margin-bottom: $spacing-small;
+        margin-bottom: variables.$spacing-small;
       }
     }
   }

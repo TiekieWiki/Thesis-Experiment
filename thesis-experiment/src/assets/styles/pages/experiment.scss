@@ -1,12 +1,14 @@
+@use "../variables";
+
 main.experiment {
   width: 100vw;
   height: 100vh;
-  padding: $spacing-medium;
+  padding: variables.$spacing-medium;
 }
 
 .task-instructions {
   .pop-up {
     display: grid;
-    gap: $spacing-small;
+    gap: variables.$spacing-small;
   }
 }

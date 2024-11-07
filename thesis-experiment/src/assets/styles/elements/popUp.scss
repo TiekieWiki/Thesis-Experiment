@@ -1,3 +1,5 @@
+@use "../variables";
+
 .pop-up-background {
   position: fixed;
   z-index: 10;
@@ -13,10 +15,10 @@
     height: 50vh;
     top: 50vh;
     left: 50vw;
-    margin-top: calc(-25vh - (2 * #{$spacing-medium} - 4px));
-    margin-left: calc(-25vw - (2 * #{$spacing-medium} - 4px));
-    padding: $spacing-medium;
-    background-color: $color-tertiary;
-    border: $size-border solid $color-primary;
+    margin-top: calc(-25vh - (2 * #{variables.$spacing-medium} - 4px));
+    margin-left: calc(-25vw - (2 * #{variables.$spacing-medium} - 4px));
+    padding: variables.$spacing-medium;
+    background-color: variables.$color-tertiary;
+    border: variables.$size-border solid variables.$color-primary;
   }
 }

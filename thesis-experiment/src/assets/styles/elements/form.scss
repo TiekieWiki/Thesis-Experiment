@@ -1,21 +1,23 @@
-@import '../mixins/interactions.scss';
+@use '../mixins/interactions.scss';
+@use "../variables";
+
 
 @mixin form-element {
   width: 100%;
-  min-width: $size-medium;
-  min-height: $size-medium;
-  padding: $spacing-small $spacing-medium;
+  min-width: variables.$size-medium;
+  min-height: variables.$size-medium;
+  padding: variables.$spacing-small variables.$spacing-medium;
   background-color: transparent;
-  border: $size-border solid $color-primary;
+  border: variables.$size-border solid variables.$color-primary;
 
   &:not(:disabled) {
-    @include outline-on-focus;
+    @include interactions.outline-on-focus;
   }
 }
 
 form {
   display: grid;
-  gap: $spacing-medium;
+  gap: variables.$spacing-medium;
 }
 
 input[type='text'],
@@ -23,15 +25,16 @@ input[type='email'],
 input[type='number'],
 input[type='date'],
 textarea {
+  margin-top: variables.$spacing-small;
+
   @include form-element;
-  margin-top: $spacing-small;
 }
 
 .label-group {
   label {
     display: grid;
-    grid-template-columns: $size-icon-small auto;
-    gap: $spacing-small;
+    grid-template-columns: variables.$size-icon-small auto;
+    gap: variables.$spacing-small;
 
     input[type='checkbox'],
     input[type='radio'] {
@@ -39,22 +42,22 @@ textarea {
       appearance: none;
       display: grid;
       place-content: center;
-      width: calc($size-icon-small + 0.2em);
-      height: calc($size-icon-small + 0.2em);
+      width: calc(variables.$size-icon-small + 0.2em);
+      height: calc(variables.$size-icon-small + 0.2em);
       background-color: transparent;
-      color: $color-primary;
-      border: $size-border solid $color-primary;
+      color: variables.$color-primary;
+      border: variables.$size-border solid variables.$color-primary;
       cursor: pointer;
 
-      @include outline-on-focus;
+      @include interactions.outline-on-focus;
 
       &::before {
         content: '';
-        width: calc($size-icon-small - 0.3em);
-        height: calc($size-icon-small - 0.3em);
+        width: calc(variables.$size-icon-small - 0.3em);
+        height: calc(variables.$size-icon-small - 0.3em);
         transform: scale(0);
-        transition: $speed-medium transform ease-in-out;
-        box-shadow: inset $size-icon-small $size-icon-small $color-primary;
+        transition: variables.$speed-medium transform ease-in-out;
+        box-shadow: inset variables.$size-icon-small variables.$size-icon-small variables.$color-primary;
       }
 
       &:checked::before {
@@ -75,11 +78,11 @@ textarea {
     }
 
     &:first-child {
-      margin-top: $spacing-small;
+      margin-top: variables.$spacing-small;
     }
 
     &:not(:first-child) {
-      margin-top: $spacing-small;
+      margin-top: variables.$spacing-small;
     }
   }
 }
@@ -96,9 +99,9 @@ textarea {
     content: '';
     grid-area: select;
     justify-self: end;
-    width: $size-icon-small;
-    height: calc($size-icon-small / 3 * 2);
-    background-color: $color-primary;
+    width: variables.$size-icon-small;
+    height: calc(variables.$size-icon-small / 3 * 2);
+    background-color: variables.$color-primary;
     clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   }
 
@@ -107,7 +110,7 @@ textarea {
     z-index: 1;
     grid-area: select;
     width: 100%;
-    padding: 0 $size-icon-small 0 0;
+    padding: 0 variables.$size-icon-small 0 0;
     margin: 0;
     background-color: transparent;
     border: none;
@@ -126,11 +129,11 @@ textarea {
 .error {
   @include form-element;
   border: none;
-  background-color: $color-error;
+  background-color: variables.$color-error;
 }
 
 .success {
   @include form-element;
   border: none;
-  background-color: $color-success;
+  background-color: variables.$color-success;
 }

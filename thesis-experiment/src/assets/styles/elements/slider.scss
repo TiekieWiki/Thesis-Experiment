@@ -1,30 +1,32 @@
+@use "../variables";
+
 .slider {
   position: relative;
   width: 65vw;
-  padding: calc($spacing-xsmall / 2);
-  border: $size-border solid $color-primary;
+  padding: calc(variables.$spacing-xsmall / 2);
+  border: variables.$size-border solid variables.$color-primary;
   border-radius: 25px;
 
   input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: $size-large;
+    height: variables.$size-large;
     background: transparent;
     outline: none;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: $size-large;
-      height: $size-large;
+      width: variables.$size-large;
+      height: variables.$size-large;
       background: url('/src/assets/images/Phone.svg') no-repeat center center;
       background-size: contain;
     }
 
     &::-moz-range-thumb {
-      width: $size-large;
-      height: $size-large;
+      width: variables.$size-large;
+      height: variables.$size-large;
       background: url('/src/assets/images/Phone.svg') no-repeat center center;
       background-size: contain;
     }

@@ -1,11 +1,13 @@
+@use "../variables";
+
 main.start {
   width: 100vw;
   height: auto;
-  padding: $spacing-medium;
+  padding: variables.$spacing-medium;
 
   .start-instructions {
     display: grid;
-    gap: $spacing-medium;
+    gap: variables.$spacing-medium;
 
     ul,
     li {
@@ -13,7 +15,7 @@ main.start {
       list-style-type: disc;
 
       &:not(:last-child) {
-        margin-bottom: $spacing-small;
+        margin-bottom: variables.$spacing-small;
       }
     }
   }
@@ -25,7 +27,7 @@ main.start {
 
       p {
         grid-column: 1 / -1;
-        margin-bottom: $spacing-small;
+        margin-bottom: variables.$spacing-small;
       }
     }
   }

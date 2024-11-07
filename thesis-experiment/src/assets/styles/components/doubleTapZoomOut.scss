@@ -1,5 +1,5 @@
-@import '../mixins/orientation.scss';
+@use '../mixins/orientation.scss';
 
 .double-tap-zoom-out {
-  @include center-orientation;
+  @include orientation.center-orientation;
 }

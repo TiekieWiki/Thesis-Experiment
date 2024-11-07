@@ -1,7 +1,9 @@
+@use "../variables";
+
 .menu {
   svg {
-    height: $size-medium;
-    color: $color-primary;
+    height: variables.$size-medium;
+    color: variables.$color-primary;
   }
 
   ul {
@@ -10,7 +12,7 @@
     align-items: center;
 
     li {
-      padding-top: $spacing-medium;
+      padding-top: variables.$spacing-medium;
     }
   }
 }

@@ -1,3 +1,5 @@
+@use "../variables";
+
 .tap-type {
   display: flex;
   flex-direction: column;
@@ -11,7 +13,7 @@
 
   .keyboard {
     position: absolute;
-    bottom: $spacing-medium;
+    bottom: variables.$spacing-medium;
   }
 
   &.standard {
@@ -20,7 +22,7 @@
     }
 
     .keyboard {
-      right: $spacing-medium;
+      right: variables.$spacing-medium;
     }
   }
 
@@ -30,7 +32,7 @@
     }
 
     .keyboard {
-      left: $spacing-medium;
+      left: variables.$spacing-medium;
     }
   }
 }

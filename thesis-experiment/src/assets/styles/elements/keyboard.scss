@@ -1,35 +1,37 @@
+@use "../variables";
+
 .keyboard {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xxsmall;
+  gap: variables.$spacing-xxsmall;
 
   .row-1,
   .row-2,
   .row-3,
   .row-4 {
     display: flex;
-    gap: $spacing-xxsmall;
+    gap: variables.$spacing-xxsmall;
     justify-content: center;
 
     div {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: $size-medium;
-      height: $size-medium;
-      border: $size-border solid $color-primary;
+      width: variables.$size-medium;
+      height: variables.$size-medium;
+      border: variables.$size-border solid variables.$color-primary;
       border-radius: 5px;
 
       &.key-medium {
-        width: calc($size-large + $spacing-xxsmall);
+        width: calc(variables.$size-large + variables.$spacing-xxsmall);
       }
 
       &.spacebar {
-        width: calc($size-medium * 6 + $spacing-xxsmall * 5);
+        width: calc(variables.$size-medium * 6 + variables.$spacing-xxsmall * 5);
       }
 
       &:active {
-        background-color: $color-secondary;
+        background-color: variables.$color-secondary;
       }
     }
   }

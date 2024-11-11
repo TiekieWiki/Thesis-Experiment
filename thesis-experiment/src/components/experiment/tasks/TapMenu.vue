@@ -1,35 +1,34 @@
 <template>
   <div :class="['tap-menu', interfaceOrientation]">
     <div class="menu">
-      <transition name="switch" mode="out-in">
-        <button v-if="!menuOpen" @click="menuOpen = true">
-          <font-awesome-icon :icon="['fas', 'bars']" />
-          <p>Menu</p>
-        </button>
-        <button v-else>
-          <font-awesome-icon
-            @click="menuOpen = false"
-            :icon="['fas', 'xmark']"
-          />
-          <p>Menu</p>
-        </button>
-      </transition>
+      <button @click.stop="menuOpen = !menuOpen">
+        <transition name="switch" mode="out-in">
+          <font-awesome-icon v-if="!menuOpen" :icon="['fas', 'bars']" />
+          <font-awesome-icon v-else :icon="['fas', 'xmark']" />
+        </transition>
+        <p>Menu</p>
+      </button>
       <ul v-if="menuOpen">
         <li v-for="item in menuItems" :key="item">
-          <a href="#">{{ item }}</a>
+          <a
+            href="#"
+            @click.stop="item == 'About' ? next() : (menuOpen = true)"
+            >{{ item }}</a
+          >
         </li>
       </ul>
     </div>
   </div>
-  <button @click="next">Next</button>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { UserClick } from '@/utils/types/measurements'
+import { ref, watch } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   interfaceOrientation: string
   hand: string
+  userClick: UserClick
 }>()
 
 const emit = defineEmits(['finishedTask'])
@@ -38,5 +37,13 @@ function next() {
 }
 
 const menuOpen = ref<boolean>(false)
-const menuItems: string[] = ['A', 'B', 'C']
+const menuItems: string[] = ['Home', 'About', 'Contact']
+
+watch(
+  () => props.userClick,
+  newValue => {
+    console.log('User clicked:', newValue)
+  },
+  { immediate: true },
+)
 </script>

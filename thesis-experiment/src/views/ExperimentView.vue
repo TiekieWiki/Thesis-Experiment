@@ -1,5 +1,5 @@
 <template>
-  <main class="experiment">
+  <main class="experiment" @click="userClicked($event, Date.now())">
     <TaskSetInstructions
       v-if="showComponent == 'taskSetInstructions' && currentTaskSet"
       :hand="currentHand"
@@ -10,12 +10,14 @@
       :hand="currentHand"
       :task="currentTask"
       @finished-instructions="() => (showComponent = 'task')"
+      @user-clicked="u => userClicked(u, Date.now())"
     />
     <component
       v-else-if="showComponent == 'task' && currentTask"
       :is="getComponent(currentTask)"
       :interface-orientation="currentInterfaceOrientation"
       :hand="currentHand"
+      :user-click="userClick"
       @finished-task="() => nextTask()"
     />
     <UserExperienceTest
@@ -56,6 +58,7 @@ import {
   correctDeviceType,
   correctScreenOrientation,
 } from '@/utils/logic/checkPhone'
+import type { UserClick } from '@/utils/types/measurements'
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType())
@@ -144,6 +147,17 @@ function nextTaskSet() {
     // Go to end page
     showComponent.value = ''
     router.push('/finishing-up')
+  }
+}
+
+// Measurements
+const userClick = ref<UserClick | null>(null)
+
+function userClicked(clickEvent: MouseEvent, clickTime: number) {
+  userClick.value = {
+    x: clickEvent.screenX,
+    y: clickEvent.screenY,
+    timestamp: clickTime,
   }
 }
 </script>

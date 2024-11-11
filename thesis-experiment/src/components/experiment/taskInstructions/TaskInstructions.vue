@@ -1,6 +1,9 @@
 <template>
   <teleport to="body">
-    <div class="task-instructions pop-up-background" @click="next">
+    <div
+      class="task-instructions pop-up-background"
+      @click="startTask($event, Date.now())"
+    >
       <div class="pop-up">
         <h1>Instructions</h1>
         <p>{{ getTaskInstruction(task) }}</p>
@@ -22,8 +25,9 @@ defineProps<{
   task: string
 }>()
 
-const emit = defineEmits(['finishedInstructions'])
-function next() {
+const emit = defineEmits(['finishedInstructions', 'userClicked'])
+function startTask(clickEvent: MouseEvent, clickTime: number) {
   emit('finishedInstructions')
+  emit('userClicked', clickEvent, clickTime)
 }
 </script>

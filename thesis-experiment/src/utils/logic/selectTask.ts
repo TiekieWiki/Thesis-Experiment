@@ -72,7 +72,7 @@ export function getTaskInstruction(task: string): string {
     case 'MultiTouchZoom':
       return 'Zoom in on the picture with two fingers'
     case 'TapMenu':
-      return 'Tap the menu, followed by the second menu item'
+      return 'Open the menu with one tap and select the about page'
     case 'TapType':
       return 'Type the sentence shown on the screen'
     default:

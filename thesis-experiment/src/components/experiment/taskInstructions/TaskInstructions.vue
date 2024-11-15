@@ -19,15 +19,29 @@
 
 <script setup lang="ts">
 import { getTaskInstruction } from '@/utils/logic/selectTask'
+import type { Measurement } from '@/utils/types/measurements'
 
 defineProps<{
   hand: string
   task: string
 }>()
 
-const emit = defineEmits(['finishedInstructions', 'userClicked'])
+const emit = defineEmits(['finishedInstructions'])
+
+/**
+ * Start the task and register user click
+ * @param clickEvent User click event
+ * @param clickTime Click timestamp
+ */
 function startTask(clickEvent: MouseEvent, clickTime: number) {
-  emit('finishedInstructions')
-  emit('userClicked', clickEvent, clickTime)
+  const measurement: Measurement = {
+    action: 'startTask',
+    touchX: clickEvent.screenX,
+    touchY: clickEvent.screenY,
+    centerX: 0,
+    centerY: 0,
+    timestamp: clickTime,
+  }
+  emit('finishedInstructions', measurement)
 }
 </script>

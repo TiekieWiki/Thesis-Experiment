@@ -1,5 +1,10 @@
 <template>
-  <main class="experiment" @click="userClicked($event, Date.now())">
+  <main
+    class="experiment"
+    @click.capture="
+      showComponent == 'task' ? userClick($event, Date.now()) : ''
+    "
+  >
     <TaskSetInstructions
       v-if="showComponent == 'taskSetInstructions' && currentTaskSet"
       :hand="currentHand"
@@ -9,15 +14,14 @@
       v-else-if="showComponent == 'taskInstructions' && currentTaskSet"
       :hand="currentHand"
       :task="currentTask"
-      @finished-instructions="() => (showComponent = 'task')"
-      @user-clicked="u => userClicked(u, Date.now())"
+      @finished-instructions="m => finishTaskInstructions(m)"
     />
     <component
       v-else-if="showComponent == 'task' && currentTask"
       :is="getComponent(currentTask)"
       :interface-orientation="currentInterfaceOrientation"
       :hand="currentHand"
-      :user-click="userClick"
+      @current-action="(a: Action) => (currentAction = a)"
       @finished-task="() => nextTask()"
     />
     <UserExperienceTest
@@ -53,12 +57,12 @@ import {
   selectRandomItem,
 } from '@/utils/logic/selectTask'
 import { tasks, taskSet } from '@/utils/types/tasks'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import {
   correctDeviceType,
   correctScreenOrientation,
 } from '@/utils/logic/checkPhone'
-import type { UserClick } from '@/utils/types/measurements'
+import type { Action, Measurement } from '@/utils/types/measurements'
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType())
@@ -151,13 +155,45 @@ function nextTaskSet() {
 }
 
 // Measurements
-const userClick = ref<UserClick | null>(null)
+const measurements = ref<Measurement[]>([])
+const currentAction = ref<Action>({
+  action: 'startTask',
+  centerX: 0,
+  centerY: 0,
+})
 
-function userClicked(clickEvent: MouseEvent, clickTime: number) {
-  userClick.value = {
-    x: clickEvent.screenX,
-    y: clickEvent.screenY,
+/**
+ * Finish task instructions and register user click
+ * @param measurement Measurement of user click
+ */
+function finishTaskInstructions(measurement: Measurement) {
+  measurements.value.push(measurement)
+  showComponent.value = 'task'
+}
+
+/**
+ * Register user click
+ * @param clickEvent User click event
+ * @param clickTime Click timestamp
+ */
+function userClick(clickEvent: MouseEvent, clickTime: number) {
+  const measurement: Measurement = {
+    action: currentAction.value.action,
+    touchX: clickEvent.screenX,
+    touchY: clickEvent.screenY,
+    centerX: currentAction.value.centerX,
+    centerY: currentAction.value.centerY,
     timestamp: clickTime,
   }
+  measurements.value.push(measurement)
 }
+
+// Print measurements
+watch(
+  () => measurements.value,
+  () => {
+    console.log(measurements.value)
+  },
+  { deep: true },
+)
 </script>

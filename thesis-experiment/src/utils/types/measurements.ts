@@ -1,7 +1,7 @@
-export interface UserClick {
-  x: number
-  y: number
-  timestamp: number
+export interface Action {
+  action: string
+  centerX: number
+  centerY: number
 }
 
 export interface TaskMeasurements {

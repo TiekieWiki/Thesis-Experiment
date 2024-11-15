@@ -179,8 +179,8 @@ function finishTaskInstructions(measurement: Measurement) {
 function userClick(clickEvent: MouseEvent, clickTime: number) {
   const measurement: Measurement = {
     action: currentAction.value.action,
-    touchX: clickEvent.screenX,
-    touchY: clickEvent.screenY,
+    touchX: clickEvent.clientX,
+    touchY: clickEvent.clientY,
     centerX: currentAction.value.centerX,
     centerY: currentAction.value.centerY,
     timestamp: clickTime,

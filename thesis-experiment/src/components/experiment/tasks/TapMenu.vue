@@ -8,7 +8,7 @@
         </transition>
         <p>Menu</p>
       </button>
-      <ul v-if="menuOpen">
+      <ul v-show="menuOpen">
         <li>
           <a @click="menuOpen = true">A</a>
         </li>
@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import type { Action } from '@/utils/types/measurements'
-import { onMounted, ref, useTemplateRef, watch } from 'vue'
+import { nextTick, onMounted, ref, useTemplateRef, watch } from 'vue'
 
 defineProps<{
   interfaceOrientation: string
@@ -71,8 +71,11 @@ watch(
 /**
  * Set menu open and set current action
  */
-function menuClicked() {
+async function menuClicked() {
   menuOpen.value = true
+
+  // Set current action when menu items are loaded
+  await nextTick()
   currentAction.value = {
     action: 'clickMenuItem',
     centerX: menuItem.value

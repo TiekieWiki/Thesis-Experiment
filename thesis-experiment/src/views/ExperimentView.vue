@@ -62,7 +62,11 @@ import {
   correctDeviceType,
   correctScreenOrientation,
 } from '@/utils/logic/checkPhone'
-import type { Action, Measurement } from '@/utils/types/measurements'
+import type {
+  Action,
+  Measurement,
+  TaskMeasurements,
+} from '@/utils/types/measurements'
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType())
@@ -113,6 +117,9 @@ const currentInterfaceOrientation = computed((): string => {
  * Go to next task
  */
 function nextTask() {
+  // Save measurements
+  saveMeasurements()
+
   // Check if all tasks are finished
   if (partialTasks.value.length !== 0) {
     // Select next task
@@ -188,12 +195,17 @@ function userClick(clickEvent: MouseEvent, clickTime: number) {
   measurements.value.push(measurement)
 }
 
-// Print measurements
-watch(
-  () => measurements.value,
-  () => {
-    console.log(measurements.value)
-  },
-  { deep: true },
-)
+/**
+ * Save measurements
+ * @returns Task measurements
+ */
+function saveMeasurements() {
+  const taskMeasurements: TaskMeasurements = {
+    task: currentTask.value,
+    taskSet: currentTaskSet.value,
+    measurements: measurements.value,
+  }
+
+  console.log(taskMeasurements)
+}
 </script>

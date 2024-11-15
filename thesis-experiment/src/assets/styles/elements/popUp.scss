@@ -1,22 +1,19 @@
-@use "../variables";
+@use '../variables';
 
 .pop-up-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
 
   .pop-up {
-    position: absolute;
-    width: 50vw;
-    height: 50vh;
-    top: 50vh;
-    left: 50vw;
-    margin-top: calc(-25vh - (2 * #{variables.$spacing-medium} - 4px));
-    margin-left: calc(-25vw - (2 * #{variables.$spacing-medium} - 4px));
+    width: 75vw;
     padding: variables.$spacing-medium;
     background-color: variables.$color-tertiary;
     border: variables.$size-border solid variables.$color-primary;

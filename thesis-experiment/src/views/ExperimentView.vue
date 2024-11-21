@@ -2,17 +2,17 @@
   <main
     class="experiment"
     @click.capture="
-      showComponent == 'task'
+      clickFilter
         ? measurements.push(userClick($event, Date.now(), currentAction))
         : ''
     "
-    @touchstart="
-      showComponent == 'task'
+    @touchstart.capture="
+      dragFilter
         ? measurements.push(userTouchStart($event, Date.now(), currentAction))
         : ''
     "
-    @touchend="
-      showComponent == 'task'
+    @touchend.capture="
+      dragFilter
         ? measurements.push(userTouchEnd($event, Date.now(), currentAction))
         : ''
     "
@@ -184,6 +184,14 @@ const currentAction = ref<Action>({
   action: 'startTask',
   centerX: 0,
   centerY: 0,
+})
+
+// Filters
+const clickFilter = computed(() => {
+  return showComponent.value == 'task' && currentTask.value == 'TapMenu'
+})
+const dragFilter = computed(() => {
+  return showComponent.value == 'task' && currentTask.value == 'DragSlider'
 })
 
 /**

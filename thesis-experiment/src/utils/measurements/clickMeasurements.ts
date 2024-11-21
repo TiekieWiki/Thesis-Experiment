@@ -60,6 +60,5 @@ export function userTouchEnd(
     centerY: currentAction.centerY,
     timestamp: touchTime,
   }
-  console.log(measurement)
   return measurement
 }

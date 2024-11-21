@@ -2,7 +2,19 @@
   <main
     class="experiment"
     @click.capture="
-      showComponent == 'task' ? userClick($event, Date.now()) : ''
+      showComponent == 'task'
+        ? measurements.push(userClick($event, Date.now(), currentAction))
+        : ''
+    "
+    @touchstart="
+      showComponent == 'task'
+        ? measurements.push(userTouchStart($event, Date.now(), currentAction))
+        : ''
+    "
+    @touchend="
+      showComponent == 'task'
+        ? measurements.push(userTouchEnd($event, Date.now(), currentAction))
+        : ''
     "
   >
     <TaskSetInstructions
@@ -57,7 +69,7 @@ import {
   selectRandomItem,
 } from '@/utils/logic/selectTask'
 import { tasks, taskSet } from '@/utils/types/tasks'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import {
   correctDeviceType,
   correctScreenOrientation,
@@ -67,6 +79,11 @@ import type {
   Measurement,
   TaskMeasurements,
 } from '@/utils/types/measurements'
+import {
+  userClick,
+  userTouchStart,
+  userTouchEnd,
+} from '@/utils/measurements/clickMeasurements'
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType())
@@ -176,23 +193,6 @@ const currentAction = ref<Action>({
 function finishTaskInstructions(measurement: Measurement) {
   measurements.value.push(measurement)
   showComponent.value = 'task'
-}
-
-/**
- * Register user click
- * @param clickEvent User click event
- * @param clickTime Click timestamp
- */
-function userClick(clickEvent: MouseEvent, clickTime: number) {
-  const measurement: Measurement = {
-    action: currentAction.value.action,
-    touchX: clickEvent.clientX,
-    touchY: clickEvent.clientY,
-    centerX: currentAction.value.centerX,
-    centerY: currentAction.value.centerY,
-    timestamp: clickTime,
-  }
-  measurements.value.push(measurement)
 }
 
 /**

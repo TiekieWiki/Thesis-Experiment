@@ -1,9 +1,8 @@
-@use "../variables";
+@use '../variables';
 
 .slider {
-  position: relative;
   width: 65vw;
-  padding: calc(variables.$spacing-xsmall / 2);
+  padding: variables.$spacing-xxsmall;
   border: variables.$size-border solid variables.$color-primary;
   border-radius: 25px;
 

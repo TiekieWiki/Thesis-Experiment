@@ -29,6 +29,7 @@ function next() {
   emit('finishedTask')
 }
 
+// Drag list
 const drag = ref<boolean>(false)
 const dragList = ref<{ id: number; name: string }[]>([
   { id: 1, name: 'A' },

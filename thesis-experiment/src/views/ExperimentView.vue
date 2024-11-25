@@ -192,10 +192,18 @@ const currentAction = ref<Action>({
 
 // Filters
 const clickFilter = computed(() => {
-  return showComponent.value == 'task' && currentTask.value == 'TapMenu'
+  const tasksWithClick = ['TapMenu']
+  return (
+    showComponent.value == 'task' &&
+    tasksWithClick.indexOf(currentTask.value) > -1
+  )
 })
 const dragFilter = computed(() => {
-  return showComponent.value == 'task' && currentTask.value == 'DragSlider'
+  const tasksWithDrag = ['DragList', 'DragSlider']
+  return (
+    showComponent.value == 'task' &&
+    tasksWithDrag.indexOf(currentTask.value) > -1
+  )
 })
 
 /**

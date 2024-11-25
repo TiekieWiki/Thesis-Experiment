@@ -6,12 +6,12 @@
         ? measurements.push(userClick($event, Date.now(), currentAction))
         : ''
     "
-    @touchstart.capture="
+    @touchstart="
       dragFilter
         ? measurements.push(userTouchStart($event, Date.now(), currentAction))
         : ''
     "
-    @touchend.capture="
+    @touchend="
       dragFilter
         ? measurements.push(userTouchEnd($event, Date.now(), currentAction))
         : ''
@@ -33,7 +33,11 @@
       :is="getComponent(currentTask)"
       :interface-orientation="currentInterfaceOrientation"
       :hand="currentHand"
-      @current-action="(a: Action) => (currentAction = a)"
+      @current-action="
+        (a: Action) => {
+          currentAction = a
+        }
+      "
       @finished-task="() => nextTask()"
     />
     <UserExperienceTest

@@ -21,6 +21,8 @@
       </ul>
     </div>
   </div>
+  <div id="firstDiv"></div>
+  <div id="secondDiv"></div>
 </template>
 
 <script setup lang="ts">
@@ -72,6 +74,16 @@ watch(
  * Set menu open and set current action
  */
 async function menuClicked() {
+  const firstDiv = document.getElementById('firstDiv')
+
+  // Define coordinates in pixels
+  const x1 = currentAction.value.centerX // Horizontal position in pixels
+  const y1 = currentAction.value.centerY // Vertical position in pixels
+
+  // Apply coordinates to the div
+  firstDiv!.style.left = x1 + 'px'
+  firstDiv!.style.top = y1 + 'px'
+
   menuOpen.value = true
 
   // Set current action when menu items are loaded
@@ -85,6 +97,15 @@ async function menuClicked() {
       ? menuItem.value.offsetTop + menuItem.value.offsetHeight / 2
       : 0,
   }
+  const secondDiv = document.getElementById('rightDiv')
+
+  // Define coordinates in pixels
+  const x2 = currentAction.value.centerX // Horizontal position in pixels
+  const y2 = currentAction.value.centerY // Vertical position in pixels
+
+  // Apply coordinates to the div
+  secondDiv!.style.left = x2 + 'px'
+  secondDiv!.style.top = y2 + 'px'
 }
 
 /**
@@ -94,3 +115,13 @@ function finishTask() {
   emit('finishedTask')
 }
 </script>
+
+<style scoped>
+#firstDiv,
+#secondDiv {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background-color: red;
+}
+</style>

@@ -2,6 +2,7 @@
   <div :class="['drag-slider', interfaceOrientation]">
     <div class="slider">
       <input
+        @touchstart="dragStarted()"
         @touchend="dragEnded()"
         v-model="sliderValue"
         ref="slider"
@@ -32,7 +33,7 @@ const sliderValue = ref<number>(1)
 
 // Measurements
 const currentAction = ref<Action>({
-  action: 'startDragList',
+  action: 'startDragSlider',
   centerX: 0,
   centerY: 0,
 })
@@ -41,45 +42,48 @@ const currentAction = ref<Action>({
 onMounted(() => {
   currentAction.value = {
     action: 'startDragSlider',
-    centerX: slider.value ? slider.value.offsetLeft + xToPx('5mm') + 2 : 0,
-    centerY: slider.value ? slider.value.offsetTop + xToPx('5mm') + 2 : 0,
+    centerX: slider.value ? slider.value.offsetLeft + xToPx('5mm') : 0,
+    centerY: slider.value ? slider.value.offsetTop + xToPx('5mm') : 0,
   }
 })
 
 // Emit current action
 watch(
-  () => currentAction.value,
+  currentAction,
   () => {
     emit('currentAction', currentAction.value)
   },
-  { immediate: true },
+  { immediate: true, flush: 'sync' },
 )
+
+/**
+ * Set current action when drag starts
+ */
+function dragStarted() {
+  currentAction.value = {
+    action: 'startDragSlider',
+    centerX: slider.value ? slider.value.offsetLeft + xToPx('5mm') : 0,
+    centerY: slider.value ? slider.value.offsetTop + xToPx('5mm') : 0,
+  }
+}
 
 /**
  * Set current action when drag ends
  */
-async function dragEnded() {
+function dragEnded() {
   currentAction.value = {
     action: 'endDragSlider',
     centerX: slider.value
-      ? slider.value!.offsetLeft +
-        slider.value!.offsetWidth -
-        (xToPx('5mm') + 2)
+      ? slider.value!.offsetLeft + slider.value!.offsetWidth - xToPx('5mm')
       : 0,
-    centerY: slider.value ? slider.value!.offsetTop + xToPx('5mm') + 2 : 0,
+    centerY: slider.value ? slider.value!.offsetTop + xToPx('5mm') : 0,
   }
-  if (sliderValue.value == 100) {
-    emit('finishedTask')
-  } else {
-    currentAction.value = {
-      action: 'startDragSlider',
-      centerX: slider.value
-        ? slider.value.offsetLeft + slider.value.offsetWidth / 2
-        : 0,
-      centerY: slider.value
-        ? slider.value.offsetTop + slider.value.offsetHeight / 2
-        : 0,
+
+  // Wait for current action to be emitted
+  setTimeout(() => {
+    if (sliderValue.value == 100) {
+      emit('finishedTask')
     }
-  }
+  }, 100)
 }
 </script>

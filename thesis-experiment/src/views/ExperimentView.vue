@@ -199,7 +199,7 @@ const clickFilter = computed(() => {
   )
 })
 const dragFilter = computed(() => {
-  const tasksWithDrag = ['DragList', 'DragSlider']
+  const tasksWithDrag = ['DragList', 'DragSlider', 'FlickLeft']
   return (
     showComponent.value == 'task' &&
     tasksWithDrag.indexOf(currentTask.value) > -1

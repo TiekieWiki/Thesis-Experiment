@@ -1,5 +1,5 @@
 <template>
-  <div :class="['double-tap-zoom-in', interfaceOrientation]">
+  <div :class="['double-tap-zoom-out', interfaceOrientation]">
     <img
       @click="imageClicked"
       ref="image"
@@ -8,8 +8,6 @@
       alt="Photo by Greg Becker on Unsplash"
     />
   </div>
-  <div id="firstDiv"></div>
-  <div id="secondDiv"></div>
 </template>
 
 <script setup lang="ts">
@@ -27,10 +25,10 @@ const emit = defineEmits(['finishedTask', 'currentAction'])
 const image = useTemplateRef<HTMLElement>('image')
 
 // Measurements
-const scale = ref<number>(1)
+const scale = ref<number>(2)
 const firstClicked = ref<boolean>(false)
 const currentAction = ref<Action>({
-  action: 'startDoubleTapZoomIn',
+  action: 'startDoubleTapZoomOut',
   centerX: 0,
   centerY: 0,
 })
@@ -38,7 +36,7 @@ const currentAction = ref<Action>({
 // Set initial action
 onMounted(() => {
   currentAction.value = {
-    action: 'startDoubleTapZoomIn',
+    action: 'startDoubleTapZoomOut',
     centerX: image.value
       ? image.value.offsetLeft + image.value.offsetWidth / 2
       : 0,
@@ -46,26 +44,6 @@ onMounted(() => {
       ? image.value.offsetTop + image.value.offsetHeight / 2
       : 0,
   }
-
-  const firstDiv = document.getElementById('firstDiv')
-
-  // Define coordinates in pixels
-  const x1 = currentAction.value.centerX // Horizontal position in pixels
-  const y1 = currentAction.value.centerY // Vertical position in pixels
-
-  // Apply coordinates to the div
-  firstDiv!.style.left = x1 + 'px'
-  firstDiv!.style.top = y1 + 'px'
-
-  // const secondDiv = document.getElementById('secondDiv')
-
-  // // Define coordinates in pixels
-  // const x2 = goalAction.value.centerX // Horizontal position in pixels
-  // const y2 = goalAction.value.centerY // Vertical position in pixels
-
-  // // Apply coordinates to the div
-  // secondDiv!.style.left = x2 + 'px'
-  // secondDiv!.style.top = y2 + 'px'
 })
 
 // Emit current action
@@ -81,11 +59,11 @@ watch(
  * Determine the action when the image is clicked
  */
 function imageClicked() {
-  currentAction.value.action = 'startDoubleTapZoomIn'
+  currentAction.value.action = 'startDoubleTapZoomOut'
 
   // Check if this is the first image click
   if (firstClicked.value) {
-    scale.value = 2
+    scale.value = 1
 
     // Emit finished task after seeing the zoomed image
     setTimeout(() => {
@@ -93,22 +71,12 @@ function imageClicked() {
     }, 500)
   } else {
     firstClicked.value = true
-    currentAction.value.action = 'endDoubleTapZoomIn'
+    currentAction.value.action = 'endDoubleTapZoomOut'
     // Reset first click if double tap is not detected
     setTimeout(() => {
       firstClicked.value = false
-      currentAction.value.action = 'startDoubleTapZoomIn'
+      currentAction.value.action = 'startDoubleTapZoomOut'
     }, 500)
   }
 }
 </script>
-
-<style scoped>
-#firstDiv,
-#secondDiv {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  background-color: red;
-}
-</style>

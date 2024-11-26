@@ -6,8 +6,8 @@ export const taskSet = [
 ]
 
 export const tasks = [
-  'DoubleTapZoomIn',
-  // 'DoubleTapZoomOut',
+  // 'DoubleTapZoomIn',
+  'DoubleTapZoomOut',
   // 'DragList',
   // 'DragSlider',
   // 'FlickLeft',

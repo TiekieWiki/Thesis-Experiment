@@ -35,8 +35,8 @@ defineProps<{
 const emit = defineEmits(['finishedTask', 'currentAction'])
 
 // Menu
-const menu = useTemplateRef('menu')
-const menuItem = useTemplateRef('menuItem')
+const menu = useTemplateRef<HTMLElement>('menu')
+const menuItem = useTemplateRef<HTMLElement>('menuItem')
 const menuOpen = ref<boolean>(false)
 
 // Measurements

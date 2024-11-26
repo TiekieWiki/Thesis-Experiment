@@ -28,7 +28,7 @@ defineProps<{
 const emit = defineEmits(['finishedTask', 'currentAction'])
 
 // Slider
-const slider = useTemplateRef('slider')
+const slider = useTemplateRef<HTMLElement>('slider')
 const sliderValue = ref<number>(1)
 
 // Measurements

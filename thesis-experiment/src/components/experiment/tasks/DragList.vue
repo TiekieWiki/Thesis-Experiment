@@ -1,8 +1,8 @@
 <template>
   <div :class="['drag-list', interfaceOrientation]">
     <draggable
-      @touchstart="dragStarted()"
-      @touchend="dragEnded()"
+      @touchstart="dragStarted"
+      @touchend="dragEnded"
       v-model="dragList"
       @start="drag = true"
       @end="drag = false"

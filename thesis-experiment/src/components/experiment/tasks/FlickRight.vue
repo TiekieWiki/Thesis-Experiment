@@ -1,5 +1,5 @@
 <template>
-  <div :class="['flick-left', interfaceOrientation]">
+  <div :class="['flick-right', interfaceOrientation]">
     <img
       @touchstart="flickStarted"
       @touchmove="flickMoving"
@@ -10,8 +10,6 @@
       alt="Photo by Greg Becker on Unsplash"
     />
   </div>
-  <div id="firstDiv"></div>
-  <div id="secondDiv"></div>
 </template>
 
 <script setup lang="ts">
@@ -33,12 +31,12 @@ const translateX = ref<number>(0)
 const isFlicking = ref<boolean>(false)
 const startX = ref<number>(0)
 const currentAction = ref<Action>({
-  action: 'startFlickLeft',
+  action: 'startFlickRight',
   centerX: 0,
   centerY: 0,
 })
 const goalAction = ref<Action>({
-  action: 'endFlickLeft',
+  action: 'endFlickRight',
   centerX: 0,
   centerY: 0,
 })
@@ -46,7 +44,7 @@ const goalAction = ref<Action>({
 // Set initial action and goal
 onMounted(() => {
   currentAction.value = {
-    action: 'startFlickLeft',
+    action: 'startFlickRight',
     centerX: image.value
       ? image.value.offsetLeft + image.value.offsetWidth / 2
       : 0,
@@ -55,34 +53,14 @@ onMounted(() => {
       : 0,
   }
   goalAction.value = {
-    action: 'endFlickLeft',
+    action: 'endFlickRight',
     centerX: image.value
-      ? image.value.offsetLeft - image.value.offsetWidth / 2
+      ? image.value.offsetLeft + image.value.offsetWidth * 1.5
       : 0,
     centerY: image.value
       ? image.value.offsetTop + image.value.offsetHeight / 2
       : 0,
   }
-
-  const firstDiv = document.getElementById('firstDiv')
-
-  // Define coordinates in pixels
-  const x1 = currentAction.value.centerX // Horizontal position in pixels
-  const y1 = currentAction.value.centerY // Vertical position in pixels
-
-  // Apply coordinates to the div
-  firstDiv!.style.left = x1 + 'px'
-  firstDiv!.style.top = y1 + 'px'
-
-  const secondDiv = document.getElementById('secondDiv')
-
-  // Define coordinates in pixels
-  const x2 = goalAction.value.centerX // Horizontal position in pixels
-  const y2 = goalAction.value.centerY // Vertical position in pixels
-
-  // Apply coordinates to the div
-  secondDiv!.style.left = x2 + 'px'
-  secondDiv!.style.top = y2 + 'px'
 })
 
 // Emit current action
@@ -100,7 +78,7 @@ watch(
  */
 function flickStarted(event: TouchEvent) {
   currentAction.value = {
-    action: 'startFlickLeft',
+    action: 'startFlickRight',
     centerX: image.value
       ? image.value.offsetLeft + image.value.offsetWidth / 2
       : 0,
@@ -133,8 +111,8 @@ function flickEnded() {
 
   // Wait for current action to be emitted
   setTimeout(() => {
-    // Check if the image has been swiped enough to the left
-    if (translateX.value < -image.value!.offsetWidth / 2) {
+    // Check if the image has been swiped enough to the right
+    if (translateX.value > image.value!.offsetWidth / 2) {
       emit('finishedTask')
     } else {
       translateX.value = 0
@@ -142,13 +120,3 @@ function flickEnded() {
   }, 100)
 }
 </script>
-
-<style scoped>
-#firstDiv,
-#secondDiv {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  background-color: red;
-}
-</style>

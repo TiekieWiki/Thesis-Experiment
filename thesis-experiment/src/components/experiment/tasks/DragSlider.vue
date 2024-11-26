@@ -2,8 +2,8 @@
   <div :class="['drag-slider', interfaceOrientation]">
     <div class="slider">
       <input
-        @touchstart="dragStarted()"
-        @touchend="dragEnded()"
+        @touchstart="dragStarted"
+        @touchend="dragEnded"
         v-model="sliderValue"
         ref="slider"
         type="range"

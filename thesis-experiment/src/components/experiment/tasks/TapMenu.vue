@@ -1,7 +1,7 @@
 <template>
   <div :class="['tap-menu', interfaceOrientation]">
     <div class="menu">
-      <button @click="menuClicked()" ref="menu">
+      <button @click="menuClicked" ref="menu">
         <transition name="switch" mode="out-in">
           <font-awesome-icon v-if="!menuOpen" :icon="['fas', 'bars']" />
           <font-awesome-icon v-else :icon="['fas', 'xmark']" />
@@ -12,7 +12,7 @@
         <li>
           <a @click="menuOpen = true">A</a>
         </li>
-        <li @click="finishTask()" ref="menuItem">
+        <li @click="finishTask" ref="menuItem">
           <a href="#">B</a>
         </li>
         <li>
@@ -61,7 +61,7 @@ onMounted(() => {
 
 // Emit current action
 watch(
-  () => currentAction.value,
+  currentAction,
   () => {
     emit('currentAction', currentAction.value)
   },

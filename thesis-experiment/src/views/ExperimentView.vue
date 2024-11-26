@@ -192,7 +192,7 @@ const currentAction = ref<Action>({
 
 // Filters
 const clickFilter = computed(() => {
-  const tasksWithClick = ['TapMenu']
+  const tasksWithClick = ['DoubleTapZoomIn', 'TapMenu']
   return (
     showComponent.value == 'task' &&
     tasksWithClick.indexOf(currentTask.value) > -1

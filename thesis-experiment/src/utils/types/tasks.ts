@@ -7,12 +7,12 @@ export const taskSet = [
 
 export const tasks = [
   // 'DoubleTapZoomIn',
-  'DoubleTapZoomOut',
+  // 'DoubleTapZoomOut',
   // 'DragList',
   // 'DragSlider',
   // 'FlickLeft',
   // 'FlickRight',
-  // 'LongTapHyperlink',
+  'LongTapHyperlink',
   // 'LongTapSelect',
   // 'MultiTouchRotate',
   // 'MultiTouchZoom',

@@ -205,6 +205,7 @@ const twoClickFilter = computed(() => {
     'FlickLeft',
     'FlickRight',
     'LongTapHyperlink',
+    'LongTapSelect',
   ]
   return (
     showComponent.value == 'task' &&

@@ -1,4 +1,4 @@
-@use "../variables";
+@use '../variables';
 
 html,
 body,
@@ -28,12 +28,12 @@ p {
 }
 
 .select-text {
-  width: 65vw;
-  user-select: text;
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
 
   ::-moz-selection,
   ::selection {
     color: variables.$color-primary;
-    background: variables.$color-secondary;
   }
 }

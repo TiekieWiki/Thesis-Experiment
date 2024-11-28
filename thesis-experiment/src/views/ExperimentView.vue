@@ -2,17 +2,17 @@
   <main
     class="experiment"
     @click.capture="
-      clickFilter
+      oneClickFilter
         ? measurements.push(userClick($event, Date.now(), currentAction))
         : ''
     "
     @touchstart="
-      dragFilter
+      twoClickFilter
         ? measurements.push(userTouchStart($event, Date.now(), currentAction))
         : ''
     "
     @touchend="
-      dragFilter
+      twoClickFilter
         ? measurements.push(userTouchEnd($event, Date.now(), currentAction))
         : ''
     "
@@ -191,18 +191,24 @@ const currentAction = ref<Action>({
 })
 
 // Filters
-const clickFilter = computed(() => {
-  const tasksWithClick = ['DoubleTapZoomIn', 'DoubleTapZoomOut', 'TapMenu']
+const oneClickFilter = computed(() => {
+  const tasksWithOneClick = ['DoubleTapZoomIn', 'DoubleTapZoomOut', 'TapMenu']
   return (
     showComponent.value == 'task' &&
-    tasksWithClick.indexOf(currentTask.value) > -1
+    tasksWithOneClick.indexOf(currentTask.value) > -1
   )
 })
-const dragFilter = computed(() => {
-  const tasksWithDrag = ['DragList', 'DragSlider', 'FlickLeft', 'FlickRight']
+const twoClickFilter = computed(() => {
+  const tasksWithTwoClicks = [
+    'DragList',
+    'DragSlider',
+    'FlickLeft',
+    'FlickRight',
+    'LongTapHyperlink',
+  ]
   return (
     showComponent.value == 'task' &&
-    tasksWithDrag.indexOf(currentTask.value) > -1
+    tasksWithTwoClicks.indexOf(currentTask.value) > -1
   )
 })
 

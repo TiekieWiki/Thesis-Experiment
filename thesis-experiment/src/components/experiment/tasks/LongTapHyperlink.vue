@@ -1,68 +1,71 @@
 <template>
   <div :class="['long-tap-hyperlink', interfaceOrientation]">
-    <a href="#" v-on-long-press.prevent="openPopUp">Test</a>
+    <a ref="link" href="#" v-on-long-press.prevent="openPopUp">Open pop-up</a>
     <teleport to="body" v-if="popUpOpen">
       <div class="pop-up-background">
         <div class="pop-up">
-          <button @click="popUpOpen = false">
-            <font-awesome-icon :icon="['fas', 'times']" />
-          </button>
-          <p>Content</p>
+          <p>Well done!</p>
         </div>
       </div>
     </teleport>
   </div>
-  <button @click="next">Next</button>
-  <div id="firstDiv"></div>
-  <div id="secondDiv"></div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref, useTemplateRef, watch } from 'vue'
 import { vOnLongPress } from '@vueuse/components'
+import type { Action } from '@/utils/types/measurements'
 
 defineProps<{
   interfaceOrientation: string
   hand: string
 }>()
 
-const emit = defineEmits(['finishedTask'])
-function next() {
-  emit('finishedTask')
-}
+const emit = defineEmits(['finishedTask', 'currentAction'])
 
+// Link and pop-up
+const link = useTemplateRef<HTMLElement>('link')
 const popUpOpen = ref<boolean>(false)
+
+// Measurements
+const currentAction = ref<Action>({
+  action: 'startLongTapHyperlink',
+  centerX: 0,
+  centerY: 0,
+})
+
+// Set initial action
+onMounted(() => {
+  currentAction.value = {
+    action: 'startLongTapHyperlink',
+    centerX: link.value
+      ? link.value.offsetLeft + link.value.offsetWidth / 2
+      : 0,
+    centerY: link.value
+      ? link.value.offsetTop + link.value.offsetHeight / 2
+      : 0,
+  }
+})
+
+// Emit current action
+watch(
+  currentAction,
+  () => {
+    emit('currentAction', currentAction.value)
+  },
+  { immediate: true, flush: 'sync' },
+)
+
+/**
+ * Open pop-up after long tap
+ */
 function openPopUp() {
+  currentAction.value.action = 'endLongTapHyperlink'
   popUpOpen.value = true
+
+  // Emit finished task after seeing the pop-up
+  setTimeout(() => {
+    emit('finishedTask')
+  }, 1000)
 }
-
-// const firstDiv = document.getElementById('firstDiv')
-
-// // Define coordinates in pixels
-// const x1 = currentAction.value.centerX // Horizontal position in pixels
-// const y1 = currentAction.value.centerY // Vertical position in pixels
-
-// // Apply coordinates to the div
-// firstDiv!.style.left = x1 + 'px'
-// firstDiv!.style.top = y1 + 'px'
-
-// const secondDiv = document.getElementById('secondDiv')
-
-// // Define coordinates in pixels
-// const x2 = goalAction.value.centerX // Horizontal position in pixels
-// const y2 = goalAction.value.centerY // Vertical position in pixels
-
-// // Apply coordinates to the div
-// secondDiv!.style.left = x2 + 'px'
-// secondDiv!.style.top = y2 + 'px'
 </script>
-
-<style scoped>
-#firstDiv,
-#secondDiv {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  background-color: red;
-}
-</style>

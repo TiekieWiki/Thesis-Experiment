@@ -1,54 +1,73 @@
 <template>
   <div :class="['long-tap-select', interfaceOrientation]">
-    <p class="select-text">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro suscipit
-      explicabo sapiente similique expedita culpa beatae magni eveniet alias ad!
-      Corrupti modi atque eos, optio dolorem aspernatur rem molestiae animi.
+    <p ref="text" class="select-text">
+      {{ content }}
     </p>
   </div>
-  <button @click="next">Next</button>
-  <div id="firstDiv"></div>
-  <div id="secondDiv"></div>
 </template>
 
 <script setup lang="ts">
+import type { Action } from '@/utils/types/measurements'
+import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue'
+
 defineProps<{
   interfaceOrientation: string
   hand: string
 }>()
 
-const emit = defineEmits(['finishedTask'])
-function next() {
-  emit('finishedTask')
+const emit = defineEmits(['finishedTask', 'currentAction'])
+
+// Text
+const text = useTemplateRef<HTMLElement>('text')
+const content = ref<string>('Select this text')
+
+// Measurements
+const currentAction = ref<Action>({
+  action: 'startLongTapSelect',
+  centerX: 0,
+  centerY: 0,
+})
+
+// Set initial action
+onMounted(() => {
+  currentAction.value = {
+    action: 'startLongTapSelect',
+    centerX: text.value
+      ? text.value.offsetLeft + text.value.offsetWidth / 2
+      : 0,
+    centerY: text.value
+      ? text.value.offsetTop + text.value.offsetHeight / 2
+      : 0,
+  }
+
+  document.addEventListener('selectionchange', detectSelectionChange)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('selectionchange', detectSelectionChange)
+})
+
+// Emit current action
+watch(
+  currentAction,
+  () => {
+    emit('currentAction', currentAction.value)
+  },
+  { immediate: true, flush: 'sync' },
+)
+
+/**
+ * Detect selection change
+ */
+function detectSelectionChange() {
+  const selection = window.getSelection()
+  if (selection && selection.toString().trim() == content.value) {
+    currentAction.value.action = 'endLongTapSelect'
+
+    // Emit finished task after seeing the pop-up
+    setTimeout(() => {
+      emit('finishedTask')
+    }, 1000)
+  }
 }
-
-// const firstDiv = document.getElementById('firstDiv')
-
-// // Define coordinates in pixels
-// const x1 = currentAction.value.centerX // Horizontal position in pixels
-// const y1 = currentAction.value.centerY // Vertical position in pixels
-
-// // Apply coordinates to the div
-// firstDiv!.style.left = x1 + 'px'
-// firstDiv!.style.top = y1 + 'px'
-
-// const secondDiv = document.getElementById('secondDiv')
-
-// // Define coordinates in pixels
-// const x2 = goalAction.value.centerX // Horizontal position in pixels
-// const y2 = goalAction.value.centerY // Vertical position in pixels
-
-// // Apply coordinates to the div
-// secondDiv!.style.left = x2 + 'px'
-// secondDiv!.style.top = y2 + 'px'
 </script>
-
-<style scoped>
-#firstDiv,
-#secondDiv {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  background-color: red;
-}
-</style>

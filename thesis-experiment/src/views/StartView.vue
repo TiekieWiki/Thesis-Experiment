@@ -16,10 +16,10 @@
 </template>
 
 <script setup lang="ts">
-import StartInstructions from '@/components/start/StartInstructions.vue'
-import DemoGraphicQuestions from '@/components/start/DemoGraphicQuestions.vue'
-import LateralityTest from '@/components/start/LateralityTest.vue'
-import { ref } from 'vue'
+import StartInstructions from '@/components/start/StartInstructions.vue';
+import DemoGraphicQuestions from '@/components/start/DemoGraphicQuestions.vue';
+import LateralityTest from '@/components/start/LateralityTest.vue';
+import { ref } from 'vue';
 
-const showComponent = ref<string>('startInstructions')
+const showComponent = ref<string>('startInstructions');
 </script>

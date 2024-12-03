@@ -4,11 +4,11 @@
  * @returns Pixels
  */
 export function xToPx(x: string): number {
-  const div = document.createElement('div')
-  div.style.display = 'block'
-  div.style.height = x
-  document.body.appendChild(div)
-  const px = parseFloat(window.getComputedStyle(div, null).height)
-  div.parentNode?.removeChild(div)
-  return px
+  const div = document.createElement('div');
+  div.style.display = 'block';
+  div.style.height = x;
+  document.body.appendChild(div);
+  const px = parseFloat(window.getComputedStyle(div, null).height);
+  div.parentNode?.removeChild(div);
+  return px;
 }

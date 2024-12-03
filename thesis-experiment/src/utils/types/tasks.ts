@@ -3,7 +3,7 @@ export const taskSet = [
   // 'RightStandard',
   // 'LeftMirrored',
   // 'RightMirrored',
-]
+];
 
 export const tasks = [
   // 'DoubleTapZoomIn',
@@ -13,9 +13,9 @@ export const tasks = [
   // 'FlickLeft',
   // 'FlickRight',
   // 'LongTapHyperlink',
-  'LongTapSelect',
+  // 'LongTapSelect',
   // 'MultiTouchRotate',
   // 'MultiTouchZoom',
   // 'TapMenu',
-  // 'TapType',
-]
+  'TapType',
+];

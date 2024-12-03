@@ -18,15 +18,15 @@
 </template>
 
 <script setup lang="ts">
-import { getTaskInstruction } from '@/utils/logic/selectTask'
-import type { Measurement } from '@/utils/types/measurements'
+import { getTaskInstruction } from '@/utils/logic/selectTask';
+import type { Measurement } from '@/utils/types/measurements';
 
 defineProps<{
-  hand: string
-  task: string
-}>()
+  hand: string;
+  task: string;
+}>();
 
-const emit = defineEmits(['finishedInstructions'])
+const emit = defineEmits(['finishedInstructions']);
 
 /**
  * Start the task and register user click
@@ -41,7 +41,7 @@ function startTask(clickEvent: MouseEvent, clickTime: number) {
     centerX: 0,
     centerY: 0,
     timestamp: clickTime,
-  }
-  emit('finishedInstructions', measurement)
+  };
+  emit('finishedInstructions', measurement);
 }
 </script>

@@ -1,4 +1,4 @@
-import { defineAsyncComponent, type Component } from 'vue'
+import { defineAsyncComponent, type Component } from 'vue';
 
 /**
  * Selects a random item from the list of items
@@ -6,12 +6,12 @@ import { defineAsyncComponent, type Component } from 'vue'
  * @returns Object with the selected item and the remaining items
  */
 export function selectRandomItem(items: string[]): {
-  selectedItem: string
-  remainingItems: string[]
+  selectedItem: string;
+  remainingItems: string[];
 } {
-  const randomIndex = Math.floor(Math.random() * items.length)
-  const reducedTaskSets = items.filter((_, index) => index !== randomIndex)
-  return { selectedItem: items[randomIndex], remainingItems: reducedTaskSets }
+  const randomIndex = Math.floor(Math.random() * items.length);
+  const reducedTaskSets = items.filter((_, index) => index !== randomIndex);
+  return { selectedItem: items[randomIndex], remainingItems: reducedTaskSets };
 }
 
 /**
@@ -24,13 +24,13 @@ export function selectRandomFiltered(
   items: string[],
   filter: string,
 ): {
-  selectedItem: string
-  remainingItems: string[]
+  selectedItem: string;
+  remainingItems: string[];
 } {
-  const filteredItems = items.filter(item => !item.includes(filter))
-  const { selectedItem } = selectRandomItem(filteredItems)
-  const remainingItems = items.filter(item => item !== selectedItem)
-  return { selectedItem, remainingItems }
+  const filteredItems = items.filter(item => !item.includes(filter));
+  const { selectedItem } = selectRandomItem(filteredItems);
+  const remainingItems = items.filter(item => item !== selectedItem);
+  return { selectedItem, remainingItems };
 }
 
 /**
@@ -41,7 +41,7 @@ export function selectRandomFiltered(
 export function getComponent(title: string): Component {
   return defineAsyncComponent(
     () => import(`@/components/experiment/tasks/${title}.vue`),
-  )
+  );
 }
 
 /**
@@ -52,30 +52,30 @@ export function getComponent(title: string): Component {
 export function getTaskInstruction(task: string): string {
   switch (task) {
     case 'DoubleTapZoomIn':
-      return 'Double tap to zoom in on the picture'
+      return 'Double tap to zoom in on the picture';
     case 'DoubleTapZoomOut':
-      return 'Double tap to zoom out on the picture'
+      return 'Double tap to zoom out on the picture';
     case 'DragList':
-      return 'Drag the first list item to the bottom of the list'
+      return 'Drag the first list item to the bottom of the list';
     case 'DragSlider':
-      return 'Drag the slider to the right to answer the phone call'
+      return 'Drag the slider to the right to answer the phone call';
     case 'FlickLeft':
-      return 'Swipe the picture to the left'
+      return 'Swipe the picture to the left';
     case 'FlickRight':
-      return 'Swipe the picture to the right'
+      return 'Swipe the picture to the right';
     case 'LongTapHyperlink':
-      return 'Hold down on the hyperlink to open a pop-up'
+      return 'Hold down on the hyperlink to open a pop-up';
     case 'LongTapSelect':
-      return 'Hold down on the text to select it'
+      return 'Hold down on the text to select it';
     case 'MultiTouchRotate':
-      return 'Rotate the picture with two fingers'
+      return 'Rotate the picture with two fingers';
     case 'MultiTouchZoom':
-      return 'Zoom in on the picture with two fingers'
+      return 'Zoom in on the picture with two fingers';
     case 'TapMenu':
-      return 'Open the menu with one tap and select the about page'
+      return 'Open the menu with one tap and select the about page';
     case 'TapType':
-      return 'Type the sentence shown on the screen'
+      return 'Type the sentence shown on the screen, including punctuation and capitalization';
     default:
-      return ''
+      return '';
   }
 }

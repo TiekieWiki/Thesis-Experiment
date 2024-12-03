@@ -47,10 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import type { LateralityQuestion } from '@/utils/types/laterality'
-import { ref, watch } from 'vue'
+import type { LateralityQuestion } from '@/utils/types/laterality';
+import { ref, watch } from 'vue';
 
-const emit = defineEmits(['finishedTest'])
+const emit = defineEmits(['finishedTest']);
 
 const lateralityQuestions = ref<LateralityQuestion[]>([
   {
@@ -113,23 +113,23 @@ const lateralityQuestions = ref<LateralityQuestion[]>([
     handedness: '',
     useOtherHand: null,
   },
-])
+]);
 
 // Check if the user has filled in the required fields
-const requiredFieldsFilled = ref<boolean>(false)
+const requiredFieldsFilled = ref<boolean>(false);
 
 // Enable the continue button when the user has filled in the required fields
 watch(lateralityQuestions.value, () => {
   if (lateralityQuestions.value.every(question => question.handedness)) {
-    requiredFieldsFilled.value = true
+    requiredFieldsFilled.value = true;
   }
-})
+});
 
 /**
  * Save the laterality test information and continue to the next step
  */
 function save() {
   // Go to the next step
-  emit('finishedTest')
+  emit('finishedTest');
 }
 </script>

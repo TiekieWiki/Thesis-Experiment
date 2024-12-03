@@ -12,13 +12,13 @@
 
 <script setup lang="ts">
 defineProps<{
-  interfaceOrientation: string
-  hand: string
-}>()
+  interfaceOrientation: string;
+  hand: string;
+}>();
 
-const emit = defineEmits(['finishedTask'])
+const emit = defineEmits(['finishedTask']);
 function next() {
-  emit('finishedTask')
+  emit('finishedTask');
 }
 
 // const firstDiv = document.getElementById('firstDiv')

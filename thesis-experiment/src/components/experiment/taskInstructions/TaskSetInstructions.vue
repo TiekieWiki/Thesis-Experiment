@@ -6,11 +6,11 @@
 
 <script setup lang="ts">
 defineProps<{
-  hand: string
-}>()
+  hand: string;
+}>();
 
-const emit = defineEmits(['finishedInstructions'])
+const emit = defineEmits(['finishedInstructions']);
 function next() {
-  emit('finishedInstructions')
+  emit('finishedInstructions');
 }
 </script>

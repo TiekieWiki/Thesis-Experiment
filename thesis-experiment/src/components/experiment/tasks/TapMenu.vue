@@ -1,7 +1,7 @@
 <template>
   <div :class="['tap-menu', interfaceOrientation]">
     <div class="menu">
-      <button @click="menuClicked" ref="menu">
+      <button @click="menuClicked" ref="menuRef">
         <transition name="switch" mode="out-in">
           <font-awesome-icon v-if="!menuOpen" :icon="['fas', 'bars']" />
           <font-awesome-icon v-else :icon="['fas', 'xmark']" />
@@ -12,7 +12,7 @@
         <li>
           <a @click="menuOpen = true">A</a>
         </li>
-        <li @click="finishTask" ref="menuItem">
+        <li @click="finishTask" ref="menuItemRef">
           <a href="#">B</a>
         </li>
         <li>
@@ -24,73 +24,73 @@
 </template>
 
 <script setup lang="ts">
-import type { Action } from '@/utils/types/measurements'
-import { nextTick, onMounted, ref, useTemplateRef, watch } from 'vue'
+import type { Action } from '@/utils/types/measurements';
+import { nextTick, onMounted, ref, useTemplateRef, watch } from 'vue';
 
 defineProps<{
-  interfaceOrientation: string
-  hand: string
-}>()
+  interfaceOrientation: string;
+  hand: string;
+}>();
 
-const emit = defineEmits(['finishedTask', 'currentAction'])
+const emit = defineEmits(['finishedTask', 'currentAction']);
 
 // Menu
-const menu = useTemplateRef<HTMLElement>('menu')
-const menuItem = useTemplateRef<HTMLElement>('menuItem')
-const menuOpen = ref<boolean>(false)
+const menuRef = useTemplateRef<HTMLElement>('menuRef');
+const menuItemRef = useTemplateRef<HTMLElement>('menuItemRef');
+const menuOpen = ref<boolean>(false);
 
 // Measurements
 const currentAction = ref<Action>({
   action: 'clickMenu',
   centerX: 0,
   centerY: 0,
-})
+});
 
 // Set initial action
 onMounted(() => {
   currentAction.value = {
     action: 'clickMenu',
-    centerX: menu.value
-      ? menu.value.offsetLeft + menu.value.offsetWidth / 2
+    centerX: menuRef.value
+      ? menuRef.value.offsetLeft + menuRef.value.offsetWidth / 2
       : 0,
-    centerY: menu.value
-      ? menu.value.offsetTop + menu.value.offsetHeight / 2
+    centerY: menuRef.value
+      ? menuRef.value.offsetTop + menuRef.value.offsetHeight / 2
       : 0,
-  }
-})
+  };
+});
 
 // Emit current action
 watch(
   currentAction,
   () => {
-    emit('currentAction', currentAction.value)
+    emit('currentAction', currentAction.value);
   },
   { immediate: true, flush: 'sync' },
-)
+);
 
 /**
  * Set menu open and set current action
  */
 async function menuClicked() {
-  menuOpen.value = true
+  menuOpen.value = true;
 
   // Set current action when menu items are loaded
-  await nextTick()
+  await nextTick();
   currentAction.value = {
     action: 'clickMenuItem',
-    centerX: menuItem.value
-      ? menuItem.value.offsetLeft + menuItem.value.offsetWidth / 2
+    centerX: menuItemRef.value
+      ? menuItemRef.value.offsetLeft + menuItemRef.value.offsetWidth / 2
       : 0,
-    centerY: menuItem.value
-      ? menuItem.value.offsetTop + menuItem.value.offsetHeight / 2
+    centerY: menuItemRef.value
+      ? menuItemRef.value.offsetTop + menuItemRef.value.offsetHeight / 2
       : 0,
-  }
+  };
 }
 
 /**
  * Finish task
  */
 function finishTask() {
-  emit('finishedTask')
+  emit('finishedTask');
 }
 </script>

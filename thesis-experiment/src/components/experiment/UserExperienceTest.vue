@@ -73,14 +73,14 @@
 </template>
 
 <script setup lang="ts">
-import type { UserExperience } from '@/utils/types/userExperience'
-import { ref, watch } from 'vue'
+import type { UserExperience } from '@/utils/types/userExperience';
+import { ref, watch } from 'vue';
 
 defineProps<{
-  taskSet: string
-}>()
+  taskSet: string;
+}>();
 
-const emit = defineEmits(['finishedTaskSet'])
+const emit = defineEmits(['finishedTaskSet']);
 
 const userExperienceQuestions = ref<UserExperience[]>([
   {
@@ -93,22 +93,22 @@ const userExperienceQuestions = ref<UserExperience[]>([
     question: 'This system is easy to use',
     answer: null,
   },
-])
+]);
 
 // Check if the user has filled in the required fields
-const requiredFieldsFilled = ref<boolean>(false)
+const requiredFieldsFilled = ref<boolean>(false);
 
 // Enable the continue button when the user has filled in the required fields
 watch(userExperienceQuestions.value, () => {
   if (userExperienceQuestions.value.every(question => question.answer)) {
-    requiredFieldsFilled.value = true
+    requiredFieldsFilled.value = true;
   }
-})
+});
 
 /**
  * Save the laterality test information and continue to the next step
  */
 function save() {
-  emit('finishedTaskSet')
+  emit('finishedTaskSet');
 }
 </script>

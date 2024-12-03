@@ -62,14 +62,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const emit = defineEmits(['finishedInstructions'])
+const emit = defineEmits(['finishedInstructions']);
 function next() {
-  emit('finishedInstructions')
+  emit('finishedInstructions');
 }
 
 // Check consent
-const consentGiven = ref<boolean>(false)
-const consent = ref<boolean>(false)
+const consentGiven = ref<boolean>(false);
+const consent = ref<boolean>(false);
 </script>

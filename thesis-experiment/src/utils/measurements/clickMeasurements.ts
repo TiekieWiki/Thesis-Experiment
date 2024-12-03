@@ -1,4 +1,4 @@
-import type { Action, Measurement } from '../types/measurements'
+import type { Action, Measurement } from '../types/measurements';
 
 /**
  * Register user click
@@ -17,8 +17,8 @@ export function userClick(
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: clickTime,
-  }
-  return measurement
+  };
+  return measurement;
 }
 
 /**
@@ -38,8 +38,8 @@ export function userTouchStart(
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,
-  }
-  return measurement
+  };
+  return measurement;
 }
 
 /**
@@ -59,6 +59,6 @@ export function userTouchEnd(
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,
-  }
-  return measurement
+  };
+  return measurement;
 }

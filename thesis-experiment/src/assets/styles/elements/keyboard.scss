@@ -1,4 +1,4 @@
-@use "../variables";
+@use '../variables';
 
 .keyboard {
   display: flex;
@@ -26,8 +26,10 @@
         width: calc(variables.$size-large + variables.$spacing-xxsmall);
       }
 
-      &.spacebar {
-        width: calc(variables.$size-medium * 6 + variables.$spacing-xxsmall * 5);
+      &.spaceBar {
+        width: calc(
+          variables.$size-medium * 6 + variables.$spacing-xxsmall * 5
+        );
       }
 
       &:active {

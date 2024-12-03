@@ -5,7 +5,7 @@
         @touchstart="dragStarted"
         @touchend="dragEnded"
         v-model="sliderValue"
-        ref="slider"
+        ref="sliderRef"
         type="range"
         min="1"
         max="100"
@@ -16,45 +16,45 @@
 </template>
 
 <script setup lang="ts">
-import { xToPx } from '@/utils/logic/sizeConversion'
-import type { Action } from '@/utils/types/measurements'
-import { onMounted, ref, useTemplateRef, watch } from 'vue'
+import { xToPx } from '@/utils/logic/sizeConversion';
+import type { Action } from '@/utils/types/measurements';
+import { onMounted, ref, useTemplateRef, watch } from 'vue';
 
 defineProps<{
-  interfaceOrientation: string
-  hand: string
-}>()
+  interfaceOrientation: string;
+  hand: string;
+}>();
 
-const emit = defineEmits(['finishedTask', 'currentAction'])
+const emit = defineEmits(['finishedTask', 'currentAction']);
 
 // Slider
-const slider = useTemplateRef<HTMLElement>('slider')
-const sliderValue = ref<number>(1)
+const sliderRef = useTemplateRef<HTMLElement>('sliderRef');
+const sliderValue = ref<number>(1);
 
 // Measurements
 const currentAction = ref<Action>({
   action: 'startDragSlider',
   centerX: 0,
   centerY: 0,
-})
+});
 
 // Set initial action
 onMounted(() => {
   currentAction.value = {
     action: 'startDragSlider',
-    centerX: slider.value ? slider.value.offsetLeft + xToPx('5mm') : 0,
-    centerY: slider.value ? slider.value.offsetTop + xToPx('5mm') : 0,
-  }
-})
+    centerX: sliderRef.value ? sliderRef.value.offsetLeft + xToPx('5mm') : 0,
+    centerY: sliderRef.value ? sliderRef.value.offsetTop + xToPx('5mm') : 0,
+  };
+});
 
 // Emit current action
 watch(
   currentAction,
   () => {
-    emit('currentAction', currentAction.value)
+    emit('currentAction', currentAction.value);
   },
   { immediate: true, flush: 'sync' },
-)
+);
 
 /**
  * Set current action when drag starts
@@ -62,9 +62,9 @@ watch(
 function dragStarted() {
   currentAction.value = {
     action: 'startDragSlider',
-    centerX: slider.value ? slider.value.offsetLeft + xToPx('5mm') : 0,
-    centerY: slider.value ? slider.value.offsetTop + xToPx('5mm') : 0,
-  }
+    centerX: sliderRef.value ? sliderRef.value.offsetLeft + xToPx('5mm') : 0,
+    centerY: sliderRef.value ? sliderRef.value.offsetTop + xToPx('5mm') : 0,
+  };
 }
 
 /**
@@ -73,17 +73,19 @@ function dragStarted() {
 function dragEnded() {
   currentAction.value = {
     action: 'endDragSlider',
-    centerX: slider.value
-      ? slider.value!.offsetLeft + slider.value!.offsetWidth - xToPx('5mm')
+    centerX: sliderRef.value
+      ? sliderRef.value!.offsetLeft +
+        sliderRef.value!.offsetWidth -
+        xToPx('5mm')
       : 0,
-    centerY: slider.value ? slider.value!.offsetTop + xToPx('5mm') : 0,
-  }
+    centerY: sliderRef.value ? sliderRef.value!.offsetTop + xToPx('5mm') : 0,
+  };
 
   // Wait for current action to be emitted
   setTimeout(() => {
     if (sliderValue.value == 100) {
-      emit('finishedTask')
+      emit('finishedTask');
     }
-  }, 100)
+  }, 100);
 }
 </script>

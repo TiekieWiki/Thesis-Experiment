@@ -1,5 +1,5 @@
-import { collection, addDoc } from 'firebase/firestore'
-import db from './firebaseInit'
+import { collection, addDoc } from 'firebase/firestore';
+import db from './firebaseInit';
 
 /**
  * Add data to a Firestore collection
@@ -7,9 +7,9 @@ import db from './firebaseInit'
  * @param data Data to add
  */
 export async function addData(table: string, data: unknown): Promise<void> {
-  const docRef = await addDoc(collection(db, table), data)
+  const docRef = await addDoc(collection(db, table), data);
 
   if (docRef === null) {
-    throw new Error('An error occurred while adding the data')
+    throw new Error('An error occurred while adding the data');
   }
 }

@@ -4,11 +4,11 @@
  */
 export function correctDeviceType(): boolean {
   const regex =
-    /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+    /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
   if (regex.test(navigator.userAgent)) {
-    return true
+    return true;
   } else {
-    return false
+    return false;
   }
 }
 
@@ -18,8 +18,8 @@ export function correctDeviceType(): boolean {
  */
 export function correctScreenOrientation(): boolean {
   if (window.innerHeight > window.innerWidth) {
-    return true
+    return true;
   } else {
-    return false
+    return false;
   }
 }

@@ -213,6 +213,7 @@ const twoClickFilter = computed(() => {
     'FlickRight',
     'LongTapHyperlink',
     'LongTapSelect',
+    'MultiTouchRotate',
     'MultiTouchZoom',
   ];
   return (

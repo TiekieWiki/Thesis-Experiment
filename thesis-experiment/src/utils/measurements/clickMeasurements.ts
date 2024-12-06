@@ -41,7 +41,10 @@ export function userTouchStart(
     timestamp: touchTime,
   };
 
-  if (currentTask === 'MultiTouchZoom' && touchEvent.touches.length > 1) {
+  if (
+    (currentTask === 'MultiTouchZoom' || currentTask === 'MultiTouchRotate') &&
+    touchEvent.touches.length > 1
+  ) {
     measurement.touchX = touchEvent.touches[1].clientX;
     measurement.touchY = touchEvent.touches[1].clientY;
   }

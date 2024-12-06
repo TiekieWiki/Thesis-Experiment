@@ -8,7 +8,9 @@
     "
     @touchstart="
       twoClickFilter
-        ? measurements.push(userTouchStart($event, Date.now(), currentAction))
+        ? measurements.push(
+            userTouchStart($event, Date.now(), currentAction, currentTask),
+          )
         : ''
     "
     @touchend="
@@ -211,6 +213,7 @@ const twoClickFilter = computed(() => {
     'FlickRight',
     'LongTapHyperlink',
     'LongTapSelect',
+    'MultiTouchZoom',
   ];
   return (
     showComponent.value == 'task' &&

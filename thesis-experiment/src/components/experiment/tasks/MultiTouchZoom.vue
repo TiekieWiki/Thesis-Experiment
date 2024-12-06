@@ -30,11 +30,7 @@ const imageRef = useTemplateRef<HTMLElement>('imageRef');
 
 // Measurements
 const scale = ref<number>(1);
-const start = {
-  x: 0,
-  y: 0,
-  distance: 0,
-};
+const startDistance = ref<number>(0);
 const currentAction = ref<Action>({
   action: 'startMultiTouchZoom',
   centerX: 0,
@@ -84,10 +80,8 @@ function startZoom(event: TouchEvent) {
     // Prevent page scroll
     event.preventDefault();
 
-    // Calculate where the fingers have started on the X and Y axis
-    start.x = (event.touches[0].clientX + event.touches[1].clientX) / 2;
-    start.y = (event.touches[0].clientY + event.touches[1].clientY) / 2;
-    start.distance = distance(event);
+    // Calculate the start distance of the fingers
+    startDistance.value = distance(event);
   }
 }
 
@@ -101,7 +95,10 @@ function zoom(event: TouchEvent) {
     event.preventDefault();
 
     // Calculate the new scale
-    scale.value = Math.min(Math.max(1, distance(event) / start.distance), 4);
+    scale.value = Math.min(
+      Math.max(1, distance(event) / startDistance.value),
+      4,
+    );
   }
 }
 

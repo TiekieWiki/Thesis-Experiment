@@ -30,6 +30,7 @@ export function userTouchStart(
   touchEvent: TouchEvent,
   touchTime: number,
   currentAction: Action,
+  currentTask: string,
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
@@ -39,6 +40,11 @@ export function userTouchStart(
     centerY: currentAction.centerY,
     timestamp: touchTime,
   };
+
+  if (currentTask === 'MultiTouchZoom' && touchEvent.touches.length > 1) {
+    measurement.touchX = touchEvent.touches[1].clientX;
+    measurement.touchY = touchEvent.touches[1].clientY;
+  }
   return measurement;
 }
 
@@ -60,5 +66,6 @@ export function userTouchEnd(
     centerY: currentAction.centerY,
     timestamp: touchTime,
   };
+
   return measurement;
 }

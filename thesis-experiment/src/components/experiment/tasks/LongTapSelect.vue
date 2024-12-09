@@ -7,9 +7,13 @@
 </template>
 
 <script setup lang="ts">
+import {
+  useEmitCurrentAction,
+  useOnMountedCurrentAction,
+} from '@/composables/useTasks';
 import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
-import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
+import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -33,17 +37,10 @@ const currentAction = ref<Action>({
 });
 
 // Set initial action
-onMounted(() => {
-  currentAction.value = {
-    action: 'startLongTapSelect',
-    centerX: textRef.value
-      ? textRef.value.offsetLeft + textRef.value.offsetWidth / 2
-      : 0,
-    centerY: textRef.value
-      ? textRef.value.offsetTop + textRef.value.offsetHeight / 2
-      : 0,
-  };
+useOnMountedCurrentAction(currentAction, 'startLongTapSelect', textRef);
 
+// Set up selection change detection
+onMounted(() => {
   document.addEventListener('selectionchange', detectSelectionChange);
 });
 
@@ -52,13 +49,7 @@ onUnmounted(() => {
 });
 
 // Emit current action
-watch(
-  currentAction,
-  () => {
-    emit('currentAction', currentAction.value);
-  },
-  { immediate: true, flush: 'sync' },
-);
+useEmitCurrentAction(currentAction, emit);
 
 /**
  * Detect selection change

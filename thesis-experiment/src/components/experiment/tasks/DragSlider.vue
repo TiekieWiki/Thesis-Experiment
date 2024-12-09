@@ -16,10 +16,11 @@
 </template>
 
 <script setup lang="ts">
+import { useEmitCurrentAction } from '@/composables/useTasks';
 import { xToPx } from '@/utils/logic/sizeConversion';
 import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
-import { onMounted, ref, useTemplateRef, watch } from 'vue';
+import { onMounted, ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -52,13 +53,7 @@ onMounted(() => {
 });
 
 // Emit current action
-watch(
-  currentAction,
-  () => {
-    emit('currentAction', currentAction.value);
-  },
-  { immediate: true, flush: 'sync' },
-);
+useEmitCurrentAction(currentAction, emit);
 
 /**
  * Set current action when drag starts

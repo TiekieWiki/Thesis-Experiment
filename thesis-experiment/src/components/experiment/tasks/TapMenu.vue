@@ -24,8 +24,12 @@
 </template>
 
 <script setup lang="ts">
+import {
+  useEmitCurrentAction,
+  useOnMountedCurrentAction,
+} from '@/composables/useTasks';
 import type { Action } from '@/utils/types/measurements';
-import { nextTick, onMounted, ref, useTemplateRef, watch } from 'vue';
+import { nextTick, ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -50,26 +54,10 @@ const currentAction = ref<Action>({
 });
 
 // Set initial action
-onMounted(() => {
-  currentAction.value = {
-    action: 'clickMenu',
-    centerX: menuRef.value
-      ? menuRef.value.offsetLeft + menuRef.value.offsetWidth / 2
-      : 0,
-    centerY: menuRef.value
-      ? menuRef.value.offsetTop + menuRef.value.offsetHeight / 2
-      : 0,
-  };
-});
+useOnMountedCurrentAction(currentAction, 'clickMenu', menuRef);
 
 // Emit current action
-watch(
-  currentAction,
-  () => {
-    emit('currentAction', currentAction.value);
-  },
-  { immediate: true, flush: 'sync' },
-);
+useEmitCurrentAction(currentAction, emit);
 
 /**
  * Set menu open and set current action

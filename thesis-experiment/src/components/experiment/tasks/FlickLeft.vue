@@ -13,9 +13,13 @@
 </template>
 
 <script setup lang="ts">
+import {
+  useEmitCurrentAction,
+  useOnMountedCurrentAction,
+} from '@/composables/useTasks';
 import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
-import { onMounted, ref, useTemplateRef, watch } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -46,35 +50,11 @@ const goalAction = ref<Action>({
 });
 
 // Set initial action and goal
-onMounted(() => {
-  currentAction.value = {
-    action: 'startFlickLeft',
-    centerX: imageRef.value
-      ? imageRef.value.offsetLeft + imageRef.value.offsetWidth / 2
-      : 0,
-    centerY: imageRef.value
-      ? imageRef.value.offsetTop + imageRef.value.offsetHeight / 2
-      : 0,
-  };
-  goalAction.value = {
-    action: 'endFlickLeft',
-    centerX: imageRef.value
-      ? imageRef.value.offsetLeft - imageRef.value.offsetWidth / 2
-      : 0,
-    centerY: imageRef.value
-      ? imageRef.value.offsetTop + imageRef.value.offsetHeight / 2
-      : 0,
-  };
-});
+useOnMountedCurrentAction(currentAction, 'startFlickLeft', imageRef);
+useOnMountedCurrentAction(goalAction, 'endFlickLeft', imageRef);
 
 // Emit current action
-watch(
-  currentAction,
-  () => {
-    emit('currentAction', currentAction.value);
-  },
-  { immediate: true, flush: 'sync' },
-);
+useEmitCurrentAction(currentAction, emit);
 
 /**
  * Set current action and start position when flicking starts

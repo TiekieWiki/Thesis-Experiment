@@ -64,8 +64,9 @@
 </template>
 
 <script setup lang="ts">
+import { useEmitCurrentAction } from '@/composables/useTasks';
 import type { Action } from '@/utils/types/measurements';
-import { onMounted, ref, useTemplateRef, watch } from 'vue';
+import { onMounted, ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -167,13 +168,7 @@ onMounted(() => {
 });
 
 // Emit current action
-watch(
-  currentAction,
-  () => {
-    emit('currentAction', currentAction.value);
-  },
-  { immediate: true, flush: 'sync' },
-);
+useEmitCurrentAction(currentAction, emit);
 
 /**
  * Set next action

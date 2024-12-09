@@ -14,10 +14,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, useTemplateRef, watch } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 import { vOnLongPress } from '@vueuse/components';
 import type { Action } from '@/utils/types/measurements';
 import { resultTimer } from '@/utils/logic/timers';
+import {
+  useEmitCurrentAction,
+  useOnMountedCurrentAction,
+} from '@/composables/useTasks';
 
 defineProps<{
   interfaceOrientation: string;
@@ -41,26 +45,10 @@ const currentAction = ref<Action>({
 });
 
 // Set initial action
-onMounted(() => {
-  currentAction.value = {
-    action: 'startLongTapHyperlink',
-    centerX: linkRef.value
-      ? linkRef.value.offsetLeft + linkRef.value.offsetWidth / 2
-      : 0,
-    centerY: linkRef.value
-      ? linkRef.value.offsetTop + linkRef.value.offsetHeight / 2
-      : 0,
-  };
-});
+useOnMountedCurrentAction(currentAction, 'startLongTapHyperlink', linkRef);
 
 // Emit current action
-watch(
-  currentAction,
-  () => {
-    emit('currentAction', currentAction.value);
-  },
-  { immediate: true, flush: 'sync' },
-);
+useEmitCurrentAction(currentAction, emit);
 
 /**
  * Open pop-up after long tap

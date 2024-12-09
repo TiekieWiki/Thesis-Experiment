@@ -11,9 +11,13 @@
 </template>
 
 <script setup lang="ts">
+import {
+  useEmitCurrentAction,
+  useOnMountedCurrentAction,
+} from '@/composables/useTasks';
 import { resetTimer, resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
-import { onMounted, ref, useTemplateRef, watch } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -38,26 +42,10 @@ const currentAction = ref<Action>({
 });
 
 // Set initial action
-onMounted(() => {
-  currentAction.value = {
-    action: 'startDoubleTapZoomOut',
-    centerX: imageRef.value
-      ? imageRef.value.offsetLeft + imageRef.value.offsetWidth / 2
-      : 0,
-    centerY: imageRef.value
-      ? imageRef.value.offsetTop + imageRef.value.offsetHeight / 2
-      : 0,
-  };
-});
+useOnMountedCurrentAction(currentAction, 'startDoubleTapZoomOut', imageRef);
 
 // Emit current action
-watch(
-  currentAction,
-  () => {
-    emit('currentAction', currentAction.value);
-  },
-  { immediate: true, flush: 'sync' },
-);
+useEmitCurrentAction(currentAction, emit);
 
 /**
  * Determine the action when the image is clicked

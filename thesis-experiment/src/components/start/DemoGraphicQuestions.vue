@@ -39,7 +39,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-const emit = defineEmits(['finishedQuestions']);
+const emit = defineEmits<{
+  finishedQuestions: [];
+}>();
 
 // Check if the user has filled in the required fields
 const birthDate = ref<string | null>(null);

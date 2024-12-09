@@ -32,7 +32,10 @@ defineProps<{
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Menu
 const menuRef = useTemplateRef<HTMLElement>('menuRef');

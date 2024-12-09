@@ -26,7 +26,9 @@ defineProps<{
   task: string;
 }>();
 
-const emit = defineEmits(['finishedInstructions']);
+const emit = defineEmits<{
+  finishedInstructions: [value: Measurement];
+}>();
 
 /**
  * Start the task and register user click

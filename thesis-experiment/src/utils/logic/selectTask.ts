@@ -52,11 +52,11 @@ export function getComponent(title: string): Component {
 export function getTaskInstruction(task: string): string {
   switch (task) {
     case 'DoubleTapZoomIn':
-      return 'Double tap to zoom in on the picture';
+      return 'Double tap the picture to zoom in';
     case 'DoubleTapZoomOut':
-      return 'Double tap to zoom out on the picture';
+      return 'Double tap the picture to zoom out';
     case 'DragList':
-      return 'Drag the first list item to the bottom of the list';
+      return 'Drag the first list item (A) to the bottom of the list';
     case 'DragSlider':
       return 'Drag the slider to the right to answer the phone call';
     case 'FlickLeft':
@@ -68,11 +68,11 @@ export function getTaskInstruction(task: string): string {
     case 'LongTapSelect':
       return 'Hold down on the text to select it';
     case 'MultiTouchRotate':
-      return 'Rotate the picture with two fingers';
+      return 'Rotate the picture in any direction with two fingers';
     case 'MultiTouchZoom':
       return 'Zoom in on the picture with two fingers';
     case 'TapMenu':
-      return 'Open the menu with one tap and select the about page';
+      return 'Click the menu button with one tap and select the about page with one tap';
     case 'TapType':
       return 'Type the sentence shown on the screen, including punctuation and capitalization';
     default:

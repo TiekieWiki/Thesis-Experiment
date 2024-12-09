@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
 import draggable from 'vuedraggable';
@@ -28,7 +29,10 @@ defineProps<{
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Drag list
 const ARef = useTemplateRef<HTMLElement>('elemARef');
@@ -109,6 +113,6 @@ function dragEnded() {
     if (dragList.value[2].name == 'A') {
       emit('finishedTask');
     }
-  }, 100);
+  }, emitTimer);
 }
 </script>

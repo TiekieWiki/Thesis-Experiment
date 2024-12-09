@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts">
+import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 
@@ -15,7 +16,10 @@ defineProps<{
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Text
 const textRef = useTemplateRef<HTMLElement>('textRef');
@@ -64,10 +68,10 @@ function detectSelectionChange() {
   if (selection && selection.toString().trim() == content.value) {
     currentAction.value.action = 'endLongTapSelect';
 
-    // Emit finished task after seeing the pop-up
+    // Emit finished task after seeing the selection
     setTimeout(() => {
       emit('finishedTask');
-    }, 1000);
+    }, resultTimer);
   }
 }
 </script>

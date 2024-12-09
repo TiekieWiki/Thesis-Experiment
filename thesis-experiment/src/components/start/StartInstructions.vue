@@ -64,7 +64,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const emit = defineEmits(['finishedInstructions']);
+const emit = defineEmits<{
+  finishedInstructions: [];
+}>();
 function next() {
   emit('finishedInstructions');
 }

@@ -80,7 +80,9 @@ defineProps<{
   taskSet: string;
 }>();
 
-const emit = defineEmits(['finishedTaskSet']);
+const emit = defineEmits<{
+  finishedTaskSet: [];
+}>();
 
 const userExperienceQuestions = ref<UserExperience[]>([
   {

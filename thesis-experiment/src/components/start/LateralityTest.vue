@@ -50,7 +50,9 @@
 import type { LateralityQuestion } from '@/utils/types/laterality';
 import { ref, watch } from 'vue';
 
-const emit = defineEmits(['finishedTest']);
+const emit = defineEmits<{
+  finishedTest: [];
+}>();
 
 const lateralityQuestions = ref<LateralityQuestion[]>([
   {

@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 import { xToPx } from '@/utils/logic/sizeConversion';
+import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
 
@@ -25,7 +26,10 @@ defineProps<{
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Slider
 const sliderRef = useTemplateRef<HTMLElement>('sliderRef');
@@ -86,6 +90,6 @@ function dragEnded() {
     if (sliderValue.value == 100) {
       emit('finishedTask');
     }
-  }, 100);
+  }, emitTimer);
 }
 </script>

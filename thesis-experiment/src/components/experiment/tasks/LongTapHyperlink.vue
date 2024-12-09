@@ -17,13 +17,17 @@
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
 import { vOnLongPress } from '@vueuse/components';
 import type { Action } from '@/utils/types/measurements';
+import { resultTimer } from '@/utils/logic/timers';
 
 defineProps<{
   interfaceOrientation: string;
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Link and pop-up
 const linkRef = useTemplateRef<HTMLElement>('linkRef');
@@ -68,6 +72,6 @@ function openPopUp() {
   // Emit finished task after seeing the pop-up
   setTimeout(() => {
     emit('finishedTask');
-  }, 1000);
+  }, resultTimer);
 }
 </script>

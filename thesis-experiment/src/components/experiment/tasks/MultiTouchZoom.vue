@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
 
@@ -23,7 +24,10 @@ defineProps<{
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Image
 const imageRef = useTemplateRef<HTMLElement>('imageRef');
@@ -111,7 +115,7 @@ function endZoom() {
     // Emit finished task after seeing the zoomed image
     setTimeout(() => {
       emit('finishedTask');
-    }, 500);
+    }, resultTimer);
   } else {
     // Reset the image position
     scale.value = 1;

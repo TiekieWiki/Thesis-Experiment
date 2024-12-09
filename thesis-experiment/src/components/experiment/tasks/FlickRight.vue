@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
 
@@ -21,7 +22,10 @@ defineProps<{
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Image
 const imageRef = useTemplateRef<HTMLElement>('imageRef');
@@ -117,6 +121,6 @@ function flickEnded() {
     } else {
       translateX.value = 0;
     }
-  }, 100);
+  }, emitTimer);
 }
 </script>

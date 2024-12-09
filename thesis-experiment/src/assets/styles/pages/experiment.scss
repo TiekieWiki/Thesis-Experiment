@@ -5,6 +5,12 @@ main.experiment {
   height: 100vh;
   padding: variables.$spacing-medium;
 
+  .task-set-instructions {
+    h1 {
+      margin-bottom: variables.$spacing-medium;
+    }
+  }
+
   .user-experience-test {
     .question {
       p {

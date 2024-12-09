@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import { resetTimer, resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef, watch } from 'vue';
 
@@ -19,7 +20,10 @@ defineProps<{
   hand: string;
 }>();
 
-const emit = defineEmits(['finishedTask', 'currentAction']);
+const emit = defineEmits<{
+  finishedTask: [];
+  currentAction: [value: Action];
+}>();
 
 // Image
 const imageRef = useTemplateRef<HTMLElement>('imageRef');
@@ -68,7 +72,7 @@ function imageClicked() {
     // Emit finished task after seeing the zoomed image
     setTimeout(() => {
       emit('finishedTask');
-    }, 500);
+    }, resultTimer);
   } else {
     firstClicked.value = true;
     currentAction.value.action = 'endDoubleTapZoomIn';
@@ -76,7 +80,7 @@ function imageClicked() {
     setTimeout(() => {
       firstClicked.value = false;
       currentAction.value.action = 'startDoubleTapZoomIn';
-    }, 500);
+    }, resetTimer);
   }
 }
 </script>

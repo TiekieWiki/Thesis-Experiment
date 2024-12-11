@@ -5,6 +5,7 @@ import type { Ref } from 'vue';
 
 /**
  * Zoom in and out on double tap
+ * @param task Task to perform
  * @param currentAction Current action reference
  * @param firstClicked First clicked reference
  * @param scale Scale reference

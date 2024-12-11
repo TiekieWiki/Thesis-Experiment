@@ -14,10 +14,14 @@
 
 <script setup lang="ts">
 import {
+  useFlickEnded,
+  useFlickMoving,
+  useFlickStarted,
+} from '@/composables/tasks/useFlick';
+import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
-import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { ref, useTemplateRef } from 'vue';
 
@@ -56,50 +60,40 @@ useOnMountedCurrentAction(goalAction, 'endFlickLeft', imageRef);
 useEmitCurrentAction(currentAction, emit);
 
 /**
- * Set current action and start position when flicking starts
+ * Start flicking
  * @param event Touch event
  */
 function flickStarted(event: TouchEvent) {
-  currentAction.value = {
-    action: 'startFlickLeft',
-    centerX: imageRef.value
-      ? imageRef.value.offsetLeft + imageRef.value.offsetWidth / 2
-      : 0,
-    centerY: imageRef.value
-      ? imageRef.value.offsetTop + imageRef.value.offsetHeight / 2
-      : 0,
-  };
-
-  isFlicking.value = true;
-  startX.value = event.touches ? event.touches[0].clientX : 0;
+  useFlickStarted(
+    'FlickLeft',
+    currentAction,
+    imageRef,
+    isFlicking,
+    startX,
+    event,
+  );
 }
 
 /**
- * Move image when flicking
+ * Move when flicking
  * @param event Touch event
  */
 function flickMoving(event: TouchEvent) {
-  if (!isFlicking.value) return;
-
-  const currentX = event.touches ? event.touches[0].clientX : 0;
-  translateX.value = currentX - startX.value;
+  useFlickMoving(isFlicking, event, translateX, startX);
 }
 
 /**
- * Set current action and end position when flicking ends
+ * End flicking
  */
 function flickEnded() {
-  currentAction.value = goalAction.value;
-  isFlicking.value = false;
-
-  // Wait for current action to be emitted
-  setTimeout(() => {
-    // Check if the image has been swiped enough to the left
-    if (translateX.value < -imageRef.value!.offsetWidth / 2) {
-      emit('finishedTask');
-    } else {
-      translateX.value = 0;
-    }
-  }, emitTimer);
+  useFlickEnded(
+    'FlickLeft',
+    currentAction,
+    goalAction,
+    isFlicking,
+    translateX,
+    imageRef,
+    emit,
+  );
 }
 </script>

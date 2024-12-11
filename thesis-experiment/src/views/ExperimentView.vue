@@ -89,6 +89,7 @@ import {
   userTouchStart,
   userTouchEnd,
 } from '@/utils/logic/clickMeasurements';
+import { useFilters } from '@/composables/useFilters';
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());
@@ -134,6 +135,10 @@ const currentHand = computed((): string => {
 const currentInterfaceOrientation = computed((): string => {
   return currentTaskSet.value.includes('Standard') ? 'standard' : 'mirrored';
 });
+
+// Filters
+const oneClickFilter = useFilters(showComponent, currentTask).oneClickFilter;
+const twoClickFilter = useFilters(showComponent, currentTask).twoClickFilter;
 
 /**
  * Go to next task
@@ -189,36 +194,6 @@ const currentAction = ref<Action>({
   action: 'startTask',
   centerX: 0,
   centerY: 0,
-});
-
-// Filters
-const oneClickFilter = computed(() => {
-  const tasksWithOneClick = [
-    'DoubleTapZoomIn',
-    'DoubleTapZoomOut',
-    'TapMenu',
-    'TapType',
-  ];
-  return (
-    showComponent.value == 'task' &&
-    tasksWithOneClick.indexOf(currentTask.value) > -1
-  );
-});
-const twoClickFilter = computed(() => {
-  const tasksWithTwoClicks = [
-    'DragList',
-    'DragSlider',
-    'FlickLeft',
-    'FlickRight',
-    'LongTapHyperlink',
-    'LongTapSelect',
-    'MultiTouchRotate',
-    'MultiTouchZoom',
-  ];
-  return (
-    showComponent.value == 'task' &&
-    tasksWithTwoClicks.indexOf(currentTask.value) > -1
-  );
 });
 
 /**

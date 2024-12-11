@@ -54,6 +54,7 @@ const emit = defineEmits<{
   finishedTest: [];
 }>();
 
+// Laterality test questions
 const lateralityQuestions = ref<LateralityQuestion[]>([
   {
     name: 'write',

@@ -84,6 +84,7 @@ const emit = defineEmits<{
   finishedTaskSet: [];
 }>();
 
+// User experience questions
 const userExperienceQuestions = ref<UserExperience[]>([
   {
     name: 'meetingRequirements',

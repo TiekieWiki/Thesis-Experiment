@@ -67,6 +67,10 @@ import { ref } from 'vue';
 const emit = defineEmits<{
   finishedInstructions: [];
 }>();
+
+/**
+ * Continue to the next step
+ */
 function next() {
   emit('finishedInstructions');
 }

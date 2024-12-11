@@ -88,7 +88,7 @@ import {
   userClick,
   userTouchStart,
   userTouchEnd,
-} from '@/utils/measurements/clickMeasurements';
+} from '@/utils/logic/clickMeasurements';
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());

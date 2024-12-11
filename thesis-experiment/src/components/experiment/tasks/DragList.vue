@@ -30,7 +30,6 @@ import draggable from 'vuedraggable';
 
 defineProps<{
   interfaceOrientation: string;
-  hand: string;
 }>();
 
 const emit = defineEmits<{

@@ -23,7 +23,6 @@ import { ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
-  hand: string;
 }>();
 
 const emit = defineEmits<{

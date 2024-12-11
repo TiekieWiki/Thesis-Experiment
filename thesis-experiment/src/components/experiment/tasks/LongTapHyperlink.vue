@@ -25,7 +25,6 @@ import {
 
 defineProps<{
   interfaceOrientation: string;
-  hand: string;
 }>();
 
 const emit = defineEmits<{

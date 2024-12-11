@@ -11,17 +11,16 @@
 </template>
 
 <script setup lang="ts">
+import { useDoubleTap } from '@/composables/tasks/useDoubleTap';
 import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
-import { resetTimer, resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
-  hand: string;
 }>();
 
 const emit = defineEmits<{
@@ -51,24 +50,6 @@ useEmitCurrentAction(currentAction, emit);
  * Determine the action when the image is clicked
  */
 function imageClicked() {
-  currentAction.value.action = 'startDoubleTapZoomOut';
-
-  // Check if this is the first image click
-  if (firstClicked.value) {
-    scale.value = 1;
-
-    // Emit finished task after seeing the zoomed image
-    setTimeout(() => {
-      emit('finishedTask');
-    }, resultTimer);
-  } else {
-    firstClicked.value = true;
-    currentAction.value.action = 'endDoubleTapZoomOut';
-    // Reset first click if double tap is not detected
-    setTimeout(() => {
-      firstClicked.value = false;
-      currentAction.value.action = 'startDoubleTapZoomOut';
-    }, resetTimer);
-  }
+  useDoubleTap('DoubleTapZoomOut', currentAction, firstClicked, scale, 1, emit);
 }
 </script>

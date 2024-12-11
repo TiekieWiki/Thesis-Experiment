@@ -1,32 +1,6 @@
+import type { EmitFunction, EventMap } from '@/utils/types/emits';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, watch, type Ref, type ShallowRef } from 'vue';
-
-type EventMap = {
-  currentAction: Action;
-};
-
-type EmitFunction<EventMap> = <K extends keyof EventMap>(
-  event: K,
-  payload: EventMap[K],
-) => void;
-
-/**
- * Composable function to emit the current action to the parent component
- * @param currentAction Reactive reference to the current action
- * @param emit Emit function to send the current action to the parent component
- */
-export function useEmitCurrentAction(
-  currentAction: Ref<Action>,
-  emit: EmitFunction<EventMap>,
-): void {
-  watch(
-    currentAction,
-    () => {
-      emit('currentAction', currentAction.value);
-    },
-    { immediate: true, flush: 'sync' },
-  );
-}
 
 /**
  * Composable function to set the current action on mounted
@@ -50,4 +24,22 @@ export function useOnMountedCurrentAction(
         : 0,
     };
   });
+}
+
+/**
+ * Composable function to emit the current action to the parent component
+ * @param currentAction Reactive reference to the current action
+ * @param emit Emit function to send the current action to the parent component
+ */
+export function useEmitCurrentAction(
+  currentAction: Ref<Action>,
+  emit: EmitFunction<EventMap>,
+): void {
+  watch(
+    currentAction,
+    () => {
+      emit('currentAction', currentAction.value);
+    },
+    { immediate: true, flush: 'sync' },
+  );
 }

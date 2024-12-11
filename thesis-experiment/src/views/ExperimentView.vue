@@ -34,7 +34,6 @@
       v-else-if="showComponent == 'task' && currentTask"
       :is="getComponent(currentTask)"
       :interface-orientation="currentInterfaceOrientation"
-      :hand="currentHand"
       @current-action="
         (a: Action) => {
           currentAction = a;

@@ -11,11 +11,11 @@ export const tasks = [
   // 'DragList',
   // 'DragSlider',
   // 'FlickLeft',
-  'FlickRight',
+  // 'FlickRight',
   // 'LongTapHyperlink',
   // 'LongTapSelect',
   // 'MultiTouchRotate',
   // 'MultiTouchZoom',
   // 'TapMenu',
-  // 'TapType',
+  'TapType',
 ];

@@ -19,6 +19,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { distance } from '@/utils/logic/math';
 import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { ref, useTemplateRef } from 'vue';
@@ -49,17 +50,6 @@ useOnMountedCurrentAction(currentAction, 'startMultiTouchZoom', imageRef);
 
 // Emit current action
 useEmitCurrentAction(currentAction, emit);
-
-/**
- * Distance between two fingers
- * @param event Touch event
- */
-function distance(event: TouchEvent) {
-  return Math.hypot(
-    event.touches[0].clientX - event.touches[1].clientX,
-    event.touches[0].clientY - event.touches[1].clientY,
-  );
-}
 
 /**
  * Start zooming

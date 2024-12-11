@@ -19,6 +19,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { calculateAngle } from '@/utils/logic/math';
 import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { ref, useTemplateRef } from 'vue';
@@ -49,22 +50,6 @@ useOnMountedCurrentAction(currentAction, 'startMultiTouchRotate', imageRef);
 
 // Emit current action
 useEmitCurrentAction(currentAction, emit);
-
-/**
- * Calculate the angle between two points
- * @param touchX1 The x-coordinate of the first touch
- * @param touchY1 The y-coordinate of the first touch
- * @param touchX2 The x-coordinate of the second touch
- * @param touchY2 The y-coordinate of the second touch
- */
-function calculateAngle(
-  touchX1: number,
-  touchY1: number,
-  touchX2: number,
-  touchY2: number,
-) {
-  return Math.atan2(touchY2 - touchY1, touchX2 - touchX1) * (180 / Math.PI);
-}
 
 /**
  * Start rotating

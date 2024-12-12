@@ -47,7 +47,10 @@
 </template>
 
 <script setup lang="ts">
+import { writeCheckpoint } from '@/utils/localDb';
+import type { Checkpoint } from '@/utils/types/checkpoint';
 import type { LateralityQuestion } from '@/utils/types/laterality';
+import { timestamp } from '@vueuse/core';
 import { ref, watch } from 'vue';
 
 const emit = defineEmits<{
@@ -131,7 +134,15 @@ watch(lateralityQuestions.value, () => {
 /**
  * Save the laterality test information and continue to the next step
  */
-function save() {
+async function save() {
+  // Write a checkpoint
+  const checkpoint: Checkpoint = {
+    id: 'lateralityTest',
+    data: '',
+    timestamp: timestamp(),
+  };
+  await writeCheckpoint(checkpoint);
+
   // Go to the next step
   emit('finishedTest');
 }

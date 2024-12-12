@@ -7,3 +7,20 @@
     </p>
   </main>
 </template>
+
+<script setup lang="ts">
+import { writeCheckpoint } from '@/utils/localDb';
+import type { Checkpoint } from '@/utils/types/checkpoint';
+import { timestamp } from '@vueuse/core';
+import { onMounted } from 'vue';
+
+onMounted(async () => {
+  // Write a checkpoint
+  const checkpoint: Checkpoint = {
+    id: 'finishedExperiment',
+    data: '',
+    timestamp: timestamp(),
+  };
+  await writeCheckpoint(checkpoint);
+});
+</script>

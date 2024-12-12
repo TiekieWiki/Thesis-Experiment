@@ -90,6 +90,9 @@ import {
   userTouchEnd,
 } from '@/utils/logic/clickMeasurements';
 import { useFilters } from '@/composables/useFilters';
+import type { Checkpoint } from '@/utils/types/checkpoint';
+import { timestamp } from '@vueuse/core';
+import { writeCheckpoint } from '@/utils/localDb';
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());
@@ -143,9 +146,17 @@ const twoClickFilter = useFilters(showComponent, currentTask).twoClickFilter;
 /**
  * Go to next task
  */
-function nextTask() {
+async function nextTask() {
   // Save measurements
   saveMeasurements();
+
+  // Write a checkpoint
+  const checkpoint: Checkpoint = {
+    id: `task-${currentTask.value}`,
+    data: '',
+    timestamp: timestamp(),
+  };
+  await writeCheckpoint(checkpoint);
 
   // Check if all tasks are finished
   if (partialTasks.value.length !== 0) {
@@ -162,7 +173,15 @@ function nextTask() {
 /**
  * Go to next task set
  */
-function nextTaskSet() {
+async function nextTaskSet() {
+  // Write a checkpoint
+  const checkpoint: Checkpoint = {
+    id: `taskSet-${currentTaskSet.value}`,
+    data: '',
+    timestamp: timestamp(),
+  };
+  await writeCheckpoint(checkpoint);
+
   // Check if task sets are finished
   if (partialTaskSet.value.length !== 0) {
     // Select next task set

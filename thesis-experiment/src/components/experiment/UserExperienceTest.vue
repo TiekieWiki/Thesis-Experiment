@@ -73,10 +73,13 @@
 </template>
 
 <script setup lang="ts">
+import { writeCheckpoint } from '@/utils/localDb';
+import type { Checkpoint } from '@/utils/types/checkpoint';
 import type { UserExperience } from '@/utils/types/userExperience';
+import { timestamp } from '@vueuse/core';
 import { ref, watch } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   taskSet: string;
 }>();
 
@@ -111,7 +114,15 @@ watch(userExperienceQuestions.value, () => {
 /**
  * Save the laterality test information and continue to the next step
  */
-function save() {
+async function save() {
+  // Write a checkpoint
+  const checkpoint: Checkpoint = {
+    id: `UXTest-${props.taskSet}`,
+    data: '',
+    timestamp: timestamp(),
+  };
+  await writeCheckpoint(checkpoint);
+
   emit('finishedTaskSet');
 }
 </script>

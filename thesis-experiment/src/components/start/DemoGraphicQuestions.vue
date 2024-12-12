@@ -37,6 +37,9 @@
 </template>
 
 <script setup lang="ts">
+import { writeCheckpoint } from '@/utils/localDb';
+import type { Checkpoint } from '@/utils/types/checkpoint';
+import { timestamp } from '@vueuse/core';
 import { ref, watch } from 'vue';
 
 const emit = defineEmits<{
@@ -59,7 +62,7 @@ watch([birthDate, gender], () => {
 /**
  * Save the demographic information and continue to the next step
  */
-function save() {
+async function save() {
   // Check if the user has the correct age
   if (calculateAge(birthDate.value!) < 18) {
     error.value = 'You must be at least 18 years old to participate';
@@ -68,6 +71,14 @@ function save() {
     error.value = 'You must be born after 1964 to participate';
     return;
   }
+
+  // Write a checkpoint
+  const checkpoint: Checkpoint = {
+    id: 'demoGraphicQuestions',
+    data: '',
+    timestamp: timestamp(),
+  };
+  await writeCheckpoint(checkpoint);
 
   // Go to the next step
   emit('finishedQuestions');

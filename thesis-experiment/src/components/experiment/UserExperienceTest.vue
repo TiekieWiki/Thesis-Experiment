@@ -73,10 +73,9 @@
 </template>
 
 <script setup lang="ts">
-import { writeCheckpoint } from '@/utils/localDb';
+import { writeCheckpoint } from '@/utils/logic/checkpoints';
 import type { Checkpoint } from '@/utils/types/checkpoint';
 import type { UserExperience } from '@/utils/types/userExperience';
-import { timestamp } from '@vueuse/core';
 import { ref, watch } from 'vue';
 
 const props = defineProps<{
@@ -119,7 +118,7 @@ async function save() {
   const checkpoint: Checkpoint = {
     id: `UXTest-${props.taskSet}`,
     data: '',
-    timestamp: timestamp(),
+    timestamp: Date.now(),
   };
   await writeCheckpoint(checkpoint);
 

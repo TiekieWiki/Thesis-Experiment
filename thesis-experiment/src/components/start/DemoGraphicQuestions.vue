@@ -37,9 +37,8 @@
 </template>
 
 <script setup lang="ts">
-import { writeCheckpoint } from '@/utils/localDb';
+import { writeCheckpoint } from '@/utils/logic/checkpoints';
 import type { Checkpoint } from '@/utils/types/checkpoint';
-import { timestamp } from '@vueuse/core';
 import { ref, watch } from 'vue';
 
 const emit = defineEmits<{
@@ -76,7 +75,7 @@ async function save() {
   const checkpoint: Checkpoint = {
     id: 'demoGraphicQuestions',
     data: '',
-    timestamp: timestamp(),
+    timestamp: Date.now(),
   };
   await writeCheckpoint(checkpoint);
 

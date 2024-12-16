@@ -1,4 +1,4 @@
-import type { Checkpoint } from './types/checkpoint';
+import type { Checkpoint } from '../types/checkpoint';
 
 const DB_NAME = 'CheckpointsDB';
 const STORE_NAME = 'checkpoints';
@@ -26,6 +26,7 @@ export function initDatabase(): Promise<IDBDatabase> {
 /**
  * Write a checkpoint to the database
  * @param checkpoint The checkpoint to write
+ * @returns Promise<void>
  */
 export async function writeCheckpoint(checkpoint: Checkpoint): Promise<void> {
   const db = await initDatabase();
@@ -42,6 +43,7 @@ export async function writeCheckpoint(checkpoint: Checkpoint): Promise<void> {
 
 /**
  * Get all checkpoints from the database
+ * @returns Promise<Checkpoint[]>
  */
 export async function getAllCheckpoints(): Promise<Checkpoint[]> {
   const db = await initDatabase();
@@ -52,6 +54,23 @@ export async function getAllCheckpoints(): Promise<Checkpoint[]> {
 
     const request = store.getAll();
     request.onsuccess = () => resolve(request.result as Checkpoint[]);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+/**
+ * Delete all checkpoints from the database
+ * @returns Promise<void>
+ */
+export async function deleteAllCheckpoints(): Promise<void> {
+  const db = await initDatabase();
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_NAME, 'readwrite');
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.clear();
+
+    request.onsuccess = () => resolve();
     request.onerror = () => reject(request.error);
   });
 }

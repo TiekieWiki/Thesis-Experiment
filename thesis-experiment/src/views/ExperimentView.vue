@@ -91,8 +91,17 @@ import {
 } from '@/utils/logic/clickMeasurements';
 import { useFilters } from '@/composables/useFilters';
 import type { Checkpoint } from '@/utils/types/checkpoint';
-import { timestamp } from '@vueuse/core';
-import { writeCheckpoint } from '@/utils/localDb';
+import { writeCheckpoint } from '@/utils/logic/checkpoints';
+import { getCurrentPage } from '@/utils/logic/userProgress';
+
+// Redirect user to the correct page
+onMounted(async () => {
+  await getCurrentPage().then(async page => {
+    if (page !== 'Experiment') {
+      router.push({ name: page });
+    }
+  });
+});
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());
@@ -154,7 +163,7 @@ async function nextTask() {
   const checkpoint: Checkpoint = {
     id: `task-${currentTask.value}`,
     data: '',
-    timestamp: timestamp(),
+    timestamp: Date.now(),
   };
   await writeCheckpoint(checkpoint);
 
@@ -178,7 +187,7 @@ async function nextTaskSet() {
   const checkpoint: Checkpoint = {
     id: `taskSet-${currentTaskSet.value}`,
     data: '',
-    timestamp: timestamp(),
+    timestamp: Date.now(),
   };
   await writeCheckpoint(checkpoint);
 

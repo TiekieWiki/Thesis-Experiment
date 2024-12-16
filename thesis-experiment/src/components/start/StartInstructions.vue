@@ -62,9 +62,8 @@
 </template>
 
 <script setup lang="ts">
-import { writeCheckpoint } from '@/utils/localDb';
+import { writeCheckpoint } from '@/utils/logic/checkpoints';
 import type { Checkpoint } from '@/utils/types/checkpoint';
-import { timestamp } from '@vueuse/core';
 import { ref } from 'vue';
 
 const emit = defineEmits<{
@@ -79,7 +78,7 @@ async function next() {
   const checkpoint: Checkpoint = {
     id: 'userID',
     data: Math.random().toString(16).slice(2),
-    timestamp: timestamp(),
+    timestamp: Date.now(),
   };
   await writeCheckpoint(checkpoint);
 

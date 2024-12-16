@@ -9,18 +9,26 @@
 </template>
 
 <script setup lang="ts">
-import { writeCheckpoint } from '@/utils/localDb';
+import router from '@/router';
+import { writeCheckpoint } from '@/utils/logic/checkpoints';
+import { getCurrentPage } from '@/utils/logic/userProgress';
 import type { Checkpoint } from '@/utils/types/checkpoint';
-import { timestamp } from '@vueuse/core';
 import { onMounted } from 'vue';
 
+// Redirect user to the correct page
 onMounted(async () => {
-  // Write a checkpoint
-  const checkpoint: Checkpoint = {
-    id: 'finishedExperiment',
-    data: '',
-    timestamp: timestamp(),
-  };
-  await writeCheckpoint(checkpoint);
+  await getCurrentPage().then(async page => {
+    if (page !== 'End') {
+      router.push({ name: page });
+    } else {
+      // Write a checkpoint
+      const checkpoint: Checkpoint = {
+        id: 'finishedExperiment',
+        data: '',
+        timestamp: Date.now(),
+      };
+      await writeCheckpoint(checkpoint);
+    }
+  });
 });
 </script>

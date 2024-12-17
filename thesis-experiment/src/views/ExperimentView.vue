@@ -92,16 +92,10 @@ import {
 import { useFilters } from '@/composables/useFilters';
 import type { Checkpoint } from '@/utils/types/checkpoint';
 import { writeCheckpoint } from '@/utils/logic/checkpoints';
-import { getCurrentPage } from '@/utils/logic/userProgress';
-
-// Redirect user to the correct page
-onMounted(async () => {
-  await getCurrentPage().then(async page => {
-    if (page !== 'Experiment') {
-      router.push({ name: page });
-    }
-  });
-});
+import {
+  getCurrentPage,
+  getRemainingTaskSets,
+} from '@/utils/logic/userProgress';
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());
@@ -126,16 +120,25 @@ const partialTasks = ref<string[]>(tasks);
 const currentTask = ref<string>('');
 const showComponent = ref<string>('taskSetInstructions');
 
-onMounted(() => {
-  // Select first task set
-  ({
-    selectedItem: currentTaskSet.value,
-    remainingItems: partialTaskSet.value,
-  } = selectRandomItem(partialTaskSet.value));
+// Redirect user to the correct page
+onMounted(async () => {
+  await getCurrentPage().then(async page => {
+    if (page !== 'Experiment') {
+      router.push({ name: page });
+    } else {
+      partialTaskSet.value = await getRemainingTaskSets();
 
-  // Select first task
-  ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
-    selectRandomItem(partialTasks.value));
+      // Select first task set
+      ({
+        selectedItem: currentTaskSet.value,
+        remainingItems: partialTaskSet.value,
+      } = selectRandomItem(partialTaskSet.value));
+
+      // Select first task
+      ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
+        selectRandomItem(partialTasks.value));
+    }
+  });
 });
 
 // Compute current hand
@@ -158,14 +161,6 @@ const twoClickFilter = useFilters(showComponent, currentTask).twoClickFilter;
 async function nextTask() {
   // Save measurements
   saveMeasurements();
-
-  // Write a checkpoint
-  const checkpoint: Checkpoint = {
-    id: `task-${currentTask.value}`,
-    data: '',
-    timestamp: Date.now(),
-  };
-  await writeCheckpoint(checkpoint);
 
   // Check if all tasks are finished
   if (partialTasks.value.length !== 0) {

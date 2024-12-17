@@ -26,7 +26,6 @@ export function initDatabase(): Promise<IDBDatabase> {
 /**
  * Write a checkpoint to the database
  * @param checkpoint The checkpoint to write
- * @returns Promise<void>
  */
 export async function writeCheckpoint(checkpoint: Checkpoint): Promise<void> {
   const db = await initDatabase();
@@ -43,7 +42,7 @@ export async function writeCheckpoint(checkpoint: Checkpoint): Promise<void> {
 
 /**
  * Get all checkpoints from the database
- * @returns Promise<Checkpoint[]>
+ * @returns All checkpoints
  */
 export async function getAllCheckpoints(): Promise<Checkpoint[]> {
   const db = await initDatabase();
@@ -60,7 +59,6 @@ export async function getAllCheckpoints(): Promise<Checkpoint[]> {
 
 /**
  * Delete all checkpoints from the database
- * @returns Promise<void>
  */
 export async function deleteAllCheckpoints(): Promise<void> {
   const db = await initDatabase();

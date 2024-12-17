@@ -10,13 +10,13 @@
       </button>
       <ul v-show="menuOpen">
         <li>
-          <a @click="menuOpen = true">A</a>
+          <a @click="menuOpen = true">Home</a>
         </li>
         <li @click="finishTask" ref="menuItemRef">
-          <a href="#">B</a>
+          <a href="#">About</a>
         </li>
         <li>
-          <a @click="menuOpen = true">C</a>
+          <a @click="menuOpen = true">Contact</a>
         </li>
       </ul>
     </div>

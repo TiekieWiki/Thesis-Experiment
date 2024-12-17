@@ -1,6 +1,6 @@
 /**
  * Check if the device is a mobile device
- * @returns boolean of whether the device is a mobile device
+ * @returns Boolean of whether the device is a mobile device
  */
 export function correctDeviceType(): boolean {
   const regex =
@@ -14,7 +14,7 @@ export function correctDeviceType(): boolean {
 
 /**
  * Check if the screen orientation is correct
- * @returns boolean of whether the screen orientation is correct
+ * @returns Boolean of whether the screen orientation is correct
  */
 export function correctScreenOrientation(): boolean {
   if (window.innerHeight > window.innerWidth) {

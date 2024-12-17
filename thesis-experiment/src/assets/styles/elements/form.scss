@@ -1,6 +1,5 @@
 @use '../mixins/interactions.scss';
-@use "../variables";
-
+@use '../variables';
 
 @mixin form-element {
   width: 100%;
@@ -9,6 +8,7 @@
   padding: variables.$spacing-small variables.$spacing-medium;
   background-color: transparent;
   border: variables.$size-border solid variables.$color-primary;
+  text-wrap: auto;
 
   &:not(:disabled) {
     @include interactions.outline-on-focus;
@@ -57,7 +57,8 @@ textarea {
         height: calc(variables.$size-icon-small - 0.3em);
         transform: scale(0);
         transition: variables.$speed-medium transform ease-in-out;
-        box-shadow: inset variables.$size-icon-small variables.$size-icon-small variables.$color-primary;
+        box-shadow: inset variables.$size-icon-small variables.$size-icon-small
+          variables.$color-primary;
       }
 
       &:checked::before {

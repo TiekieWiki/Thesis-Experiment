@@ -4,6 +4,8 @@ import type { Action, Measurement } from '../types/measurements';
  * Register user click
  * @param clickEvent User click event
  * @param clickTime Click timestamp
+ * @param currentAction Current action
+ * @returns Measurement
  */
 export function userClick(
   clickEvent: MouseEvent,
@@ -25,6 +27,9 @@ export function userClick(
  * Register user touch start
  * @param touchEvent User touch event
  * @param touchTime Touch timestamp
+ * @param currentAction Current action
+ * @param currentTask Current task
+ * @returns Measurement
  */
 export function userTouchStart(
   touchEvent: TouchEvent,
@@ -55,6 +60,8 @@ export function userTouchStart(
  * Register user touch end
  * @param touchEvent User touch event
  * @param touchTime Touch timestamp
+ * @param currentAction Current action
+ * @returns Measurement
  */
 export function userTouchEnd(
   touchEvent: TouchEvent,

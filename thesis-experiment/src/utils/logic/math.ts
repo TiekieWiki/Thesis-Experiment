@@ -26,3 +26,18 @@ export function distance(event: TouchEvent): number {
     event.touches[0].clientY - event.touches[1].clientY,
   );
 }
+
+/**
+ * Calculate the age of the user
+ * @param dateString The birth date of the user
+ */
+export function calculateAge(birthDate: string) {
+  const today = new Date();
+  const date = new Date(birthDate);
+  let age = today.getFullYear() - date.getFullYear();
+  const month = today.getMonth() - date.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < date.getDate())) {
+    age--;
+  }
+  return age;
+}

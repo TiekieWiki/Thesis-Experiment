@@ -37,8 +37,12 @@
 </template>
 
 <script setup lang="ts">
-import { writeCheckpoint } from '@/utils/logic/checkpoints';
+import { addData } from '@/utils/db';
+import { getMobileBrowser, getOperatingSystem } from '@/utils/logic/checkPhone';
+import { getAllCheckpoints, writeCheckpoint } from '@/utils/logic/checkpoints';
+import { calculateAge } from '@/utils/logic/math';
 import type { Checkpoint } from '@/utils/types/checkpoint';
+import type { User } from '@/utils/types/user';
 import { ref, watch } from 'vue';
 
 const emit = defineEmits<{
@@ -71,6 +75,20 @@ async function save() {
     return;
   }
 
+  // Save the demographic information
+  const user: User = {
+    id: (await getAllCheckpoints()).sort((a, b) => a.timestamp - b.timestamp)[0]
+      .data,
+    birthDate: birthDate.value!,
+    gender: gender.value!,
+    os: getOperatingSystem(),
+    browser: getMobileBrowser(),
+    screenWidth: window.innerWidth,
+    screenHeight: window.innerHeight,
+  };
+
+  addData('user', user);
+
   // Write a checkpoint
   const checkpoint: Checkpoint = {
     id: 'demoGraphicQuestions',
@@ -81,20 +99,5 @@ async function save() {
 
   // Go to the next step
   emit('finishedQuestions');
-}
-
-/**
- * Calculate the age of the user
- * @param dateString The birth date of the user
- */
-function calculateAge(birthDate: string) {
-  const today = new Date();
-  const date = new Date(birthDate);
-  let age = today.getFullYear() - date.getFullYear();
-  const month = today.getMonth() - date.getMonth();
-  if (month < 0 || (month === 0 && today.getDate() < date.getDate())) {
-    age--;
-  }
-  return age;
 }
 </script>

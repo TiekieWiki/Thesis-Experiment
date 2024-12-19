@@ -91,11 +91,12 @@ import {
 } from '@/utils/logic/clickMeasurements';
 import { useFilters } from '@/composables/useFilters';
 import type { Checkpoint } from '@/utils/types/checkpoint';
-import { writeCheckpoint } from '@/utils/logic/checkpoints';
+import { getAllCheckpoints, writeCheckpoint } from '@/utils/logic/checkpoints';
 import {
   getCurrentPage,
-  getRemainingTaskSets,
+  getExperimentComponent,
 } from '@/utils/logic/userProgress';
+import { addData } from '@/utils/db';
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());
@@ -126,13 +127,28 @@ onMounted(async () => {
     if (page !== 'Experiment') {
       router.push({ name: page });
     } else {
-      partialTaskSet.value = await getRemainingTaskSets();
+      const { curTaskSet, partTaskSets, partTasks, showComp } =
+        await getExperimentComponent();
+      currentTaskSet.value = curTaskSet;
+      partialTaskSet.value = partTaskSets;
+      partialTasks.value = partTasks;
+      showComponent.value = showComp;
 
-      // Select first task set
-      ({
-        selectedItem: currentTaskSet.value,
-        remainingItems: partialTaskSet.value,
-      } = selectRandomItem(partialTaskSet.value));
+      if (currentTaskSet.value === '') {
+        // Select first task set
+        ({
+          selectedItem: currentTaskSet.value,
+          remainingItems: partialTaskSet.value,
+        } = selectRandomItem(partialTaskSet.value));
+
+        // Write a checkpoint
+        const checkpoint: Checkpoint = {
+          id: `taskSet-${currentTaskSet.value}`,
+          data: '',
+          timestamp: Date.now(),
+        };
+        await writeCheckpoint(checkpoint);
+      }
 
       // Select first task
       ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
@@ -162,6 +178,14 @@ async function nextTask() {
   // Save measurements
   saveMeasurements();
 
+  // Write a checkpoint
+  const checkpoint: Checkpoint = {
+    id: `task-${currentTask.value}`,
+    data: '',
+    timestamp: Date.now(),
+  };
+  await writeCheckpoint(checkpoint);
+
   // Check if all tasks are finished
   if (partialTasks.value.length !== 0) {
     // Select next task
@@ -178,14 +202,6 @@ async function nextTask() {
  * Go to next task set
  */
 async function nextTaskSet() {
-  // Write a checkpoint
-  const checkpoint: Checkpoint = {
-    id: `taskSet-${currentTaskSet.value}`,
-    data: '',
-    timestamp: Date.now(),
-  };
-  await writeCheckpoint(checkpoint);
-
   // Check if task sets are finished
   if (partialTaskSet.value.length !== 0) {
     // Select next task set
@@ -197,6 +213,14 @@ async function nextTaskSet() {
       currentTaskSet.value.includes('Left') ? 'left' : 'right',
     ));
     showComponent.value = 'taskSetInstructions';
+
+    // Write a checkpoint
+    const checkpoint: Checkpoint = {
+      id: `taskSet-${currentTaskSet.value}`,
+      data: '',
+      timestamp: Date.now(),
+    };
+    await writeCheckpoint(checkpoint);
 
     // Reset partial tasks
     partialTasks.value = tasks;
@@ -232,13 +256,16 @@ function finishTaskInstructions(measurement: Measurement) {
  * Save measurements
  * @returns Task measurements
  */
-function saveMeasurements() {
+async function saveMeasurements() {
   const taskMeasurements: TaskMeasurements = {
-    task: currentTask.value,
+    userId: (await getAllCheckpoints()).sort(
+      (a, b) => a.timestamp - b.timestamp,
+    )[0].data,
     taskSet: currentTaskSet.value,
+    task: currentTask.value,
     measurements: measurements.value,
   };
 
-  console.log(taskMeasurements);
+  addData('measurements', taskMeasurements);
 }
 </script>

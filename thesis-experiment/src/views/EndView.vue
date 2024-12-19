@@ -10,9 +10,7 @@
 
 <script setup lang="ts">
 import router from '@/router';
-import { writeCheckpoint } from '@/utils/logic/checkpoints';
 import { getCurrentPage } from '@/utils/logic/userProgress';
-import type { Checkpoint } from '@/utils/types/checkpoint';
 import { onMounted } from 'vue';
 
 // Redirect user to the correct page
@@ -20,14 +18,6 @@ onMounted(async () => {
   await getCurrentPage().then(async page => {
     if (page !== 'End') {
       router.push({ name: page });
-    } else {
-      // Write a checkpoint
-      const checkpoint: Checkpoint = {
-        id: 'finishedExperiment',
-        data: '',
-        timestamp: Date.now(),
-      };
-      await writeCheckpoint(checkpoint);
     }
   });
 });

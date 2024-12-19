@@ -54,6 +54,10 @@ export async function getStartComponent(): Promise<string> {
   return 'startInstructions';
 }
 
+/**
+ * Get the current task set, partial task sets, partial tasks, and component to show
+ * @returns Current task set, partial task sets, partial tasks, and component to show
+ */
 export async function getExperimentComponent(): Promise<{
   curTaskSet: string;
   partTaskSets: string[];

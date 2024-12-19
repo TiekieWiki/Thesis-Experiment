@@ -229,6 +229,14 @@ async function nextTaskSet() {
     ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
       selectRandomItem(partialTasks.value));
   } else {
+    // Write a checkpoint
+    const checkpoint: Checkpoint = {
+      id: 'finishedExperiment',
+      data: '',
+      timestamp: Date.now(),
+    };
+    await writeCheckpoint(checkpoint);
+
     // Go to end page
     showComponent.value = '';
     router.push('/finishing-up');

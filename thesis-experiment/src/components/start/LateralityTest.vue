@@ -47,9 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import { writeCheckpoint } from '@/utils/logic/checkpoints';
+import { addData } from '@/utils/db';
+import { getAllCheckpoints, writeCheckpoint } from '@/utils/logic/checkpoints';
 import type { Checkpoint } from '@/utils/types/checkpoint';
-import type { LateralityQuestion } from '@/utils/types/laterality';
+import type { Laterality, LateralityQuestion } from '@/utils/types/laterality';
 import { ref, watch } from 'vue';
 
 const emit = defineEmits<{
@@ -113,7 +114,7 @@ const lateralityQuestions = ref<LateralityQuestion[]>([
     useOtherHand: null,
   },
   {
-    name: 'lid',
+    name: 'box',
     question: 'Which hand do you use to open a box (holding the lid)?',
     handedness: '',
     useOtherHand: null,
@@ -134,6 +135,74 @@ watch(lateralityQuestions.value, () => {
  * Save the laterality test information and continue to the next step
  */
 async function save() {
+  // Save the laterality test
+  const laterality: Laterality = {
+    userId: (await getAllCheckpoints()).sort(
+      (a, b) => a.timestamp - b.timestamp,
+    )[0].data,
+    writing: lateralityQuestions.value.find(
+      question => question.name === 'write',
+    )!.handedness,
+    writingOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'write',
+    )!.useOtherHand,
+    drawing: lateralityQuestions.value.find(
+      question => question.name === 'draw',
+    )!.handedness,
+    drawingOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'draw',
+    )!.useOtherHand,
+    throwing: lateralityQuestions.value.find(
+      question => question.name === 'throw',
+    )!.handedness,
+    throwingOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'throw',
+    )!.useOtherHand,
+    scissors: lateralityQuestions.value.find(
+      question => question.name === 'scissors',
+    )!.handedness,
+    scissorsOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'scissors',
+    )!.useOtherHand,
+    toothbrush: lateralityQuestions.value.find(
+      question => question.name === 'toothbrush',
+    )!.handedness,
+    toothbrushOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'toothbrush',
+    )!.useOtherHand,
+    knife: lateralityQuestions.value.find(
+      question => question.name === 'knife',
+    )!.handedness,
+    knifeOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'knife',
+    )!.useOtherHand,
+    spoon: lateralityQuestions.value.find(
+      question => question.name === 'spoon',
+    )!.handedness,
+    spoonOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'spoon',
+    )!.useOtherHand,
+    broom: lateralityQuestions.value.find(
+      question => question.name === 'broom',
+    )!.handedness,
+    broomOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'broom',
+    )!.useOtherHand,
+    match: lateralityQuestions.value.find(
+      question => question.name === 'match',
+    )!.handedness,
+    matchOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'match',
+    )!.useOtherHand,
+    box: lateralityQuestions.value.find(question => question.name === 'box')!
+      .handedness,
+    boxOtherHand: lateralityQuestions.value.find(
+      question => question.name === 'box',
+    )!.useOtherHand,
+  };
+
+  addData('laterality', laterality);
+
   // Write a checkpoint
   const checkpoint: Checkpoint = {
     id: 'lateralityTest',

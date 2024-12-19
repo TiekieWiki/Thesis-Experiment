@@ -1,4 +1,4 @@
-import { taskSet } from '../types/tasks';
+import { tasks, taskSet } from '../types/tasks';
 import { deleteAllCheckpoints, getAllCheckpoints } from './checkpoints';
 
 /**
@@ -54,16 +54,87 @@ export async function getStartComponent(): Promise<string> {
   return 'startInstructions';
 }
 
-/**
- * Get the remaining task sets
- * @returns The remaining task sets
- */
-export async function getRemainingTaskSets(): Promise<string[]> {
+export async function getExperimentComponent(): Promise<{
+  curTaskSet: string;
+  partTaskSets: string[];
+  partTasks: string[];
+  showComp: string;
+}> {
   const checkpoints = await getAllCheckpoints();
 
-  const completedTaskSets = checkpoints
-    .filter(checkpoint => checkpoint.id.includes('taskSet-'))
-    .map(checkpoint => checkpoint.id.replace('taskSet-', ''));
+  // Sort the checkpoints by timestamp
+  checkpoints.sort((a, b) => a.timestamp - b.timestamp);
 
-  return taskSet.filter(taskSet => !completedTaskSets.includes(taskSet));
+  // Check if experiment has started
+  if (checkpoints.length === 0) {
+    return {
+      curTaskSet: '',
+      partTaskSets: [],
+      partTasks: [],
+      showComp: 'taskSetInstructions',
+    };
+  }
+
+  // Get the last checkpoint and the completed task sets
+  const lastCheckpoint = checkpoints[checkpoints.length - 1];
+  const completedTaskSetsCheckpoints = checkpoints.filter(checkpoint =>
+    checkpoint.id.includes('taskSet-'),
+  );
+  const completedTaskSets = completedTaskSetsCheckpoints.map(checkpoint =>
+    checkpoint.id.replace('taskSet-', ''),
+  );
+
+  // Determine the current component to show
+  if (lastCheckpoint.id.includes('UXtest-')) {
+    return {
+      curTaskSet: '',
+      partTaskSets: taskSet.filter(
+        taskSet => !completedTaskSets.includes(taskSet),
+      ),
+      partTasks: tasks,
+      showComp: 'taskSetInstructions',
+    };
+  } else if (lastCheckpoint.id.includes('taskSet-')) {
+    return {
+      curTaskSet: lastCheckpoint.id.replace('taskSet-', ''),
+      partTaskSets: taskSet.filter(
+        taskSet => !completedTaskSets.includes(taskSet),
+      ),
+      partTasks: tasks,
+      showComp: 'taskSetInstructions',
+    };
+  } else if (lastCheckpoint.id.includes('task-')) {
+    const lastTaskSet =
+      completedTaskSetsCheckpoints[completedTaskSetsCheckpoints.length - 1];
+    console.log(checkpoints.slice(checkpoints.indexOf(lastTaskSet) + 1));
+    const completedTasks = checkpoints
+      .slice(checkpoints.indexOf(lastTaskSet) + 1)
+      .map(checkpoint => checkpoint.id.replace('task-', ''));
+    if (completedTasks.length !== tasks.length) {
+      return {
+        curTaskSet: lastTaskSet.id.replace('taskSet-', ''),
+        partTaskSets: taskSet.filter(
+          taskSet => !completedTaskSets.includes(taskSet),
+        ),
+        partTasks: tasks.filter(task => !completedTasks.includes(task)),
+        showComp: 'taskInstructions',
+      };
+    } else {
+      return {
+        curTaskSet: lastTaskSet.id.replace('taskSet-', ''),
+        partTaskSets: taskSet.filter(
+          taskSet => !completedTaskSets.includes(taskSet),
+        ),
+        partTasks: tasks,
+        showComp: 'userExperienceTest',
+      };
+    }
+  } else {
+    return {
+      curTaskSet: '',
+      partTaskSets: taskSet,
+      partTasks: tasks,
+      showComp: 'taskSetInstructions',
+    };
+  }
 }

@@ -7,8 +7,9 @@ export interface Action {
 }
 
 export interface TaskMeasurements {
-  task: string;
+  userId: string;
   taskSet: string;
+  task: string;
   measurements: Measurement[];
 }
 

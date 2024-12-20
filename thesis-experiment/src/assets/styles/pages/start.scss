@@ -25,6 +25,11 @@ main.start {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
 
+      &:not(:nth-child(11)) {
+        padding-bottom: variables.$spacing-medium;
+        border-bottom: variables.$size-border solid variables.$color-primary;
+      }
+
       p {
         grid-column: 1 / -1;
       }

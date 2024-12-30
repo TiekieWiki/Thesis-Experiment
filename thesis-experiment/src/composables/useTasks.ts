@@ -17,10 +17,14 @@ export function useOnMountedCurrentAction(
     currentAction.value = {
       action: action,
       centerX: centerRef.value
-        ? centerRef.value.offsetLeft + centerRef.value.offsetWidth / 2
+        ? window.screenX +
+          centerRef.value.offsetLeft +
+          centerRef.value.offsetWidth / 2
         : 0,
       centerY: centerRef.value
-        ? centerRef.value.offsetTop + centerRef.value.offsetHeight / 2
+        ? window.screenY +
+          centerRef.value.offsetTop +
+          centerRef.value.offsetHeight / 2
         : 0,
     };
   });

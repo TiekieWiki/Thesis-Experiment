@@ -73,10 +73,10 @@ function dragStarted() {
   currentAction.value = {
     action: 'startDragList',
     centerX: ARef.value
-      ? ARef.value.offsetLeft + ARef.value.offsetWidth / 2
+      ? window.screenX + ARef.value.offsetLeft + ARef.value.offsetWidth / 2
       : 0,
     centerY: ARef.value
-      ? ARef.value.offsetTop + ARef.value.offsetHeight / 2
+      ? window.screenY + ARef.value.offsetTop + ARef.value.offsetHeight / 2
       : 0,
   };
 }

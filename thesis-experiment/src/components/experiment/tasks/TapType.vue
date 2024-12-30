@@ -202,12 +202,14 @@ onMounted(() => {
   currentAction.value = {
     action: 'clickCapitalization',
     centerX: capitalizationRef.value
-      ? keyboardPosition.value.x +
+      ? window.screenX +
+        keyboardPosition.value.x +
         capitalizationRef.value.offsetLeft +
         capitalizationRef.value.offsetWidth / 2
       : 0,
     centerY: capitalizationRef.value
-      ? keyboardPosition.value.y +
+      ? window.screenY +
+        keyboardPosition.value.y +
         capitalizationRef.value.offsetTop +
         capitalizationRef.value.offsetHeight / 2
       : 0,

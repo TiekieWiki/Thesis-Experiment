@@ -7,7 +7,9 @@
       <div class="pop-up">
         <h1>Instructions</h1>
         <p>{{ getTaskInstruction(task) }}</p>
-        <p>Reminder: perform this task with your {{ hand }} hand</p>
+        <p>
+          Reminder: perform this task with your <b>{{ hand }} hand</b>
+        </p>
         <p>
           Hold the phone in a neutral position and click this pop-up to start
           the task

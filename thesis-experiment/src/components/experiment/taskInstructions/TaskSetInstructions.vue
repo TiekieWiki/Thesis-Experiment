@@ -1,5 +1,8 @@
 <template>
   <div class="task-set-instructions">
+    <progress :value="(4 - remainingTaskSets) * 0.2" max="1">
+      {{ (4 - remainingTaskSets) * 20 + '%' }}
+    </progress>
     <h1 v-if="hand == 'left'">
       Perform oncoming tasks only with your left hand until further notice
     </h1>
@@ -13,6 +16,7 @@
 <script setup lang="ts">
 defineProps<{
   hand: string;
+  remainingTaskSets: number;
 }>();
 
 const emit = defineEmits<{

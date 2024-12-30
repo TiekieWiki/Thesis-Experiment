@@ -22,6 +22,7 @@
     <TaskSetInstructions
       v-if="showComponent == 'taskSetInstructions' && currentTaskSet"
       :hand="currentHand"
+      :remaining-task-sets="partialTaskSet.length"
       @finished-instructions="() => (showComponent = 'taskInstructions')"
     />
     <TaskInstructions

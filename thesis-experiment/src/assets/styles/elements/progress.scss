@@ -1,0 +1,22 @@
+@use '../variables';
+
+progress {
+  &[value] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    width: 100%;
+    background: variables.$color-secondary;
+
+    &::-webkit-progress-bar {
+      background: variables.$color-secondary;
+    }
+    &::-webkit-progress-value {
+      background: variables.$color-primary;
+    }
+    &::-moz-progress-bar {
+      background: variables.$color-primary;
+    }
+  }
+}

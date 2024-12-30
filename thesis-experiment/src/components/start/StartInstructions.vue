@@ -1,5 +1,6 @@
 <template>
   <div v-if="!consentGiven" class="start-instructions">
+    <progress value="0" max="1">0 %</progress>
     <h1>Master thesis experiment</h1>
     <div>
       Thank you for participating in this research. This research aims to
@@ -24,6 +25,7 @@
     <button :disabled="!consent" @click="consentGiven = true">Continue</button>
   </div>
   <div v-else class="start-instructions">
+    <progress value="0.05" max="1">5 %</progress>
     <h1>Instructions</h1>
     <p>
       In this research, you will first be asked to complete a set of personal

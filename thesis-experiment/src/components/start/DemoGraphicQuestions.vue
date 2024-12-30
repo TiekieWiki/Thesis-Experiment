@@ -1,5 +1,6 @@
 <template>
   <form>
+    <progress value="0.1" max="1">10 %</progress>
     <h1>Personal information</h1>
     <label>Birth date <input v-model="birthDate" type="date" /> </label>
     <div class="label-group">

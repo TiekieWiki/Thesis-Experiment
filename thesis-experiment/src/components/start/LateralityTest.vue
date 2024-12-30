@@ -1,5 +1,6 @@
 <template>
   <form class="laterality-test">
+    <progress value="0.15" max="1">15 %</progress>
     <h1>Laterality test</h1>
     <div
       v-for="question in lateralityQuestions"

@@ -19,34 +19,39 @@
         : ''
     "
   >
-    <TaskSetInstructions
-      v-if="showComponent == 'taskSetInstructions' && currentTaskSet"
-      :hand="currentHand"
-      :remaining-task-sets="partialTaskSet.length"
-      @finished-instructions="() => (showComponent = 'taskInstructions')"
-    />
-    <TaskInstructions
-      v-else-if="showComponent == 'taskInstructions' && currentTaskSet"
-      :hand="currentHand"
-      :task="currentTask"
-      @finished-instructions="m => finishTaskInstructions(m)"
-    />
-    <component
-      v-else-if="showComponent == 'task' && currentTask"
-      :is="getComponent(currentTask)"
-      :interface-orientation="currentInterfaceOrientation"
-      @current-action="
-        (a: Action) => {
-          currentAction = a;
-        }
-      "
-      @finished-task="() => nextTask()"
-    />
-    <UserExperienceTest
-      v-else-if="showComponent == 'userExperienceTest'"
-      :task-set="currentTaskSet"
-      @finished-task-set="() => nextTaskSet()"
-    />
+    <Suspense>
+      <template #default
+        ><TaskSetInstructions
+          v-if="showComponent == 'taskSetInstructions' && currentTaskSet"
+          :hand="currentHand"
+          :remaining-task-sets="partialTaskSet.length"
+          @finished-instructions="() => (showComponent = 'taskInstructions')" />
+        <TaskInstructions
+          v-else-if="showComponent == 'taskInstructions' && currentTaskSet"
+          :hand="currentHand"
+          :task="currentTask"
+          @finished-instructions="m => finishTaskInstructions(m)" />
+        <component
+          v-else-if="showComponent == 'task' && currentTask"
+          :is="getComponent(currentTask)"
+          :interface-orientation="currentInterfaceOrientation"
+          @current-action="
+            (a: Action) => {
+              currentAction = a;
+            }
+          "
+          @finished-task="() => nextTask()" />
+        <UserExperienceTest
+          v-else-if="showComponent == 'userExperienceTest'"
+          :task-set="currentTaskSet"
+          @finished-task-set="() => nextTaskSet()"
+      /></template>
+      <template #fallback>
+        <div class="loader">
+          <div class="loaderSpinner"></div>
+        </div>
+      </template>
+    </Suspense>
   </main>
   <teleport v-if="!isCorrectDevice || !isCorrectOrientation" to="body">
     <div class="pop-up-background">

@@ -1,17 +1,28 @@
 <template>
   <main class="start">
-    <StartInstructions
-      v-if="showComponent == 'startInstructions'"
-      @finished-instructions="() => (showComponent = 'demoGraphicQuestions')"
-    />
-    <DemoGraphicQuestions
-      v-else-if="showComponent == 'demoGraphicQuestions'"
-      @finished-questions="() => (showComponent = 'lateralityTest')"
-    />
-    <LateralityTest
-      v-else-if="showComponent == 'lateralityTest'"
-      @finished-test="() => $router.push('/experiment')"
-    />
+    <Suspense>
+      <template #default>
+        <StartInstructions
+          v-if="showComponent == 'startInstructions'"
+          @finished-instructions="
+            () => (showComponent = 'demoGraphicQuestions')
+          "
+        />
+        <DemoGraphicQuestions
+          v-else-if="showComponent == 'demoGraphicQuestions'"
+          @finished-questions="() => (showComponent = 'lateralityTest')"
+        />
+        <LateralityTest
+          v-else-if="showComponent == 'lateralityTest'"
+          @finished-test="() => $router.push('/experiment')"
+        />
+      </template>
+      <template #fallback>
+        <div class="loader">
+          <div class="loaderSpinner"></div>
+        </div>
+      </template>
+    </Suspense>
   </main>
 </template>
 

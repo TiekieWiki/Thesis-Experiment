@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="row-4">
-        <div class="key-medium">123</div>
+        <div class="key-medium disabled">123</div>
         <div
           @click="addCharacter(' ')"
           ref="spaceBarRef"

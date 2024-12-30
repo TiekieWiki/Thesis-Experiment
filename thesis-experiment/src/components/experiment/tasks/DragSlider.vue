@@ -46,8 +46,12 @@ const currentAction = ref<Action>({
 onMounted(() => {
   currentAction.value = {
     action: 'startDragSlider',
-    centerX: sliderRef.value ? sliderRef.value.offsetLeft + xToPx('5mm') : 0,
-    centerY: sliderRef.value ? sliderRef.value.offsetTop + xToPx('5mm') : 0,
+    centerX: sliderRef.value
+      ? window.screenX + sliderRef.value.offsetLeft + xToPx('5mm')
+      : 0,
+    centerY: sliderRef.value
+      ? window.screenY + sliderRef.value.offsetTop + xToPx('5mm')
+      : 0,
   };
 });
 
@@ -60,8 +64,12 @@ useEmitCurrentAction(currentAction, emit);
 function dragStarted() {
   currentAction.value = {
     action: 'startDragSlider',
-    centerX: sliderRef.value ? sliderRef.value.offsetLeft + xToPx('5mm') : 0,
-    centerY: sliderRef.value ? sliderRef.value.offsetTop + xToPx('5mm') : 0,
+    centerX: sliderRef.value
+      ? window.screenX + sliderRef.value.offsetLeft + xToPx('5mm')
+      : 0,
+    centerY: sliderRef.value
+      ? window.screenY + sliderRef.value.offsetTop + xToPx('5mm')
+      : 0,
   };
 }
 
@@ -72,11 +80,14 @@ function dragEnded() {
   currentAction.value = {
     action: 'endDragSlider',
     centerX: sliderRef.value
-      ? sliderRef.value!.offsetLeft +
+      ? window.screenX +
+        sliderRef.value!.offsetLeft +
         sliderRef.value!.offsetWidth -
         xToPx('5mm')
       : 0,
-    centerY: sliderRef.value ? sliderRef.value!.offsetTop + xToPx('5mm') : 0,
+    centerY: sliderRef.value
+      ? window.screenY + sliderRef.value!.offsetTop + xToPx('5mm')
+      : 0,
   };
 
   // Wait for current action to be emitted

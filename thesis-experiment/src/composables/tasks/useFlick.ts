@@ -23,10 +23,14 @@ export function useFlickStarted(
   currentAction.value = {
     action: `start${task}`,
     centerX: imageRef.value
-      ? imageRef.value.offsetLeft + imageRef.value.offsetWidth / 2
+      ? window.screenX +
+        imageRef.value.offsetLeft +
+        imageRef.value.offsetWidth / 2
       : 0,
     centerY: imageRef.value
-      ? imageRef.value.offsetTop + imageRef.value.offsetHeight / 2
+      ? window.screenY +
+        imageRef.value.offsetTop +
+        imageRef.value.offsetHeight / 2
       : 0,
   };
 

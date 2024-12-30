@@ -49,12 +49,14 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickCapitalization',
       centerX: capitalizationRef.value
-        ? keyboardPosition.value.x +
+        ? window.screenX +
+          keyboardPosition.value.x +
           capitalizationRef.value.offsetLeft +
           capitalizationRef.value.offsetWidth / 2
         : 0,
       centerY: capitalizationRef.value
-        ? keyboardPosition.value.y +
+        ? window.screenY +
+          keyboardPosition.value.y +
           capitalizationRef.value.offsetTop +
           capitalizationRef.value.offsetHeight / 2
         : 0,
@@ -65,12 +67,14 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickBackspace',
       centerX: backspaceRef.value
-        ? keyboardPosition.value.x +
+        ? window.screenX +
+          keyboardPosition.value.x +
           backspaceRef.value.offsetLeft +
           backspaceRef.value.offsetWidth / 2
         : 0,
       centerY: backspaceRef.value
-        ? keyboardPosition.value.y +
+        ? window.screenY +
+          keyboardPosition.value.y +
           backspaceRef.value.offsetTop +
           backspaceRef.value.offsetHeight / 2
         : 0,
@@ -81,12 +85,14 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickCheck',
       centerX: checkRef.value
-        ? keyboardPosition.value.x +
+        ? window.screenX +
+          keyboardPosition.value.x +
           checkRef.value.offsetLeft +
           checkRef.value.offsetWidth / 2
         : 0,
       centerY: checkRef.value
-        ? keyboardPosition.value.y +
+        ? window.screenY +
+          keyboardPosition.value.y +
           checkRef.value.offsetTop +
           checkRef.value.offsetHeight / 2
         : 0,
@@ -109,13 +115,15 @@ export function useNextAction(
       action: `click${nextCharacter === ' ' ? 'SpaceBar' : nextCharacter}`,
       centerX:
         nextCharacterRef instanceof HTMLElement
-          ? keyboardPosition.value.x +
+          ? window.screenX +
+            keyboardPosition.value.x +
             nextCharacterRef.offsetLeft +
             nextCharacterRef.offsetWidth / 2
           : 0,
       centerY:
         nextCharacterRef instanceof HTMLElement
-          ? keyboardPosition.value.y +
+          ? window.screenY +
+            keyboardPosition.value.y +
             nextCharacterRef.offsetTop +
             nextCharacterRef.offsetHeight / 2
           : 0,

@@ -14,8 +14,8 @@ export function userClick(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX: clickEvent.clientX,
-    touchY: clickEvent.clientY,
+    touchX: window.screenX + clickEvent.screenX,
+    touchY: window.screenY + clickEvent.screenY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: clickTime,
@@ -39,8 +39,8 @@ export function userTouchStart(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX: touchEvent.touches[0].clientX,
-    touchY: touchEvent.touches[0].clientY,
+    touchX: window.screenX + touchEvent.touches[0].screenX,
+    touchY: window.screenY + touchEvent.touches[0].screenY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,
@@ -50,8 +50,8 @@ export function userTouchStart(
     (currentTask === 'MultiTouchZoom' || currentTask === 'MultiTouchRotate') &&
     touchEvent.touches.length > 1
   ) {
-    measurement.touchX = touchEvent.touches[1].clientX;
-    measurement.touchY = touchEvent.touches[1].clientY;
+    measurement.touchX = window.screenX + touchEvent.touches[1].screenX;
+    measurement.touchY = window.screenY + touchEvent.touches[1].screenY;
   }
   return measurement;
 }
@@ -70,8 +70,8 @@ export function userTouchEnd(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX: touchEvent.changedTouches[0].clientX,
-    touchY: touchEvent.changedTouches[0].clientY,
+    touchX: window.screenX + touchEvent.changedTouches[0].screenX,
+    touchY: window.screenY + touchEvent.changedTouches[0].screenY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,

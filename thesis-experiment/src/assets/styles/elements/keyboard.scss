@@ -24,6 +24,10 @@
 
       &.key-medium {
         width: calc(variables.$size-large + variables.$spacing-xxsmall);
+
+        &.disabled {
+          background-color: variables.$color-secondary;
+        }
       }
 
       &.spaceBar {

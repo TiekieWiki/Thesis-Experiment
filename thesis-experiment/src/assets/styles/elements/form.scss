@@ -47,7 +47,6 @@ textarea {
       background-color: transparent;
       color: variables.$color-primary;
       border: variables.$size-border solid variables.$color-primary;
-      cursor: pointer;
 
       @include interactions.outline-on-focus;
 
@@ -94,7 +93,6 @@ textarea {
   display: grid;
   grid-template-areas: 'select';
   align-items: center;
-  cursor: pointer;
 
   &::after {
     content: '';
@@ -119,7 +117,6 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    cursor: inherit;
 
     &::-ms-expand {
       display: none;
@@ -131,10 +128,4 @@ textarea {
   @include form-element;
   border: none;
   background-color: variables.$color-error;
-}
-
-.success {
-  @include form-element;
-  border: none;
-  background-color: variables.$color-success;
 }

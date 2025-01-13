@@ -32,10 +32,9 @@
       questions. After that, you will be asked to complete four series of tasks,
       each series with either your left or right hand, as instructed before the
       series. Each series consists of a set of tasks that you will be asked to
-      complete. You will be asked to complete the tasks as quickly and
-      accurately as possible. You will be timed during the tasks, and your time
-      will be recorded. You will also be asked to complete a short survey at the
-      end of each series. Please complete the tasks as quickly and accurately as
+      complete. You will be timed during the tasks, and your time will be
+      recorded. You will also be asked to complete a short survey at the end of
+      each series. Please complete the tasks as quickly and accurately as
       possible.
     </p>
     <p>Before you begin the experiment, please ensure the following:</p>
@@ -57,7 +56,10 @@
         Complete the experiment with the phone in portrait mode. If not, the
         experiment will pause.
       </li>
-      <li>Complete each task with only the instructed hand.</li>
+      <li>
+        Complete each task holding and using the phone with only the instructed
+        hand.
+      </li>
     </ul>
     <button @click="next">Continue</button>
   </div>

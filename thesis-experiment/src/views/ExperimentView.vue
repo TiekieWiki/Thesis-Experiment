@@ -44,6 +44,7 @@
         <UserExperienceTest
           v-else-if="showComponent == 'userExperienceTest'"
           :task-set="currentTaskSet"
+          :hand="currentHand"
           @finished-task-set="() => nextTaskSet()"
       /></template>
       <template #fallback>

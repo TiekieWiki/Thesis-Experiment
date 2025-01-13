@@ -1,6 +1,10 @@
 <template>
   <form class="user-experience-test">
     <h1>User experience test</h1>
+    <p>
+      Answer the questions below about the last twelve tasks performed with your
+      <b>{{ hand }} hand.</b>
+    </p>
     <div
       v-for="question in userExperienceQuestions"
       :key="question.name"
@@ -84,6 +88,7 @@ import { ref, watch } from 'vue';
 
 const props = defineProps<{
   taskSet: string;
+  hand: string;
 }>();
 
 const emit = defineEmits<{

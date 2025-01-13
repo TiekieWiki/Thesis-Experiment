@@ -6,6 +6,7 @@
       v-model="writtenText"
       ref="textareaRef"
       :placeholder="sentence"
+      readonly
     ></textarea>
     <div ref="keyboard" class="keyboard">
       <div class="row-1">

@@ -17,5 +17,8 @@
     padding: variables.$spacing-medium;
     background-color: variables.$color-tertiary;
     border: variables.$size-border solid variables.$color-primary;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 }

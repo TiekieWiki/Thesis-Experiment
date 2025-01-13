@@ -24,7 +24,7 @@
 
   .keyboard {
     position: absolute;
-    bottom: variables.$spacing-medium;
+    bottom: variables.$spacing-small;
   }
 
   &.standard {
@@ -33,7 +33,7 @@
     }
 
     .keyboard {
-      right: variables.$spacing-medium;
+      right: variables.$spacing-small;
     }
   }
 
@@ -43,7 +43,7 @@
     }
 
     .keyboard {
-      left: variables.$spacing-medium;
+      left: variables.$spacing-small;
     }
   }
 }

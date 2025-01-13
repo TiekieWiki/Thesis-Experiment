@@ -17,8 +17,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: variables.$size-medium;
-      height: variables.$size-medium;
+      width: calc(variables.$size-medium + 1mm);
+      height: variables.$size-large;
       border: variables.$size-border solid variables.$color-primary;
       border-radius: 5px;
 

@@ -36,6 +36,7 @@
       </div>
       <div class="label-group">
         <label
+          v-if="question.handedness !== '' && question.handedness !== 'noPref'"
           ><input v-model="question.useOtherHand" type="checkbox" />I never use
           the other hand</label
         >

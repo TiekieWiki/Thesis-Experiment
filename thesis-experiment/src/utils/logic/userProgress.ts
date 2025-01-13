@@ -110,7 +110,6 @@ export async function getExperimentComponent(): Promise<{
   } else if (lastCheckpoint.id.includes('task-')) {
     const lastTaskSet =
       completedTaskSetsCheckpoints[completedTaskSetsCheckpoints.length - 1];
-    console.log(checkpoints.slice(checkpoints.indexOf(lastTaskSet) + 1));
     const completedTasks = checkpoints
       .slice(checkpoints.indexOf(lastTaskSet) + 1)
       .map(checkpoint => checkpoint.id.replace('task-', ''));

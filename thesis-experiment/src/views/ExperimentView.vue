@@ -156,10 +156,11 @@ onMounted(async () => {
         };
         await writeCheckpoint(checkpoint);
       }
-
+      console.log('beforeFirstSelect', partialTasks.value);
       // Select first task
       ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
         selectRandomItem(partialTasks.value));
+      console.log('afterFirstSelect', partialTasks.value);
     }
   });
 });
@@ -195,9 +196,11 @@ async function nextTask() {
 
   // Check if all tasks are finished
   if (partialTasks.value.length !== 0) {
+    console.log('beforeNextSelect', partialTasks.value);
     // Select next task
     ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
       selectRandomItem(partialTasks.value));
+    console.log('afterNextSelect', partialTasks.value);
     showComponent.value = 'taskInstructions';
   } else {
     // Show user experience questionnaire

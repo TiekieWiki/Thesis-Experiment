@@ -25,5 +25,10 @@ main.experiment {
   .pop-up {
     display: grid;
     gap: variables.$spacing-small;
+
+    video {
+      width: 50%;
+      justify-self: center;
+    }
   }
 }

@@ -10,6 +10,14 @@
         <p>
           Reminder: perform this task with your <b>{{ hand }} hand</b>
         </p>
+        <video autoplay loop muted>
+          <source
+            :src="`/src/assets/images/animations/${animation}-${hand}.mp4`"
+            type="video/mp4"
+          />
+          Finger animated icons created by Freepik - Flaticon cannot be
+          displayed.
+        </video>
         <p>
           Hold the phone in a neutral position and click this pop-up to start
           the task
@@ -22,8 +30,9 @@
 <script setup lang="ts">
 import { getTaskInstruction } from '@/utils/logic/selectTask';
 import type { Measurement } from '@/utils/types/measurements';
+import { computed } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   hand: string;
   task: string;
 }>();
@@ -48,4 +57,38 @@ function startTask(clickEvent: MouseEvent, clickTime: number) {
   };
   emit('finishedInstructions', measurement);
 }
+
+/**
+ * Get the animation for the task
+ */
+const animation = computed(() => {
+  switch (props.task) {
+    case 'DoubleTapZoomIn':
+      return 'DoubleTap';
+    case 'DoubleTapZoomOut':
+      return 'DoubleTap';
+    case 'DragList':
+      return 'Drag';
+    case 'DragSlider':
+      return 'FlickRight';
+    case 'FlickLeft':
+      return 'FlickLeft';
+    case 'FlickRight':
+      return 'FlickRight';
+    case 'LongTapHyperlink':
+      return 'LongTap';
+    case 'LongTapSelect':
+      return 'LongTap';
+    case 'MultiTouchRotate':
+      return 'MultiTouchRotate';
+    case 'MultiTouchZoom':
+      return 'MultiTouchZoom';
+    case 'TapMenu':
+      return 'Tap';
+    case 'TapType':
+      return 'Tap';
+    default:
+      return 'Tap';
+  }
+});
 </script>

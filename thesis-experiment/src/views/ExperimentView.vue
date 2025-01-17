@@ -140,6 +140,11 @@ onMounted(async () => {
       partialTaskSet.value = partTaskSets;
       partialTasks.value = partTasks;
       showComponent.value = showComp;
+      console.log(
+        currentTaskSet.value,
+        partialTaskSet.value,
+        partialTasks.value,
+      );
 
       if (currentTaskSet.value === '') {
         // Select first task set
@@ -156,11 +161,9 @@ onMounted(async () => {
         };
         await writeCheckpoint(checkpoint);
       }
-      console.log('beforeFirstSelect', partialTasks.value);
       // Select first task
       ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
         selectRandomItem(partialTasks.value));
-      console.log('afterFirstSelect', partialTasks.value);
     }
   });
 });
@@ -196,11 +199,9 @@ async function nextTask() {
 
   // Check if all tasks are finished
   if (partialTasks.value.length !== 0) {
-    console.log('beforeNextSelect', partialTasks.value);
     // Select next task
     ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
       selectRandomItem(partialTasks.value));
-    console.log('afterNextSelect', partialTasks.value);
     showComponent.value = 'taskInstructions';
   } else {
     // Show user experience questionnaire

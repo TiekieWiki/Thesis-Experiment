@@ -140,11 +140,6 @@ onMounted(async () => {
       partialTaskSet.value = partTaskSets;
       partialTasks.value = partTasks;
       showComponent.value = showComp;
-      console.log(
-        currentTaskSet.value,
-        partialTaskSet.value,
-        partialTasks.value,
-      );
 
       if (currentTaskSet.value === '') {
         // Select first task set

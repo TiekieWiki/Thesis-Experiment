@@ -27,7 +27,9 @@ export function selectRandomFiltered(
   selectedItem: string;
   remainingItems: string[];
 } {
-  const filteredItems = items.filter(item => !item.includes(filter));
+  const filteredItems = items.filter(
+    item => !item.includes(filter.charAt(0).toUpperCase() + filter.slice(1)),
+  );
   const { selectedItem } = selectRandomItem(filteredItems);
   const remainingItems = items.filter(item => item !== selectedItem);
   return { selectedItem, remainingItems };

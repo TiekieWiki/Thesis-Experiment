@@ -44,6 +44,7 @@ const currentAction = ref<Action>({
   centerX: 0,
   centerY: 0,
 });
+const finished = ref<boolean>(false);
 
 // Set initial action
 useOnMountedCurrentAction(currentAction, 'startMultiTouchRotate', imageRef);
@@ -101,7 +102,8 @@ function rotate(event: TouchEvent) {
  */
 function endRotate() {
   currentAction.value.action = 'endMultiTouchRotate';
-  if (rotation.value > 45 || rotation.value < -45) {
+  if ((rotation.value > 45 || rotation.value < -45) && !finished.value) {
+    finished.value = true;
     // Emit finished task after seeing the rotated image
     setTimeout(() => {
       emit('finishedTask');

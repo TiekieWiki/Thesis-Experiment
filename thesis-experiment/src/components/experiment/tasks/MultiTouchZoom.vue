@@ -44,6 +44,7 @@ const currentAction = ref<Action>({
   centerX: 0,
   centerY: 0,
 });
+const finished = ref<boolean>(false);
 
 // Set initial action
 useOnMountedCurrentAction(currentAction, 'startMultiTouchZoom', imageRef);
@@ -88,7 +89,8 @@ function zoom(event: TouchEvent) {
  */
 function endZoom() {
   currentAction.value.action = 'endMultiTouchZoom';
-  if (scale.value > 1.5) {
+  if (scale.value > 1.5 && !finished.value) {
+    finished.value = true;
     // Emit finished task after seeing the zoomed image
     setTimeout(() => {
       emit('finishedTask');

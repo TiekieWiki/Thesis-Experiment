@@ -197,6 +197,7 @@ async function nextTask() {
     // Select next task
     ({ selectedItem: currentTask.value, remainingItems: partialTasks.value } =
       selectRandomItem(partialTasks.value));
+
     showComponent.value = 'taskInstructions';
   } else {
     // Show user experience questionnaire

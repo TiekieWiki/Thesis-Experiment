@@ -58,7 +58,8 @@
       </li>
       <li>
         Complete each task holding and using the phone with only the instructed
-        hand.
+        hand. To make sure you are using the correct hand, you can place the
+        hand you are not using behind your back.
       </li>
     </ul>
     <button @click="next">Continue</button>

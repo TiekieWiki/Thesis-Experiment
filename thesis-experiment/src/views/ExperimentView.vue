@@ -182,7 +182,7 @@ const twoClickFilter = useFilters(showComponent, currentTask).twoClickFilter;
  */
 async function nextTask() {
   // Save measurements
-  saveMeasurements();
+  await saveMeasurements();
 
   // Write a checkpoint
   const checkpoint: Checkpoint = {
@@ -282,5 +282,7 @@ async function saveMeasurements() {
   };
 
   addData('measurements', taskMeasurements);
+
+  measurements.value = [];
 }
 </script>

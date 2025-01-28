@@ -103,14 +103,16 @@ export function useNextAction(
     const nextCharacter = sentence[writtenText.value.length].toUpperCase();
     const nextCharacterRef =
       nextCharacter == ' '
-        ? punctuationRef.value
+        ? spaceBarRef.value
         : firstRow.includes(nextCharacter)
           ? firstRowRefs.value[firstRow.indexOf(nextCharacter)]
           : secondRow.includes(nextCharacter)
             ? secondRowRefs.value[secondRow.indexOf(nextCharacter)]
-            : thirdRowRefs.value[thirdRow.indexOf(nextCharacter)]
-              ? nextCharacter == '.'
-              : spaceBarRef.value;
+            : thirdRow.includes(nextCharacter)
+              ? thirdRowRefs.value[thirdRow.indexOf(nextCharacter)]
+              : nextCharacter == '.'
+                ? punctuationRef.value
+                : null;
     currentAction.value = {
       action: `click${nextCharacter === ' ' ? 'SpaceBar' : nextCharacter}`,
       centerX:

@@ -72,7 +72,7 @@ async function save() {
     error.value = 'You must be at least 18 years old to participate';
     return;
   } else if (new Date(birthDate.value!).getFullYear() < 1964) {
-    error.value = 'You must be born after 1964 to participate';
+    error.value = 'You must be born in or after 1964 to participate';
     return;
   }
 
@@ -84,8 +84,8 @@ async function save() {
     gender: gender.value!,
     os: getOperatingSystem(),
     browser: getMobileBrowser(),
-    screenWidth: window.innerWidth,
-    screenHeight: window.innerHeight,
+    screenWidth: window.screen.width,
+    screenHeight: window.screen.height,
   };
 
   addData('user', user);

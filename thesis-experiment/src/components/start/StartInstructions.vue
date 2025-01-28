@@ -33,9 +33,10 @@
       each series with either your left or right hand, as instructed before the
       series. Each series consists of a set of tasks that you will be asked to
       complete. You will be timed during the tasks, and your time will be
-      recorded. You will also be asked to complete a short survey at the end of
-      each series. Please complete the tasks as quickly and accurately as
-      possible.
+      recorded. The tasks starts when you click the task instructions and
+      finished when you successfully completed the task as instructed. You will
+      also be asked to complete a short survey at the end of each series. Please
+      complete the tasks as quickly and accurately as possible.
     </p>
     <p>Before you begin the experiment, please ensure the following:</p>
     <ul>

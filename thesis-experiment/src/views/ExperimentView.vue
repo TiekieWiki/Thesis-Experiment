@@ -81,7 +81,7 @@ import {
   selectRandomItem,
 } from '@/utils/logic/selectTask';
 import { tasks, taskSet } from '@/utils/types/tasks';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import {
   correctDeviceType,
   correctScreenOrientation,
@@ -119,6 +119,15 @@ onUnmounted(() => {
   window.removeEventListener('resize', () => {
     isCorrectOrientation.value = correctScreenOrientation();
   });
+});
+
+// Reset task instructions when orientation was corrected
+watch(isCorrectOrientation, (newValue, oldValue) => {
+  if (newValue && !oldValue) {
+    if (showComponent.value === 'task') {
+      showComponent.value = 'taskInstructions';
+    }
+  }
 });
 
 // Set task and task set on component mount

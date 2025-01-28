@@ -2,12 +2,15 @@
   <div :class="['tap-type', interfaceOrientation]">
     <p>{{ sentence }}</p>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-    <textarea
-      v-model="writtenText"
-      ref="textareaRef"
-      :placeholder="sentence"
-      readonly
-    ></textarea>
+    <div class="textarea-container">
+      <textarea
+        v-model="writtenText"
+        ref="textareaRef"
+        :placeholder="sentence"
+        readonly
+      ></textarea>
+      <div ref="carot" class="carot"></div>
+    </div>
     <div ref="keyboard" class="keyboard">
       <div class="row-1">
         <div
@@ -74,7 +77,7 @@ import {
 } from '@/composables/tasks/useTapType';
 import { useEmitCurrentAction } from '@/composables/useTasks';
 import type { Action } from '@/utils/types/measurements';
-import { onMounted, ref, useTemplateRef } from 'vue';
+import { onMounted, ref, useTemplateRef, watch } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -100,6 +103,7 @@ const backspaceRef = useTemplateRef<HTMLElement>('backspaceRef');
 const spaceBarRef = useTemplateRef<HTMLElement>('spaceBarRef');
 const punctuationRef = useTemplateRef<HTMLElement>('punctuationRef');
 const checkRef = useTemplateRef<HTMLElement>('checkRef');
+const cursorPosition = ref<number>(0);
 
 /**
  * Capitalize character if capitalization is enabled
@@ -136,11 +140,11 @@ function capitalize() {
  */
 function addCharacter(key: string) {
   if (textareaRef.value) {
-    const cursorPosition = textareaRef.value.selectionStart;
+    cursorPosition.value = textareaRef.value.selectionStart;
     writtenText.value =
-      writtenText.value.slice(0, cursorPosition) +
+      writtenText.value.slice(0, cursorPosition.value) +
       key +
-      writtenText.value.slice(cursorPosition);
+      writtenText.value.slice(cursorPosition.value);
   }
   capitalization.value = false;
   useNextAction(
@@ -164,10 +168,10 @@ function addCharacter(key: string) {
  */
 function removeCharacter() {
   if (textareaRef.value) {
-    const cursorPosition = textareaRef.value.selectionStart;
+    cursorPosition.value = textareaRef.value.selectionStart;
     writtenText.value =
-      writtenText.value.slice(0, cursorPosition - 1) +
-      writtenText.value.slice(cursorPosition);
+      writtenText.value.slice(0, cursorPosition.value - 1) +
+      writtenText.value.slice(cursorPosition.value);
   }
   useNextAction(
     writtenText,
@@ -184,6 +188,41 @@ function removeCharacter() {
     currentAction,
   );
 }
+
+// Carot position
+// const carotRef = useTemplateRef<HTMLElement>('carot');
+
+// function updateCursorPosition() {
+//   const cursorElement = carotRef.value;
+
+//   // Calculate the position of the cursor
+//   const textareaRect = textareaRef.value!.getBoundingClientRect();
+
+//   // Create a hidden element to measure the text's dimensions
+//   const measurementDiv = document.createElement('div');
+//   measurementDiv.style.visibility = 'hidden';
+//   measurementDiv.style.whiteSpace = 'pre-wrap';
+//   measurementDiv.style.position = 'absolute';
+//   measurementDiv.style.font = getComputedStyle(textareaRef.value!).font;
+//   measurementDiv.textContent = writtenText.value.slice(0, cursorPosition.value);
+
+//   document.body.appendChild(measurementDiv);
+//   const { width, height } = measurementDiv.getBoundingClientRect();
+//   document.body.removeChild(measurementDiv);
+
+//   // Set cursor position
+//   const x = textareaRect.left + width;
+//   const y = height;
+//   cursorElement!.style.left = `${x}px`;
+//   cursorElement!.style.top = `${y}px`;
+// }
+
+// onMounted(() => {
+//   updateCursorPosition();
+// });
+
+// Watch for updates to the cursor position or text content
+// watch([writtenText, cursorPosition], updateCursorPosition);
 
 // Measurements
 const currentAction = ref<Action>({

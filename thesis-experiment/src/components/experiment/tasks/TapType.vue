@@ -6,9 +6,11 @@
       <textarea
         v-model="writtenText"
         ref="textareaRef"
+        @click="updateCursorPosition"
         :placeholder="sentence"
         readonly
       ></textarea>
+      <div ref="test-char" class="test-char">x</div>
       <div ref="carot" class="carot"></div>
     </div>
     <div ref="keyboard" class="keyboard">
@@ -109,14 +111,14 @@ const cursorPosition = ref<number>(0);
  * Capitalize character if capitalization is enabled
  * @param key Key to capitalize
  */
-function capitalizeCharacter(key: string) {
+function capitalizeCharacter(key: string): string {
   return capitalization.value ? key.toUpperCase() : key.toLowerCase();
 }
 
 /**
  * Toggle capitalization
  */
-function capitalize() {
+function capitalize(): void {
   capitalization.value = !capitalization.value;
   useNextAction(
     writtenText,
@@ -138,7 +140,7 @@ function capitalize() {
  * Add character to the written text
  * @param key Key to add to the written text
  */
-function addCharacter(key: string) {
+function addCharacter(key: string): void {
   if (textareaRef.value) {
     cursorPosition.value = textareaRef.value.selectionStart;
     writtenText.value =
@@ -166,7 +168,7 @@ function addCharacter(key: string) {
 /**
  * Remove character from the written text
  */
-function removeCharacter() {
+function removeCharacter(): void {
   if (textareaRef.value) {
     cursorPosition.value = textareaRef.value.selectionStart;
     writtenText.value =
@@ -190,39 +192,25 @@ function removeCharacter() {
 }
 
 // Carot position
-// const carotRef = useTemplateRef<HTMLElement>('carot');
+const testCharRef = useTemplateRef<HTMLElement>('test-char');
+const textareaPadding = 16;
+const carotRef = useTemplateRef<HTMLElement>('carot');
 
-// function updateCursorPosition() {
-//   const cursorElement = carotRef.value;
+// Initialize carot
+onMounted(() => {
+  carotRef.value!.style.top = `${textareaPadding}px`;
+  carotRef.value!.style.left = `${textareaPadding}px`;
+  carotRef.value!.style.height = `${testCharRef.value!.getBoundingClientRect().height}px`;
+});
 
-//   // Calculate the position of the cursor
-//   const textareaRect = textareaRef.value!.getBoundingClientRect();
+watch(writtenText, () => {
+  updateCursorPosition();
+});
 
-//   // Create a hidden element to measure the text's dimensions
-//   const measurementDiv = document.createElement('div');
-//   measurementDiv.style.visibility = 'hidden';
-//   measurementDiv.style.whiteSpace = 'pre-wrap';
-//   measurementDiv.style.position = 'absolute';
-//   measurementDiv.style.font = getComputedStyle(textareaRef.value!).font;
-//   measurementDiv.textContent = writtenText.value.slice(0, cursorPosition.value);
-
-//   document.body.appendChild(measurementDiv);
-//   const { width, height } = measurementDiv.getBoundingClientRect();
-//   document.body.removeChild(measurementDiv);
-
-//   // Set cursor position
-//   const x = textareaRect.left + width;
-//   const y = height;
-//   cursorElement!.style.left = `${x}px`;
-//   cursorElement!.style.top = `${y}px`;
-// }
-
-// onMounted(() => {
-//   updateCursorPosition();
-// });
-
-// Watch for updates to the cursor position or text content
-// watch([writtenText, cursorPosition], updateCursorPosition);
+function updateCursorPosition(): void {
+  carotRef.value!.style.top = `${textareaPadding}px`;
+  carotRef.value!.style.left = `${textareaPadding + testCharRef.value!.getBoundingClientRect().width * (textareaRef.value!.selectionStart + 1)}px`;
+}
 
 // Measurements
 const currentAction = ref<Action>({
@@ -264,7 +252,7 @@ useEmitCurrentAction(currentAction, emit);
 /**
  * Check if the written text matches the sentence
  */
-function checkSentence() {
+function checkSentence(): void {
   errorMessage.value = '';
 
   if (writtenText.value === sentence) {

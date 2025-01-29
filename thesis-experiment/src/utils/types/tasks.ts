@@ -13,9 +13,9 @@ export const tasks = [
   // 'FlickLeft',
   // 'FlickRight',
   // 'LongTapHyperlink',
-  'LongTapSelect',
+  // 'LongTapSelect',
   // 'MultiTouchRotate',
   // 'MultiTouchZoom',
   // 'TapMenu',
-  // 'TapType',
+  'TapType',
 ];

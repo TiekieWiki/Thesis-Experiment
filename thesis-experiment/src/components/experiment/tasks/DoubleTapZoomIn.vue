@@ -49,7 +49,7 @@ useEmitCurrentAction(currentAction, emit);
 /**
  * Determine the action when the image is clicked
  */
-function imageClicked() {
+function imageClicked(): void {
   useDoubleTap('DoubleTapZoomIn', currentAction, firstClicked, scale, 2, emit);
 }
 </script>

@@ -53,7 +53,7 @@ useEmitCurrentAction(currentAction, emit);
 /**
  * Detect selection change
  */
-function detectSelectionChange() {
+function detectSelectionChange(): void {
   const selection = window.getSelection();
   if (selection && selection.toString().trim() == content.value) {
     // Emit finished task after seeing the selection

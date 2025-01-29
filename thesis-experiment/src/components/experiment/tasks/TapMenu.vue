@@ -61,7 +61,7 @@ useEmitCurrentAction(currentAction, emit);
 /**
  * Set menu open and set current action
  */
-async function menuClicked() {
+async function menuClicked(): Promise<void> {
   menuOpen.value = true;
 
   // Set current action when menu items are loaded
@@ -86,7 +86,7 @@ async function menuClicked() {
 /**
  * Finish task
  */
-function finishTask() {
+function finishTask(): void {
   emit('finishedTask');
 }
 </script>

@@ -28,7 +28,7 @@ export function correctScreenOrientation(): boolean {
  * Get the operating system of the device
  * @returns Operating system of the device
  */
-export function getOperatingSystem() {
+export function getOperatingSystem(): string {
   const userAgent = navigator.userAgent || navigator.vendor;
 
   if (/windows phone/i.test(userAgent)) {

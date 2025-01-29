@@ -47,8 +47,6 @@ export function userTouchStart(
     timestamp: touchTime,
   };
 
-  console.log('userTouchStart');
-
   if (
     (currentTask === 'MultiTouchZoom' || currentTask === 'MultiTouchRotate') &&
     touchEvent.touches.length > 1

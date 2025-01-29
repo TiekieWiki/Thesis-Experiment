@@ -79,7 +79,7 @@ const emit = defineEmits<{
 /**
  * Continue to the next step
  */
-async function next() {
+async function next(): Promise<void> {
   // Write a checkpoint
   const checkpoint: Checkpoint = {
     id: 'userID',

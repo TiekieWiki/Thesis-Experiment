@@ -189,7 +189,7 @@ const twoClickFilter = useFilters(showComponent, currentTask).twoClickFilter;
 /**
  * Go to next task
  */
-async function nextTask() {
+async function nextTask(): Promise<void> {
   // Save measurements
   await saveMeasurements();
 
@@ -217,7 +217,7 @@ async function nextTask() {
 /**
  * Go to next task set
  */
-async function nextTaskSet() {
+async function nextTaskSet(): Promise<void> {
   // Check if task sets are finished
   if (partialTaskSet.value.length !== 0) {
     // Select next task set
@@ -271,7 +271,7 @@ const currentAction = ref<Action>({
  * Finish task instructions and register user click
  * @param measurement Measurement of user click
  */
-function finishTaskInstructions(measurement: Measurement) {
+function finishTaskInstructions(measurement: Measurement): void {
   measurements.value.push(measurement);
   showComponent.value = 'task';
 }
@@ -280,7 +280,7 @@ function finishTaskInstructions(measurement: Measurement) {
  * Save measurements
  * @returns Task measurements
  */
-async function saveMeasurements() {
+async function saveMeasurements(): Promise<void> {
   const taskMeasurements: TaskMeasurements = {
     userId: (await getAllCheckpoints()).sort(
       (a, b) => a.timestamp - b.timestamp,

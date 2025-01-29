@@ -16,6 +16,6 @@ export const tasks = [
   // 'LongTapSelect',
   // 'MultiTouchRotate',
   // 'MultiTouchZoom',
-  // 'TapMenu',
-  'TapType',
+  'TapMenu',
+  // 'TapType',
 ];

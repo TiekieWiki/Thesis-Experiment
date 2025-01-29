@@ -49,16 +49,18 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickCapitalization',
       centerX: capitalizationRef.value
-        ? window.screenX +
+        ? window.screen.width -
+          window.innerWidth +
           keyboardPosition.value.x +
-          capitalizationRef.value.offsetLeft +
-          capitalizationRef.value.offsetWidth / 2
+          capitalizationRef.value.getBoundingClientRect().left +
+          capitalizationRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: capitalizationRef.value
-        ? window.screenY +
+        ? window.screen.height -
+          window.innerHeight +
           keyboardPosition.value.y +
-          capitalizationRef.value.offsetTop +
-          capitalizationRef.value.offsetHeight / 2
+          capitalizationRef.value.getBoundingClientRect().top +
+          capitalizationRef.value.getBoundingClientRect().height / 2
         : 0,
     };
   }
@@ -67,16 +69,18 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickBackspace',
       centerX: backspaceRef.value
-        ? window.screenX +
+        ? window.screen.width -
+          window.innerWidth +
           keyboardPosition.value.x +
-          backspaceRef.value.offsetLeft +
-          backspaceRef.value.offsetWidth / 2
+          backspaceRef.value.getBoundingClientRect().left +
+          backspaceRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: backspaceRef.value
-        ? window.screenY +
+        ? window.screen.height -
+          window.innerHeight +
           keyboardPosition.value.y +
-          backspaceRef.value.offsetTop +
-          backspaceRef.value.offsetHeight / 2
+          backspaceRef.value.getBoundingClientRect().top +
+          backspaceRef.value.getBoundingClientRect().height / 2
         : 0,
     };
   }
@@ -85,16 +89,18 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickCheck',
       centerX: checkRef.value
-        ? window.screenX +
+        ? window.screen.width -
+          window.innerWidth +
           keyboardPosition.value.x +
-          checkRef.value.offsetLeft +
-          checkRef.value.offsetWidth / 2
+          checkRef.value.getBoundingClientRect().left +
+          checkRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: checkRef.value
-        ? window.screenY +
+        ? window.screen.height -
+          window.innerHeight +
           keyboardPosition.value.y +
-          checkRef.value.offsetTop +
-          checkRef.value.offsetHeight / 2
+          checkRef.value.getBoundingClientRect().top +
+          checkRef.value.getBoundingClientRect().height / 2
         : 0,
     };
   }
@@ -117,17 +123,19 @@ export function useNextAction(
       action: `click${nextCharacter === ' ' ? 'SpaceBar' : nextCharacter}`,
       centerX:
         nextCharacterRef instanceof HTMLElement
-          ? window.screenX +
+          ? window.screen.width -
+            window.innerWidth +
             keyboardPosition.value.x +
-            nextCharacterRef.offsetLeft +
-            nextCharacterRef.offsetWidth / 2
+            nextCharacterRef.getBoundingClientRect().left +
+            nextCharacterRef.getBoundingClientRect().width / 2
           : 0,
       centerY:
         nextCharacterRef instanceof HTMLElement
-          ? window.screenY +
+          ? window.screen.height -
+            window.innerHeight +
             keyboardPosition.value.y +
-            nextCharacterRef.offsetTop +
-            nextCharacterRef.offsetHeight / 2
+            nextCharacterRef.getBoundingClientRect().top +
+            nextCharacterRef.getBoundingClientRect().height / 2
           : 0,
     };
   }

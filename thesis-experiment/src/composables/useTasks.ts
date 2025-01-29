@@ -14,17 +14,20 @@ export function useOnMountedCurrentAction(
   centerRef: Readonly<ShallowRef<HTMLElement | null>>,
 ): void {
   onMounted(() => {
+    console.log(window.screen.height, window.innerHeight, window.outerHeight);
     currentAction.value = {
       action: action,
       centerX: centerRef.value
-        ? window.screenX +
-          centerRef.value.offsetLeft +
-          centerRef.value.offsetWidth / 2
+        ? window.screen.width -
+          window.innerWidth +
+          centerRef.value.getBoundingClientRect().left +
+          centerRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: centerRef.value
-        ? window.screenY +
-          centerRef.value.offsetTop +
-          centerRef.value.offsetHeight / 2
+        ? window.screen.height -
+          window.innerHeight +
+          centerRef.value.getBoundingClientRect().top +
+          centerRef.value.getBoundingClientRect().height / 2
         : 0,
     };
   });

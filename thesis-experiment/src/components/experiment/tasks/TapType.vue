@@ -242,16 +242,18 @@ onMounted(() => {
   currentAction.value = {
     action: 'clickCapitalization',
     centerX: capitalizationRef.value
-      ? window.screenX +
+      ? window.screen.width -
+        window.innerWidth +
         keyboardPosition.value.x +
-        capitalizationRef.value.offsetLeft +
-        capitalizationRef.value.offsetWidth / 2
+        capitalizationRef.value.getBoundingClientRect().left +
+        capitalizationRef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: capitalizationRef.value
-      ? window.screenY +
+      ? window.screen.height -
+        window.innerHeight +
         keyboardPosition.value.y +
-        capitalizationRef.value.offsetTop +
-        capitalizationRef.value.offsetHeight / 2
+        capitalizationRef.value.getBoundingClientRect().top +
+        capitalizationRef.value.getBoundingClientRect().height / 2
       : 0,
   };
 });

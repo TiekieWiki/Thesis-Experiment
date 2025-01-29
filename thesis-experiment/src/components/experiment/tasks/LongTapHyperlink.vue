@@ -53,7 +53,6 @@ useEmitCurrentAction(currentAction, emit);
  * Open pop-up after long tap
  */
 function openPopUp() {
-  currentAction.value.action = 'endLongTapHyperlink';
   popUpOpen.value = true;
 
   // Emit finished task after seeing the pop-up

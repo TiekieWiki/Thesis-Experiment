@@ -20,6 +20,7 @@ export function userClick(
     centerY: currentAction.centerY,
     timestamp: clickTime,
   };
+
   return measurement;
 }
 

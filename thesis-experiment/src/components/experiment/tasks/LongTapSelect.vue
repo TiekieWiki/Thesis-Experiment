@@ -56,8 +56,6 @@ useEmitCurrentAction(currentAction, emit);
 function detectSelectionChange() {
   const selection = window.getSelection();
   if (selection && selection.toString().trim() == content.value) {
-    currentAction.value.action = 'endLongTapSelect';
-
     // Emit finished task after seeing the selection
     setTimeout(() => {
       emit('finishedTask');

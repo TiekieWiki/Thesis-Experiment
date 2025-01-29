@@ -69,14 +69,16 @@ async function menuClicked() {
   currentAction.value = {
     action: 'clickMenuItem',
     centerX: menuItemRef.value
-      ? window.screenX +
-        menuItemRef.value.offsetLeft +
-        menuItemRef.value.offsetWidth / 2
+      ? window.screen.width -
+        window.innerWidth +
+        menuItemRef.value.getBoundingClientRect().left +
+        menuItemRef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: menuItemRef.value
-      ? window.screenY +
-        menuItemRef.value.offsetTop +
-        menuItemRef.value.offsetHeight / 2
+      ? window.screen.height -
+        window.innerHeight +
+        menuItemRef.value.getBoundingClientRect().top +
+        menuItemRef.value.getBoundingClientRect().height / 2
       : 0,
   };
 }

@@ -47,10 +47,16 @@ onMounted(() => {
   currentAction.value = {
     action: 'startDragSlider',
     centerX: sliderRef.value
-      ? window.screenX + sliderRef.value.offsetLeft + xToPx('5mm')
+      ? window.screen.width -
+        window.innerWidth +
+        sliderRef.value.getBoundingClientRect().left +
+        xToPx('5mm')
       : 0,
     centerY: sliderRef.value
-      ? window.screenY + sliderRef.value.offsetTop + xToPx('5mm')
+      ? window.screen.height -
+        window.innerHeight +
+        sliderRef.value.getBoundingClientRect().top +
+        xToPx('5mm')
       : 0,
   };
 });

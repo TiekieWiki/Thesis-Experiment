@@ -23,7 +23,7 @@ const emit = defineEmits<{
   finishedInstructions: [];
 }>();
 
-function next() {
+function next(): void {
   emit('finishedInstructions');
 }
 </script>

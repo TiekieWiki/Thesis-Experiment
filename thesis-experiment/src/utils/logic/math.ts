@@ -11,7 +11,7 @@ export function calculateAngle(
   touchY1: number,
   touchX2: number,
   touchY2: number,
-) {
+): number {
   return Math.atan2(touchY2 - touchY1, touchX2 - touchX1) * (180 / Math.PI);
 }
 
@@ -31,7 +31,7 @@ export function distance(event: TouchEvent): number {
  * Calculate the age of the user
  * @param dateString The birth date of the user
  */
-export function calculateAge(birthDate: string) {
+export function calculateAge(birthDate: string): number {
   const today = new Date();
   const date = new Date(birthDate);
   let age = today.getFullYear() - date.getFullYear();

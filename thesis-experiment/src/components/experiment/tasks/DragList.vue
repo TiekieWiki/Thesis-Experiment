@@ -69,7 +69,7 @@ useEmitCurrentAction(currentAction, emit);
 /**
  * Set current action when drag starts
  */
-function dragStarted() {
+function dragStarted(): void {
   currentAction.value = {
     action: 'startDragList',
     centerX: ARef.value
@@ -84,7 +84,7 @@ function dragStarted() {
 /**
  * Set current action when drag ends
  */
-function dragEnded() {
+function dragEnded(): void {
   currentAction.value = goalAction.value;
 
   // Wait for current action to be emitted

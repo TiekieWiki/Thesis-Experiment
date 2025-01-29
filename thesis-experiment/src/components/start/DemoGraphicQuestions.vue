@@ -66,7 +66,7 @@ watch([birthDate, gender], () => {
 /**
  * Save the demographic information and continue to the next step
  */
-async function save() {
+async function save(): Promise<void> {
   // Check if the user has the correct age
   if (calculateAge(birthDate.value!) < 18) {
     error.value = 'You must be at least 18 years old to participate';

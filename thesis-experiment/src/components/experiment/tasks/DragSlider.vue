@@ -67,7 +67,7 @@ useEmitCurrentAction(currentAction, emit);
 /**
  * Set current action when drag starts
  */
-function dragStarted() {
+function dragStarted(): void {
   currentAction.value = {
     action: 'startDragSlider',
     centerX: sliderRef.value
@@ -82,7 +82,7 @@ function dragStarted() {
 /**
  * Set current action when drag ends
  */
-function dragEnded() {
+function dragEnded(): void {
   currentAction.value = {
     action: 'endDragSlider',
     centerX: sliderRef.value

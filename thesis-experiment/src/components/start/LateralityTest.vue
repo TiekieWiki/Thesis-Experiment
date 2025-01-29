@@ -136,7 +136,7 @@ watch(lateralityQuestions.value, () => {
 /**
  * Save the laterality test information and continue to the next step
  */
-async function save() {
+async function save(): Promise<void> {
   // Save the laterality test
   const laterality: Laterality = {
     userId: (await getAllCheckpoints()).sort(

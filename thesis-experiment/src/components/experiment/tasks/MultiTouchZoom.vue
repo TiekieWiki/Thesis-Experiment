@@ -56,7 +56,7 @@ useEmitCurrentAction(currentAction, emit);
  * Start zooming
  * @param event Touch event
  */
-function startZoom(event: TouchEvent) {
+function startZoom(event: TouchEvent): void {
   currentAction.value.action = 'startMultiTouchZoom';
   if (event.touches.length === 2) {
     // Prevent page scroll
@@ -71,7 +71,7 @@ function startZoom(event: TouchEvent) {
  * Zoom the image
  * @param event Touch event
  */
-function zoom(event: TouchEvent) {
+function zoom(event: TouchEvent): void {
   if (event.touches.length === 2) {
     // Prevent page scroll
     event.preventDefault();
@@ -87,7 +87,7 @@ function zoom(event: TouchEvent) {
 /**
  * End zooming
  */
-function endZoom() {
+function endZoom(): void {
   currentAction.value.action = 'endMultiTouchZoom';
   if (scale.value > 1.5 && !finished.value) {
     finished.value = true;

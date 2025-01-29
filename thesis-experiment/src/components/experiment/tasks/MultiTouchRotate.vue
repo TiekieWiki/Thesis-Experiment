@@ -56,7 +56,7 @@ useEmitCurrentAction(currentAction, emit);
  * Start rotating
  * @param event Touch event
  */
-function startRotate(event: TouchEvent) {
+function startRotate(event: TouchEvent): void {
   currentAction.value.action = 'startMultiTouchRotate';
   if (event.touches.length === 2) {
     // Prevent page scroll
@@ -76,7 +76,7 @@ function startRotate(event: TouchEvent) {
  * Rotate the image
  * @param event Touch event
  */
-function rotate(event: TouchEvent) {
+function rotate(event: TouchEvent): void {
   if (event.touches.length === 2) {
     // Prevent page scroll
     event.preventDefault();
@@ -100,7 +100,7 @@ function rotate(event: TouchEvent) {
 /**
  * End rotate
  */
-function endRotate() {
+function endRotate(): void {
   currentAction.value.action = 'endMultiTouchRotate';
   if ((rotation.value > 45 || rotation.value < -45) && !finished.value) {
     finished.value = true;

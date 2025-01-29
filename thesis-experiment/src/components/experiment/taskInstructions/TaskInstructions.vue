@@ -46,7 +46,7 @@ const emit = defineEmits<{
  * @param clickEvent User click event
  * @param clickTime Click timestamp
  */
-function startTask(clickEvent: MouseEvent, clickTime: number) {
+function startTask(clickEvent: MouseEvent, clickTime: number): void {
   const measurement: Measurement = {
     action: 'startTask',
     touchX: clickEvent.screenX,

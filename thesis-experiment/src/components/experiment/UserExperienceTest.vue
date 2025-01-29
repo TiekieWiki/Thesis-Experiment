@@ -122,7 +122,7 @@ watch(userExperienceQuestions.value, () => {
 /**
  * Save the laterality test information and continue to the next step
  */
-async function save() {
+async function save(): Promise<void> {
   // Save the user experience test data
   const uxTest: UserExperience = {
     userId: (await getAllCheckpoints()).sort(

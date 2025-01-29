@@ -63,7 +63,7 @@ useEmitCurrentAction(currentAction, emit);
  * Start flicking
  * @param event Touch event
  */
-function flickStarted(event: TouchEvent) {
+function flickStarted(event: TouchEvent): void {
   useFlickStarted(
     'FlickRight',
     currentAction,
@@ -77,14 +77,14 @@ function flickStarted(event: TouchEvent) {
  * Move when flicking
  * @param event Touch event
  */
-function flickMoving(event: TouchEvent) {
+function flickMoving(event: TouchEvent): void {
   useFlickMoving(isFlicking, event, translateX, startX);
 }
 
 /**
  * End flicking
  */
-function flickEnded() {
+function flickEnded(): void {
   useFlickEnded(
     'FlickRight',
     currentAction,

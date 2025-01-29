@@ -14,7 +14,6 @@ export function useOnMountedCurrentAction(
   centerRef: Readonly<ShallowRef<HTMLElement | null>>,
 ): void {
   onMounted(() => {
-    console.log(window.screen.height, window.innerHeight, window.outerHeight);
     currentAction.value = {
       action: action,
       centerX: centerRef.value

@@ -68,7 +68,7 @@ export function getTaskInstruction(task: string): string {
     case 'LongTapHyperlink':
       return 'Hold down on the hyperlink to open a pop-up';
     case 'LongTapSelect':
-      return 'Hold down on the text and move the cursors to select it';
+      return 'Hold down on the text to select it';
     case 'MultiTouchRotate':
       return 'Rotate the picture in any direction with two fingers';
     case 'MultiTouchZoom':

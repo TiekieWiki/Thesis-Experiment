@@ -11,7 +11,7 @@
         readonly
       ></textarea>
       <div ref="test-char" class="test-char">x</div>
-      <div ref="carot" class="carot"></div>
+      <div ref="caret" class="caret"></div>
     </div>
     <div ref="keyboard" class="keyboard">
       <div class="row-1">
@@ -78,8 +78,9 @@ import {
   useNextAction,
 } from '@/composables/tasks/useTapType';
 import { useEmitCurrentAction } from '@/composables/useTasks';
+import { getCursorPosition, wrapSentence } from '@/utils/logic/math';
 import type { Action } from '@/utils/types/measurements';
-import { onMounted, ref, useTemplateRef, watch } from 'vue';
+import { onMounted, ref, useTemplateRef } from 'vue';
 
 defineProps<{
   interfaceOrientation: string;
@@ -105,7 +106,6 @@ const backspaceRef = useTemplateRef<HTMLElement>('backspaceRef');
 const spaceBarRef = useTemplateRef<HTMLElement>('spaceBarRef');
 const punctuationRef = useTemplateRef<HTMLElement>('punctuationRef');
 const checkRef = useTemplateRef<HTMLElement>('checkRef');
-const cursorPosition = ref<number>(0);
 
 /**
  * Capitalize character if capitalization is enabled
@@ -142,12 +142,12 @@ function capitalize(): void {
  */
 function addCharacter(key: string): void {
   if (textareaRef.value) {
-    cursorPosition.value = textareaRef.value.selectionStart;
     writtenText.value =
       writtenText.value.slice(0, cursorPosition.value) +
       key +
       writtenText.value.slice(cursorPosition.value);
   }
+  cursorPosition.value++;
   capitalization.value = false;
   useNextAction(
     writtenText,
@@ -163,6 +163,7 @@ function addCharacter(key: string): void {
     keyboardPosition,
     currentAction,
   );
+  positionCaret();
 }
 
 /**
@@ -170,11 +171,11 @@ function addCharacter(key: string): void {
  */
 function removeCharacter(): void {
   if (textareaRef.value) {
-    cursorPosition.value = textareaRef.value.selectionStart;
     writtenText.value =
       writtenText.value.slice(0, cursorPosition.value - 1) +
       writtenText.value.slice(cursorPosition.value);
   }
+  cursorPosition.value--;
   useNextAction(
     writtenText,
     capitalization,
@@ -189,27 +190,49 @@ function removeCharacter(): void {
     keyboardPosition,
     currentAction,
   );
+  positionCaret();
 }
 
-// Carot position
+// Cursor position
+const cursorPosition = ref<number>(0);
 const testCharRef = useTemplateRef<HTMLElement>('test-char');
-const textareaPadding = 16;
-const carotRef = useTemplateRef<HTMLElement>('carot');
+const textareaPadding = 18;
+const caretRef = useTemplateRef<HTMLElement>('caret');
+const charactersPerLine = ref<number>(0);
 
-// Initialize carot
+// Initialize caret and determine text wrap
 onMounted(() => {
-  carotRef.value!.style.top = `${textareaPadding}px`;
-  carotRef.value!.style.left = `${textareaPadding}px`;
-  carotRef.value!.style.height = `${testCharRef.value!.getBoundingClientRect().height}px`;
+  // Set caret position
+  caretRef.value!.style.top = `${textareaPadding}px`;
+  caretRef.value!.style.left = `${textareaPadding}px`;
+  caretRef.value!.style.height = `${testCharRef.value!.getBoundingClientRect().height}px`;
+
+  // Determine text wrap
+  charactersPerLine.value = Math.floor(
+    (textareaRef.value!.getBoundingClientRect().width - 2 * textareaPadding) /
+      testCharRef.value!.getBoundingClientRect().width,
+  );
 });
 
-watch(writtenText, () => {
-  updateCursorPosition();
-});
+/**
+ * Position caret based on cursor position
+ */
+function positionCaret(): void {
+  const { lineIndex: lineIndex, cursorIndex: cursorIndex } = getCursorPosition(
+    wrapSentence(charactersPerLine.value, writtenText.value),
+    cursorPosition.value,
+  );
 
+  caretRef.value!.style.top = `${textareaPadding + lineIndex * (testCharRef.value!.getBoundingClientRect().height + 2)}px`;
+  caretRef.value!.style.left = `${textareaPadding + cursorIndex * testCharRef.value!.getBoundingClientRect().width}px`;
+}
+
+/**
+ * Update cursor position on click
+ */
 function updateCursorPosition(): void {
-  carotRef.value!.style.top = `${textareaPadding}px`;
-  carotRef.value!.style.left = `${textareaPadding + testCharRef.value!.getBoundingClientRect().width * (textareaRef.value!.selectionStart + 1)}px`;
+  cursorPosition.value = textareaRef.value!.selectionStart;
+  positionCaret();
 }
 
 // Measurements

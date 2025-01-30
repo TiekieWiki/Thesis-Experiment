@@ -41,3 +41,63 @@ export function calculateAge(birthDate: string): number {
   }
   return age;
 }
+
+/**
+ * Wrap a sentence to fit the maximum number of characters per line
+ * @param charactersPerLine Maximum number of characters per line
+ * @param sentence Sentence to wrap
+ * @returns Sentence wrapped to fit the maximum number of characters per line
+ */
+export function wrapSentence(
+  charactersPerLine: number,
+  sentence: string,
+): string[] {
+  const words = sentence.split(' ');
+  let currentLine = '';
+  const sentenceLines: string[] = [];
+
+  for (const word of words) {
+    if ((currentLine + word).length > charactersPerLine) {
+      sentenceLines.push(currentLine.trim());
+      currentLine = word + ' ';
+    } else {
+      currentLine += word + ' ';
+    }
+  }
+
+  if (currentLine.trim()) {
+    sentenceLines.push(currentLine.trim());
+  }
+
+  return sentenceLines;
+}
+
+/**
+ * Get the line index and cursor index of the cursor position
+ * @param sentenceLines Line of the sentence
+ * @param cursorPosition Position of the cursor
+ * @returns Object with the line index and cursor index
+ */
+export function getCursorPosition(
+  sentenceLines: string[],
+  cursorPosition: number,
+): { lineIndex: number; cursorIndex: number } {
+  let charCount = 0;
+
+  console.log(sentenceLines);
+
+  for (let i = 0; i < sentenceLines.length; i++) {
+    const lineLength = sentenceLines[i].length;
+
+    if (cursorPosition < charCount + lineLength) {
+      return { lineIndex: i, cursorIndex: cursorPosition - charCount };
+    }
+
+    charCount += lineLength + 1;
+  }
+
+  return {
+    lineIndex: sentenceLines.length - 1,
+    cursorIndex: sentenceLines[sentenceLines.length - 1].length,
+  };
+}

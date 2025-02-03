@@ -1,5 +1,6 @@
 <template>
   <div :class="['long-tap-select', interfaceOrientation]">
+    <slot></slot>
     <p ref="textRef" class="select-text">
       {{ content }}
     </p>

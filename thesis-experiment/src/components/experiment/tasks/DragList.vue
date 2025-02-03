@@ -1,5 +1,6 @@
 <template>
   <div :class="['drag-list', interfaceOrientation]">
+    <slot></slot>
     <draggable
       @touchstart="dragStarted"
       @touchend="dragEnded"

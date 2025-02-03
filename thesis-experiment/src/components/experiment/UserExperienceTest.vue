@@ -99,12 +99,13 @@ const emit = defineEmits<{
 const userExperienceQuestions = ref<UserExperienceQuestion[]>([
   {
     name: 'meetingRequirements',
-    question: "This system's capabilities meet my requirements",
+    question:
+      'The combination of hand use and object placement meets my requirements.',
     answer: null,
   },
   {
     name: 'easyToUse',
-    question: 'This system is easy to use',
+    question: 'The combination of hand use and object placement is easy to use',
     answer: null,
   },
 ]);

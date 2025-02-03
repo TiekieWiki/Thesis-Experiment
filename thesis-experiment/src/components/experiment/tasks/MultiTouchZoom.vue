@@ -1,5 +1,6 @@
 <template>
   <div :class="['multi-touch-zoom', interfaceOrientation]">
+    <slot></slot>
     <img
       @touchstart="startZoom"
       @touchmove="zoom"
@@ -95,7 +96,7 @@ function endZoom(): void {
     setTimeout(() => {
       emit('finishedTask');
     }, resultTimer);
-  } else {
+  } else if (!finished.value) {
     // Reset the image position
     scale.value = 1;
   }

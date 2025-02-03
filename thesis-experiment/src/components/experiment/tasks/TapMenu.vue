@@ -1,5 +1,6 @@
 <template>
   <div :class="['tap-menu', interfaceOrientation]">
+    <slot></slot>
     <div class="menu">
       <button @click="menuClicked" ref="menuRef">
         <transition name="switch" mode="out-in">

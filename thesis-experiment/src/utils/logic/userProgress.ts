@@ -18,8 +18,8 @@ export async function getCurrentPage(): Promise<string> {
     if (lastCheckpoint.id === 'finishedExperiment') {
       return 'End';
     }
-    // Check if the last checkpoint was set within a day
-    else if (Date.now() - lastCheckpoint.timestamp > 24 * 60 * 60 * 1000) {
+    // Check if the last checkpoint was set within two hours
+    else if (Date.now() - lastCheckpoint.timestamp > 2 * 60 * 60 * 1000) {
       await deleteAllCheckpoints();
       return 'Start';
     }

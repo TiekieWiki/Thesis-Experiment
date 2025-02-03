@@ -1,5 +1,6 @@
 <template>
   <div :class="['multi-touch-rotate', interfaceOrientation]">
+    <slot></slot>
     <img
       @touchstart="startRotate"
       @touchmove="rotate"
@@ -108,7 +109,7 @@ function endRotate(): void {
     setTimeout(() => {
       emit('finishedTask');
     }, resultTimer);
-  } else {
+  } else if (!finished.value) {
     // Reset the image position
     rotation.value = 0;
   }

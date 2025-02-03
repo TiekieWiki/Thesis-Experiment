@@ -8,7 +8,7 @@
         <h1>Instructions</h1>
         <p>{{ getTaskInstruction(task) }}</p>
         <p>
-          Reminder: perform this task with only your <b>{{ hand }} hand</b>
+          Reminder: perform this task with <b>only your {{ hand }} hand</b>
         </p>
         <video autoplay loop muted>
           <source

@@ -1,5 +1,6 @@
 <template>
   <div :class="['double-tap-zoom-in', interfaceOrientation]">
+    <slot></slot>
     <img
       @click="imageClicked"
       ref="imageRef"

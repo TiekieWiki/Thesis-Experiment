@@ -5,13 +5,13 @@
     <div>
       Thank you for participating in this research. This research aims to
       investigate the effects of handedness on smartphone interaction.
-      Participating in this research is voluntary. You can stop participating at
-      any time without any consequences or withdraw consent after participating.
-      The data collected will be used for research purposes only and will be
-      kept confidential. The data will be stored securely and will be
-      anonymized. The results of this research may be published in scientific
-      journals or presented at conferences. If you have any questions about this
-      research, please contact the researcher at
+      Participating in this research takes around 10-15 minutes and is
+      voluntary. You can stop participating at any time without any consequences
+      or withdraw consent after participating. The data collected will be used
+      for research purposes only and will be kept confidential. The data will be
+      stored securely and will be anonymized. The results of this research may
+      be published in scientific journals or presented at conferences. If you
+      have any questions about this research, please contact the researcher at
       <a href="mailto: t.stellingwerf1@students.uu.nl"
         >t.stellingwerf1@students.uu.nl</a
       >.
@@ -32,11 +32,12 @@
       questions. After that, you will be asked to complete four series of tasks,
       each series with either your left or right hand, as instructed before the
       series. Each series consists of a set of tasks that you will be asked to
-      complete. You will be timed during the tasks, and your time will be
-      recorded. The tasks starts when you click the task instructions and
-      finished when you successfully completed the task as instructed. You will
-      also be asked to complete a short survey at the end of each series. Please
-      complete the tasks as quickly and accurately as possible.
+      complete. The instructions will be presented before the task and during
+      the task if you forget. You will be timed during the tasks, and your time
+      will be recorded. The tasks starts when you click the task instructions
+      and finishes when you successfully completed the task as instructed. You
+      will also be asked to complete a short survey at the end of each series.
+      Please complete the tasks as quickly and accurately as possible.
     </p>
     <p>Before you begin the experiment, please ensure the following:</p>
     <ul>
@@ -59,8 +60,9 @@
       </li>
       <li>
         Complete each task holding and using the phone with only the instructed
-        hand. To make sure you are using the correct hand, you can place the
-        hand you are not using behind your back.
+        hand. You can't hold the phone with one hand and use the other to
+        complete the task. To make sure you are using the correct hand, you can
+        place the hand you are not using behind your back.
       </li>
     </ul>
     <button @click="next">Continue</button>

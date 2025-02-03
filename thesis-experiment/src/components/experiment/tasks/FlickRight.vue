@@ -1,5 +1,6 @@
 <template>
   <div :class="['flick-right', interfaceOrientation]">
+    <slot></slot>
     <img
       @touchstart="flickStarted"
       @touchmove="flickMoving"

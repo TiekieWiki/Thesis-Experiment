@@ -1,5 +1,6 @@
 <template>
   <div :class="['tap-type', interfaceOrientation]">
+    <slot></slot>
     <p>{{ sentence }}</p>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
     <div class="textarea-container">
@@ -176,6 +177,7 @@ function removeCharacter(): void {
       writtenText.value.slice(cursorPosition.value);
   }
   cursorPosition.value--;
+  capitalization.value = false;
   useNextAction(
     writtenText,
     capitalization,

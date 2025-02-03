@@ -40,7 +40,13 @@
               currentAction = a;
             }
           "
-          @finished-task="() => nextTask()" />
+          @finished-task="() => nextTask()"
+        >
+          <p class="task-instruction">
+            {{ getTaskInstruction(currentTask) }}. Use your
+            {{ currentHand }} hand.
+          </p>
+        </component>
         <UserExperienceTest
           v-else-if="showComponent == 'userExperienceTest'"
           :task-set="currentTaskSet"
@@ -104,6 +110,7 @@ import {
   getExperimentComponent,
 } from '@/utils/logic/userProgress';
 import { addData } from '@/utils/db';
+import { getTaskInstruction } from '@/utils/logic/selectTask';
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());
@@ -126,6 +133,7 @@ watch(isCorrectOrientation, (newValue, oldValue) => {
   if (newValue && !oldValue) {
     if (showComponent.value === 'task') {
       showComponent.value = 'taskInstructions';
+      measurements.value = [];
     }
   }
 });

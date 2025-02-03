@@ -12,6 +12,20 @@ main.experiment {
     }
   }
 
+  .task-instruction {
+    position: fixed;
+    max-width: calc(100% - 2 * variables.$spacing-medium);
+    top: variables.$spacing-medium;
+    left: variables.$spacing-medium;
+    font-style: italic;
+  }
+
+  .tap-menu {
+    .task-instruction {
+      top: 45%;
+    }
+  }
+
   .user-experience-test {
     .question {
       p {

@@ -1,5 +1,6 @@
 <template>
   <div :class="['drag-slider', interfaceOrientation]">
+    <slot></slot>
     <div class="slider">
       <input
         @touchstart="dragStarted"

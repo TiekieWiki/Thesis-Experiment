@@ -1,5 +1,6 @@
 <template>
   <div :class="['long-tap-hyperlink', interfaceOrientation]">
+    <slot></slot>
     <a ref="linkRef" href="#" v-on-long-press.prevent="openPopUp"
       >Open pop-up</a
     >

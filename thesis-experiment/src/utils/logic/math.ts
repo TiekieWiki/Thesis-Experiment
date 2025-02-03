@@ -66,7 +66,11 @@ export function wrapSentence(
   }
 
   if (currentLine.trim()) {
-    sentenceLines.push(currentLine.trim());
+    if (sentence[sentence.length - 1] === ' ') {
+      sentenceLines.push(currentLine.trim() + ' ');
+    } else {
+      sentenceLines.push(currentLine.trim());
+    }
   }
 
   return sentenceLines;
@@ -83,8 +87,6 @@ export function getCursorPosition(
   cursorPosition: number,
 ): { lineIndex: number; cursorIndex: number } {
   let charCount = 0;
-
-  console.log(sentenceLines);
 
   for (let i = 0; i < sentenceLines.length; i++) {
     const lineLength = sentenceLines[i].length;

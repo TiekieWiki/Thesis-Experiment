@@ -1,4 +1,11 @@
-import { collection, addDoc } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  QueryConstraint,
+  type DocumentData,
+  getDocs,
+  query,
+} from 'firebase/firestore';
 import db from './firebaseInit';
 
 /**
@@ -11,5 +18,25 @@ export async function addData(table: string, data: unknown): Promise<void> {
 
   if (docRef === null) {
     throw new Error('An error occurred while adding the data');
+  }
+}
+
+/**
+ * Get data from a Firestore collection
+ * @param table Firestore collection name
+ * @param tableQuery Firestore query constraint
+ * @returns Firestore document data
+ */
+export async function getData(
+  table: string,
+  tableQuery: QueryConstraint,
+): Promise<DocumentData[]> {
+  const querySnapshot = await getDocs(query(collection(db, table), tableQuery));
+
+  if (!querySnapshot.empty) {
+    const data = querySnapshot.docs.map(doc => doc.data());
+    return data;
+  } else {
+    return [];
   }
 }

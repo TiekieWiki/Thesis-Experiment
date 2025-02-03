@@ -6,4 +6,8 @@ main.end {
   width: 100vw;
   height: auto;
   padding: variables.$spacing-medium;
+
+  input[type='email'] {
+    margin-top: 0;
+  }
 }

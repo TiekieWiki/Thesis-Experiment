@@ -7,3 +7,8 @@ export interface User {
   screenWidth: number;
   screenHeight: number;
 }
+
+export interface UserEmail {
+  userId: string;
+  email: string;
+}

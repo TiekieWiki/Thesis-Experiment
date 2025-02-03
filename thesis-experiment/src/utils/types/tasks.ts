@@ -6,7 +6,7 @@ export const taskSet = [
 ];
 
 export const tasks = [
-  // 'DoubleTapZoomIn',
+  'DoubleTapZoomIn',
   // 'DoubleTapZoomOut',
   // 'DragList',
   // 'DragSlider',
@@ -17,5 +17,5 @@ export const tasks = [
   // 'MultiTouchRotate',
   // 'MultiTouchZoom',
   // 'TapMenu',
-  'TapType',
+  // 'TapType',
 ];

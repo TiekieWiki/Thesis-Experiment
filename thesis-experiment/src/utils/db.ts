@@ -29,9 +29,14 @@ export async function addData(table: string, data: unknown): Promise<void> {
  */
 export async function getData(
   table: string,
-  tableQuery: QueryConstraint,
+  tableQuery?: QueryConstraint,
 ): Promise<DocumentData[]> {
-  const querySnapshot = await getDocs(query(collection(db, table), tableQuery));
+  let querySnapshot;
+  if (tableQuery === undefined) {
+    querySnapshot = await getDocs(collection(db, table));
+  } else {
+    querySnapshot = await getDocs(query(collection(db, table), tableQuery));
+  }
 
   if (!querySnapshot.empty) {
     const data = querySnapshot.docs.map(doc => doc.data());

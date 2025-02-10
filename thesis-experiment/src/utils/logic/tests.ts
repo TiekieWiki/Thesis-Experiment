@@ -16,7 +16,6 @@ export function showMeasurementPoints(
   div.style.width = '4px';
   div.style.height = '4px';
   div.style.backgroundColor = center ? 'red' : 'blue';
-  div.style.zIndex = '1000';
 
   document.body.appendChild(div);
 }

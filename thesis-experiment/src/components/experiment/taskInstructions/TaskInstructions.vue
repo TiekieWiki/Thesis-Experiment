@@ -49,8 +49,8 @@ const emit = defineEmits<{
 function startTask(clickEvent: MouseEvent, clickTime: number): void {
   const measurement: Measurement = {
     action: 'startTask',
-    touchX: clickEvent.screenX,
-    touchY: clickEvent.screenY,
+    touchX: window.screen.width - window.innerWidth + clickEvent.clientX,
+    touchY: window.screen.height - window.innerHeight + clickEvent.clientY,
     centerX: 0,
     centerY: 0,
     timestamp: clickTime,

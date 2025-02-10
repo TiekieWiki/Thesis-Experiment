@@ -1,5 +1,5 @@
 import type { Action, Measurement } from '../types/measurements';
-import { showMeasurementPoints } from './tests';
+// import { showMeasurementPoints } from './tests';
 
 /**
  * Register user click
@@ -15,15 +15,15 @@ export function userClick(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX: clickEvent.screenX,
-    touchY: clickEvent.screenY,
+    touchX: window.screen.width - window.innerWidth + clickEvent.clientX,
+    touchY: window.screen.height - window.innerHeight + clickEvent.clientY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: clickTime,
   };
 
   // showMeasurementPoints(measurement.touchX, measurement.touchY, false);
-  showMeasurementPoints(measurement.centerX, measurement.centerY, true);
+  // showMeasurementPoints(measurement.centerX, measurement.centerY, true);
 
   return measurement;
 }
@@ -44,8 +44,10 @@ export function userTouchStart(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX: touchEvent.touches[0].screenX,
-    touchY: touchEvent.touches[0].screenY,
+    touchX:
+      window.screen.width - window.innerWidth + touchEvent.touches[0].clientX,
+    touchY:
+      window.screen.height - window.innerHeight + touchEvent.touches[0].clientY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,
@@ -55,12 +57,14 @@ export function userTouchStart(
     (currentTask === 'MultiTouchZoom' || currentTask === 'MultiTouchRotate') &&
     touchEvent.touches.length > 1
   ) {
-    measurement.touchX = touchEvent.touches[1].screenX;
-    measurement.touchY = touchEvent.touches[1].screenY;
+    measurement.touchX =
+      window.screen.width - window.innerWidth + touchEvent.touches[1].clientX;
+    measurement.touchY =
+      window.screen.height - window.innerHeight + touchEvent.touches[1].clientY;
   }
 
   // showMeasurementPoints(measurement.touchX, measurement.touchY, false);
-  showMeasurementPoints(measurement.centerX, measurement.centerY, true);
+  // showMeasurementPoints(measurement.centerX, measurement.centerY, true);
 
   return measurement;
 }
@@ -79,15 +83,21 @@ export function userTouchEnd(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX: touchEvent.changedTouches[0].screenX,
-    touchY: touchEvent.changedTouches[0].screenY,
+    touchX:
+      window.screen.width -
+      window.innerWidth +
+      touchEvent.changedTouches[0].clientX,
+    touchY:
+      window.screen.height -
+      window.innerHeight +
+      touchEvent.changedTouches[0].clientY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,
   };
 
   // showMeasurementPoints(measurement.touchX, measurement.touchY, false);
-  showMeasurementPoints(measurement.centerX, measurement.centerY, true);
+  // showMeasurementPoints(measurement.centerX, measurement.centerY, true);
 
   return measurement;
 }

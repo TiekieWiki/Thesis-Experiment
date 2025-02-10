@@ -74,10 +74,16 @@ function dragStarted(): void {
   currentAction.value = {
     action: 'startDragList',
     centerX: ARef.value
-      ? window.screenX + ARef.value.offsetLeft + ARef.value.offsetWidth / 2
+      ? window.screen.width -
+        window.innerWidth +
+        ARef.value.getBoundingClientRect().left +
+        ARef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: ARef.value
-      ? window.screenY + ARef.value.offsetTop + ARef.value.offsetHeight / 2
+      ? window.screen.height -
+        window.innerHeight +
+        ARef.value.getBoundingClientRect().top +
+        ARef.value.getBoundingClientRect().height / 2
       : 0,
   };
 }

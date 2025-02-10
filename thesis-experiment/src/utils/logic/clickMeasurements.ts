@@ -1,4 +1,5 @@
 import type { Action, Measurement } from '../types/measurements';
+import { showMeasurementPoints } from './tests';
 
 /**
  * Register user click
@@ -20,6 +21,9 @@ export function userClick(
     centerY: currentAction.centerY,
     timestamp: clickTime,
   };
+
+  // showMeasurementPoints(measurement.touchX, measurement.touchY, false);
+  showMeasurementPoints(measurement.centerX, measurement.centerY, true);
 
   return measurement;
 }
@@ -51,9 +55,13 @@ export function userTouchStart(
     (currentTask === 'MultiTouchZoom' || currentTask === 'MultiTouchRotate') &&
     touchEvent.touches.length > 1
   ) {
-    measurement.touchX = window.screenX + touchEvent.touches[1].screenX;
-    measurement.touchY = window.screenY + touchEvent.touches[1].screenY;
+    measurement.touchX = touchEvent.touches[1].screenX;
+    measurement.touchY = touchEvent.touches[1].screenY;
   }
+
+  // showMeasurementPoints(measurement.touchX, measurement.touchY, false);
+  showMeasurementPoints(measurement.centerX, measurement.centerY, true);
+
   return measurement;
 }
 
@@ -77,6 +85,9 @@ export function userTouchEnd(
     centerY: currentAction.centerY,
     timestamp: touchTime,
   };
+
+  // showMeasurementPoints(measurement.touchX, measurement.touchY, false);
+  showMeasurementPoints(measurement.centerX, measurement.centerY, true);
 
   return measurement;
 }

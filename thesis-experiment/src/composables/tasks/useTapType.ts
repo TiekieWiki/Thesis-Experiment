@@ -41,7 +41,6 @@ export function useNextAction(
   firstRowRefs: Ref<(HTMLElement | null)[]>,
   secondRowRefs: Ref<(HTMLElement | null)[]>,
   thirdRowRefs: Ref<(HTMLElement | null)[]>,
-  keyboardPosition: Ref<{ x: number; y: number }>,
   currentAction: Ref<Action>,
 ): void {
   // If the written text is empty, click capitalization
@@ -51,14 +50,12 @@ export function useNextAction(
       centerX: capitalizationRef.value
         ? window.screen.width -
           window.innerWidth +
-          keyboardPosition.value.x +
           capitalizationRef.value.getBoundingClientRect().left +
           capitalizationRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: capitalizationRef.value
         ? window.screen.height -
           window.innerHeight +
-          keyboardPosition.value.y +
           capitalizationRef.value.getBoundingClientRect().top +
           capitalizationRef.value.getBoundingClientRect().height / 2
         : 0,
@@ -71,14 +68,12 @@ export function useNextAction(
       centerX: backspaceRef.value
         ? window.screen.width -
           window.innerWidth +
-          keyboardPosition.value.x +
           backspaceRef.value.getBoundingClientRect().left +
           backspaceRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: backspaceRef.value
         ? window.screen.height -
           window.innerHeight +
-          keyboardPosition.value.y +
           backspaceRef.value.getBoundingClientRect().top +
           backspaceRef.value.getBoundingClientRect().height / 2
         : 0,
@@ -91,14 +86,12 @@ export function useNextAction(
       centerX: checkRef.value
         ? window.screen.width -
           window.innerWidth +
-          keyboardPosition.value.x +
           checkRef.value.getBoundingClientRect().left +
           checkRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: checkRef.value
         ? window.screen.height -
           window.innerHeight +
-          keyboardPosition.value.y +
           checkRef.value.getBoundingClientRect().top +
           checkRef.value.getBoundingClientRect().height / 2
         : 0,
@@ -125,7 +118,6 @@ export function useNextAction(
         nextCharacterRef instanceof HTMLElement
           ? window.screen.width -
             window.innerWidth +
-            keyboardPosition.value.x +
             nextCharacterRef.getBoundingClientRect().left +
             nextCharacterRef.getBoundingClientRect().width / 2
           : 0,
@@ -133,7 +125,6 @@ export function useNextAction(
         nextCharacterRef instanceof HTMLElement
           ? window.screen.height -
             window.innerHeight +
-            keyboardPosition.value.y +
             nextCharacterRef.getBoundingClientRect().top +
             nextCharacterRef.getBoundingClientRect().height / 2
           : 0,

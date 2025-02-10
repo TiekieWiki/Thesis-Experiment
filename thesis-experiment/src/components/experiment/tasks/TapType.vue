@@ -14,7 +14,7 @@
       <div ref="test-char" class="test-char">x</div>
       <div ref="caret" class="caret"></div>
     </div>
-    <div ref="keyboard" class="keyboard">
+    <div class="keyboard">
       <div class="row-1">
         <div
           v-for="key in firstRow"
@@ -96,8 +96,6 @@ const emit = defineEmits<{
 const textareaRef = useTemplateRef<HTMLTextAreaElement>('textareaRef');
 const writtenText = ref<string>('');
 const errorMessage = ref<string>('');
-const keyboardRef = useTemplateRef<HTMLElement>('keyboard');
-const keyboardPosition = ref<{ x: number; y: number }>({ x: 0, y: 0 });
 const firstRowRefs = ref<(HTMLElement | null)[]>([]);
 const secondRowRefs = ref<(HTMLElement | null)[]>([]);
 const thirdRowRefs = ref<(HTMLElement | null)[]>([]);
@@ -132,7 +130,6 @@ function capitalize(): void {
     firstRowRefs,
     secondRowRefs,
     thirdRowRefs,
-    keyboardPosition,
     currentAction,
   );
 }
@@ -161,7 +158,6 @@ function addCharacter(key: string): void {
     firstRowRefs,
     secondRowRefs,
     thirdRowRefs,
-    keyboardPosition,
     currentAction,
   );
   positionCaret();
@@ -189,7 +185,6 @@ function removeCharacter(): void {
     firstRowRefs,
     secondRowRefs,
     thirdRowRefs,
-    keyboardPosition,
     currentAction,
   );
   positionCaret();
@@ -246,25 +241,17 @@ const currentAction = ref<Action>({
 
 // Set initial action
 onMounted(() => {
-  // Get keyboard position
-  keyboardPosition.value = {
-    x: keyboardRef.value ? keyboardRef.value.offsetLeft : 0,
-    y: keyboardRef.value ? keyboardRef.value.offsetTop : 0,
-  };
-
   currentAction.value = {
     action: 'clickCapitalization',
     centerX: capitalizationRef.value
       ? window.screen.width -
         window.innerWidth +
-        keyboardPosition.value.x +
         capitalizationRef.value.getBoundingClientRect().left +
         capitalizationRef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: capitalizationRef.value
       ? window.screen.height -
         window.innerHeight +
-        keyboardPosition.value.y +
         capitalizationRef.value.getBoundingClientRect().top +
         capitalizationRef.value.getBoundingClientRect().height / 2
       : 0,

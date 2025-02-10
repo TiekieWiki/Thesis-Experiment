@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import { useEmitCurrentAction } from '@/composables/useTasks';
 import { xToPx } from '@/utils/logic/sizeConversion';
+import { showMeasurementPoints } from '@/utils/logic/tests';
 import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef } from 'vue';
@@ -60,6 +61,11 @@ onMounted(() => {
         xToPx('5mm')
       : 0,
   };
+  showMeasurementPoints(
+    currentAction.value.centerX,
+    currentAction.value.centerY,
+    true,
+  );
 });
 
 // Emit current action
@@ -72,10 +78,16 @@ function dragStarted(): void {
   currentAction.value = {
     action: 'startDragSlider',
     centerX: sliderRef.value
-      ? window.screenX + sliderRef.value.offsetLeft + xToPx('5mm')
+      ? window.screen.width -
+        window.innerWidth +
+        sliderRef.value.getBoundingClientRect().left +
+        xToPx('5mm')
       : 0,
     centerY: sliderRef.value
-      ? window.screenY + sliderRef.value.offsetTop + xToPx('5mm')
+      ? window.screen.height -
+        window.innerHeight +
+        sliderRef.value.getBoundingClientRect().top +
+        xToPx('5mm')
       : 0,
   };
 }
@@ -87,13 +99,17 @@ function dragEnded(): void {
   currentAction.value = {
     action: 'endDragSlider',
     centerX: sliderRef.value
-      ? window.screenX +
-        sliderRef.value!.offsetLeft +
-        sliderRef.value!.offsetWidth -
+      ? window.screen.width -
+        window.innerWidth +
+        sliderRef.value.getBoundingClientRect().left +
+        sliderRef.value.getBoundingClientRect().width -
         xToPx('5mm')
       : 0,
     centerY: sliderRef.value
-      ? window.screenY + sliderRef.value!.offsetTop + xToPx('5mm')
+      ? window.screen.height -
+        window.innerHeight +
+        sliderRef.value.getBoundingClientRect().top +
+        xToPx('5mm')
       : 0,
   };
 

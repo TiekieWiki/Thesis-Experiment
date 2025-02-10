@@ -111,6 +111,7 @@ import {
 } from '@/utils/logic/userProgress';
 import { addData } from '@/utils/db';
 import { getTaskInstruction } from '@/utils/logic/selectTask';
+import { clearMeasurementPoints } from '@/utils/logic/tests';
 
 // Check if device and orientation is correct
 const isCorrectDevice = ref<boolean>(correctDeviceType());
@@ -282,6 +283,7 @@ const currentAction = ref<Action>({
 function finishTaskInstructions(measurement: Measurement): void {
   measurements.value.push(measurement);
   showComponent.value = 'task';
+  clearMeasurementPoints();
 }
 
 /**

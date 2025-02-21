@@ -2,7 +2,8 @@
   <form class="user-experience-test">
     <h1>User experience test</h1>
     <p>
-      Answer the questions below about the last twelve tasks performed with your
+      Answer the questions below about the last series of tasks performed with
+      your
       <b>{{ hand }} hand.</b>
     </p>
     <div
@@ -100,12 +101,13 @@ const userExperienceQuestions = ref<UserExperienceQuestion[]>([
   {
     name: 'meetingRequirements',
     question:
-      'The combination of hand use and object placement meets my requirements.',
+      'The combination of the used hand and object placement meets my requirements.',
     answer: null,
   },
   {
     name: 'easyToUse',
-    question: 'The combination of hand use and object placement is easy to use',
+    question:
+      'The combination of the used hand and object placement is easy to use',
     answer: null,
   },
 ]);

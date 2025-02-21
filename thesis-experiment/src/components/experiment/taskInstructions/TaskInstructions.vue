@@ -8,13 +8,10 @@
         <h1>Instructions</h1>
         <p>{{ getTaskInstruction(task) }}</p>
         <p>
-          Reminder: perform this task with <b>only your {{ hand }} hand</b>
+          Reminder: perform this task using <b>only your {{ hand }} hand</b>
         </p>
         <video autoplay loop muted>
-          <source
-            :src="`/src/assets/images/animations/${animation}-${hand}.mp4`"
-            type="video/mp4"
-          />
+          <source :src="videoSrc" type="video/mp4" />
           Finger animated icons created by Freepik - Flaticon cannot be
           displayed.
         </video>
@@ -40,6 +37,12 @@ const props = defineProps<{
 const emit = defineEmits<{
   finishedInstructions: [value: Measurement];
 }>();
+
+// Compute animation path
+const videoSrc = computed(
+  () =>
+    `${import.meta.env.BASE_URL}animations/${animation.value}-${props.hand.charAt(0).toUpperCase() + props.hand.slice(1)}.mp4`,
+);
 
 /**
  * Start the task and register user click

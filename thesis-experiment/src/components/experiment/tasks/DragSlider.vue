@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { useEmitCurrentAction } from '@/composables/useTasks';
 import { xToPx } from '@/utils/logic/sizeConversion';
-import { showMeasurementPoints } from '@/utils/logic/tests';
 import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef } from 'vue';
@@ -61,11 +60,6 @@ onMounted(() => {
         xToPx('5mm')
       : 0,
   };
-  showMeasurementPoints(
-    currentAction.value.centerX,
-    currentAction.value.centerY,
-    true,
-  );
 });
 
 // Emit current action

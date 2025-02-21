@@ -7,7 +7,7 @@
       @touchend="flickEnded"
       ref="imageRef"
       :style="{ transform: `translateX(${translateX}px)` }"
-      src="../../../assets/images/Test.jpg"
+      src="/public/Test.jpg"
       alt="Photo by Greg Becker on Unsplash"
     />
   </div>

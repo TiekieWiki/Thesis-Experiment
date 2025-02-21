@@ -19,14 +19,14 @@
       appearance: none;
       width: variables.$size-large;
       height: variables.$size-large;
-      background: url('/src/assets/images/Phone.svg') no-repeat center center;
+      background: url('/public/Phone.svg') no-repeat center center;
       background-size: contain;
     }
 
     &::-moz-range-thumb {
       width: variables.$size-large;
       height: variables.$size-large;
-      background: url('/src/assets/images/Phone.svg') no-repeat center center;
+      background: url('/public/Phone.svg') no-repeat center center;
       background-size: contain;
     }
   }

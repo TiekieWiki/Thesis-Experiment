@@ -2,6 +2,13 @@
   <form class="laterality-test">
     <progress value="0.15" max="1">15 %</progress>
     <h1>Laterality test</h1>
+    <p>
+      In this test, you will be asked to indicate which hand you use for
+      different activities. Please answer the questions as accurately as
+      possible. If you do not have a preference, please select "No preference".
+      If you select "Left hand" or "Right hand" and never use the other hand,
+      please indicate this as well.
+    </p>
     <div
       v-for="question in lateralityQuestions"
       :key="question.name"

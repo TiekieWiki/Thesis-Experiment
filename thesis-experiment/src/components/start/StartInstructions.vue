@@ -33,11 +33,12 @@
       each series with either your left or right hand, as instructed before the
       series. Each series consists of a set of tasks that you will be asked to
       complete. The instructions will be presented before the task and during
-      the task if you forget. You will be timed during the tasks, and your time
-      will be recorded. The tasks starts when you click the task instructions
-      and finishes when you successfully completed the task as instructed. You
-      will also be asked to complete a short survey at the end of each series.
-      Please complete the tasks as quickly and accurately as possible.
+      the task in case you forget. You will be timed during the tasks, and your
+      time will be recorded. The task starts when you click the task
+      instructions and finishes when you successfully completed the task as
+      instructed. You will also be asked to complete a short survey at the end
+      of each series. Please complete the tasks as quickly and accurately as
+      possible.
     </p>
     <p>Before you begin the experiment, please ensure the following:</p>
     <ul>
@@ -55,8 +56,8 @@
         can see the elements on the screen properly.
       </li>
       <li>
-        Complete the experiment with the phone in portrait mode. If not, the
-        experiment will pause.
+        Complete the experiment with the phone in portrait mode. The experiment
+        will pause in landscape mode.
       </li>
       <li>
         Complete each task holding and using the phone with only the instructed

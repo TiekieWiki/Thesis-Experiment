@@ -18,6 +18,10 @@ const router = createRouter({
       name: 'End',
       component: () => import('../views/EndView.vue'),
     },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: { name: 'Start' },
+    },
   ],
 });
 

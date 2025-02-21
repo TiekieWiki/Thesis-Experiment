@@ -5,7 +5,7 @@
       @click="imageClicked"
       ref="imageRef"
       :style="{ transform: `scale(${scale})` }"
-      src="../../../assets/images/Test.jpg"
+      src="/public/Test.jpg"
       alt="Photo by Greg Becker on Unsplash"
     />
   </div>

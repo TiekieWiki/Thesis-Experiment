@@ -1,7 +1,12 @@
 <template>
   <div :class="['long-tap-select', interfaceOrientation]">
     <slot></slot>
-    <p ref="textRef" class="select-text">
+    <p
+      ref="textRef"
+      class="select-text"
+      @touchstart="currentAction.action = 'startLongTapSelect'"
+      @touchend="currentAction.action = 'endLongTapSelect'"
+    >
       {{ content }}
     </p>
   </div>

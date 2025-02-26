@@ -40,6 +40,6 @@ npm run build
 npm run lint
 ```
 
-### BrowserStack
+## Testing
 
 This project is tested with BrowserStack.

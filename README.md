@@ -39,3 +39,7 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### BrowserStack
+
+This project is tested with BrowserStack.

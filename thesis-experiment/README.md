@@ -20,6 +20,8 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 npm install
 ```
 
+Create src/utils/firebaseConfig.js with Firebase config key.
+
 ### Compile and Hot-Reload for Development
 
 ```sh

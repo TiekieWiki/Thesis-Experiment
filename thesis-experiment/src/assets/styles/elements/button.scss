@@ -8,6 +8,7 @@ button {
   min-width: variables.$size-medium;
   min-height: variables.$size-medium;
   padding: variables.$spacing-small variables.$spacing-medium;
+  color: variables.$color-primary;
   background-color: variables.$color-tertiary;
   border: variables.$size-border solid variables.$color-primary;
 

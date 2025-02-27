@@ -9,6 +9,8 @@
   input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
+    outline: none;
+    box-shadow: none;
     width: 100%;
     height: variables.$size-large;
     background: transparent;
@@ -17,6 +19,7 @@
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
+      box-shadow: none;
       width: variables.$size-large;
       height: variables.$size-large;
       background: url('/public/Phone.svg') no-repeat center center;

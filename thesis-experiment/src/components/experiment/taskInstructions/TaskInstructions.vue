@@ -10,11 +10,16 @@
         <p>
           Reminder: perform this task using <b>only your {{ hand }} hand</b>
         </p>
-        <video autoplay loop muted>
+        <img
+          :src="videoSrc"
+          alt="Finger animated icons created by Freepik - Flaticon cannot be
+          displayed."
+        />
+        <!-- <video autoplay loop muted>
           <source :src="videoSrc" type="video/mp4" />
           Finger animated icons created by Freepik - Flaticon cannot be
           displayed.
-        </video>
+        </video> -->
         <p>
           Hold the phone in a neutral position and click this pop-up to start
           the task
@@ -41,7 +46,7 @@ const emit = defineEmits<{
 // Compute animation path
 const videoSrc = computed(
   () =>
-    `${import.meta.env.BASE_URL}animations/${animation.value}-${props.hand.charAt(0).toUpperCase() + props.hand.slice(1)}.mp4`,
+    `${import.meta.env.BASE_URL}animations/${animation.value}-${props.hand.charAt(0).toUpperCase() + props.hand.slice(1)}.gif`,
 );
 
 /**

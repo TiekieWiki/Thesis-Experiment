@@ -23,6 +23,7 @@ body {
   scroll-behavior: smooth;
   overscroll-behavior: contain;
   background-color: variables.$color-tertiary;
+  touch-action: manipulation;
 }
 
 :focus,

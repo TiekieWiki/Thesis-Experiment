@@ -29,9 +29,9 @@ li {
 }
 
 .select-text {
-  -webkit-user-select: all;
-  -ms-user-select: all;
-  user-select: all;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 
   ::-moz-selection,
   ::selection {

@@ -25,7 +25,7 @@ main.start {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
 
-      &:not(:nth-child(11)) {
+      &:not(:nth-child(13)) {
         padding-bottom: variables.$spacing-medium;
         border-bottom: variables.$size-border solid variables.$color-primary;
       }

@@ -20,6 +20,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { distance } from '@/utils/logic/math';
 import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
@@ -95,6 +96,9 @@ function endZoom(): void {
     // Emit finished task after seeing the zoomed image
     setTimeout(() => {
       emit('finishedTask');
+
+      // Enter full screen
+      enterFullScreen();
     }, resultTimer);
   } else if (!finished.value) {
     // Reset the image position

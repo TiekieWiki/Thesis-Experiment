@@ -12,7 +12,7 @@ export function showMeasurementPoints(
   div.className = 'measurement-point';
   div.style.position = 'absolute';
   div.style.left = `${x - 2}px`;
-  div.style.top = `${y - 2 - (window.screen.height - window.innerHeight)}px`;
+  div.style.top = `${y - 2}px`;
   div.style.width = '4px';
   div.style.height = '4px';
   div.style.backgroundColor = center ? 'red' : 'blue';

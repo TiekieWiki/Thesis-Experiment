@@ -48,15 +48,11 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickCapitalization',
       centerX: capitalizationRef.value
-        ? window.screen.width -
-          window.innerWidth +
-          capitalizationRef.value.getBoundingClientRect().left +
+        ? capitalizationRef.value.getBoundingClientRect().left +
           capitalizationRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: capitalizationRef.value
-        ? window.screen.height -
-          window.innerHeight +
-          capitalizationRef.value.getBoundingClientRect().top +
+        ? capitalizationRef.value.getBoundingClientRect().top +
           capitalizationRef.value.getBoundingClientRect().height / 2
         : 0,
     };
@@ -66,15 +62,11 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickBackspace',
       centerX: backspaceRef.value
-        ? window.screen.width -
-          window.innerWidth +
-          backspaceRef.value.getBoundingClientRect().left +
+        ? backspaceRef.value.getBoundingClientRect().left +
           backspaceRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: backspaceRef.value
-        ? window.screen.height -
-          window.innerHeight +
-          backspaceRef.value.getBoundingClientRect().top +
+        ? backspaceRef.value.getBoundingClientRect().top +
           backspaceRef.value.getBoundingClientRect().height / 2
         : 0,
     };
@@ -84,15 +76,11 @@ export function useNextAction(
     currentAction.value = {
       action: 'clickCheck',
       centerX: checkRef.value
-        ? window.screen.width -
-          window.innerWidth +
-          checkRef.value.getBoundingClientRect().left +
+        ? checkRef.value.getBoundingClientRect().left +
           checkRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: checkRef.value
-        ? window.screen.height -
-          window.innerHeight +
-          checkRef.value.getBoundingClientRect().top +
+        ? checkRef.value.getBoundingClientRect().top +
           checkRef.value.getBoundingClientRect().height / 2
         : 0,
     };
@@ -116,16 +104,12 @@ export function useNextAction(
       action: `click${nextCharacter === ' ' ? 'SpaceBar' : nextCharacter}`,
       centerX:
         nextCharacterRef instanceof HTMLElement
-          ? window.screen.width -
-            window.innerWidth +
-            nextCharacterRef.getBoundingClientRect().left +
+          ? nextCharacterRef.getBoundingClientRect().left +
             nextCharacterRef.getBoundingClientRect().width / 2
           : 0,
       centerY:
         nextCharacterRef instanceof HTMLElement
-          ? window.screen.height -
-            window.innerHeight +
-            nextCharacterRef.getBoundingClientRect().top +
+          ? nextCharacterRef.getBoundingClientRect().top +
             nextCharacterRef.getBoundingClientRect().height / 2
           : 0,
     };

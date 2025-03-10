@@ -1,3 +1,4 @@
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { emitTimer } from '@/utils/logic/timers';
 import type { EmitFunction, EventMap } from '@/utils/types/emits';
 import type { Action } from '@/utils/types/measurements';
@@ -23,15 +24,11 @@ export function useFlickStarted(
   currentAction.value = {
     action: `start${task}`,
     centerX: imageRef.value
-      ? window.screen.width -
-        window.innerWidth +
-        imageRef.value.getBoundingClientRect().left +
+      ? imageRef.value.getBoundingClientRect().left +
         imageRef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: imageRef.value
-      ? window.screen.height -
-        window.innerHeight +
-        imageRef.value.getBoundingClientRect().top +
+      ? imageRef.value.getBoundingClientRect().top +
         imageRef.value.getBoundingClientRect().height / 2
       : 0,
   };
@@ -87,6 +84,9 @@ export function useFlickEnded(
         translateX.value > imageRef.value!.offsetWidth / 2)
     ) {
       emit('finishedTask', undefined);
+
+      // Enter full screen
+      enterFullScreen();
     } else {
       translateX.value = 0;
     }

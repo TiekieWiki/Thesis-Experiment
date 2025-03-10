@@ -111,6 +111,7 @@ import {
 } from '@/utils/logic/userProgress';
 import { addData } from '@/utils/db';
 import { getTaskInstruction } from '@/utils/logic/selectTask';
+import { exitFullScreen } from '@/utils/logic/fullScreen';
 // import { clearMeasurementPoints } from '@/utils/logic/tests';
 
 // Check if device and orientation is correct
@@ -261,6 +262,9 @@ async function nextTaskSet(): Promise<void> {
       timestamp: Date.now(),
     };
     await writeCheckpoint(checkpoint);
+
+    // Exit full screen
+    exitFullScreen();
 
     // Go to end page
     showComponent.value = '';

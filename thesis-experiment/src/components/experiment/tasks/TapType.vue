@@ -79,6 +79,7 @@ import {
   useNextAction,
 } from '@/composables/tasks/useTapType';
 import { useEmitCurrentAction } from '@/composables/useTasks';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { getCursorPosition, wrapSentence } from '@/utils/logic/math';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, ref, useTemplateRef } from 'vue';
@@ -244,15 +245,11 @@ onMounted(() => {
   currentAction.value = {
     action: 'clickCapitalization',
     centerX: capitalizationRef.value
-      ? window.screen.width -
-        window.innerWidth +
-        capitalizationRef.value.getBoundingClientRect().left +
+      ? capitalizationRef.value.getBoundingClientRect().left +
         capitalizationRef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: capitalizationRef.value
-      ? window.screen.height -
-        window.innerHeight +
-        capitalizationRef.value.getBoundingClientRect().top +
+      ? capitalizationRef.value.getBoundingClientRect().top +
         capitalizationRef.value.getBoundingClientRect().height / 2
       : 0,
   };
@@ -269,6 +266,9 @@ function checkSentence(): void {
 
   if (writtenText.value === sentence) {
     emit('finishedTask');
+
+    // Enter full screen
+    enterFullScreen();
   } else {
     errorMessage.value = 'The written text does not match the sentence.';
   }

@@ -24,6 +24,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { emitTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { ref, useTemplateRef } from 'vue';
@@ -74,15 +75,11 @@ function dragStarted(): void {
   currentAction.value = {
     action: 'startDragList',
     centerX: ARef.value
-      ? window.screen.width -
-        window.innerWidth +
-        ARef.value.getBoundingClientRect().left +
+      ? ARef.value.getBoundingClientRect().left +
         ARef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: ARef.value
-      ? window.screen.height -
-        window.innerHeight +
-        ARef.value.getBoundingClientRect().top +
+      ? ARef.value.getBoundingClientRect().top +
         ARef.value.getBoundingClientRect().height / 2
       : 0,
   };
@@ -98,6 +95,9 @@ function dragEnded(): void {
   setTimeout(() => {
     if (dragList.value[2].name == 'A') {
       emit('finishedTask');
+
+      // Enter full screen
+      enterFullScreen();
     }
   }, emitTimer);
 }

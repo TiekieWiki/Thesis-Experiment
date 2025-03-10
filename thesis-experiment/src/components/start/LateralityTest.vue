@@ -58,6 +58,7 @@
 <script setup lang="ts">
 import { addData } from '@/utils/db';
 import { getAllCheckpoints, writeCheckpoint } from '@/utils/logic/checkpoints';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import type { Checkpoint } from '@/utils/types/checkpoint';
 import type { Laterality, LateralityQuestion } from '@/utils/types/laterality';
 import { ref, watch } from 'vue';
@@ -222,5 +223,8 @@ async function save(): Promise<void> {
 
   // Go to the next step
   emit('finishedTest');
+
+  // Enter full screen
+  enterFullScreen();
 }
 </script>

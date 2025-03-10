@@ -60,6 +60,10 @@
         will pause in landscape mode.
       </li>
       <li>
+        The tasks will open in full-screen. Please keep it that way. After all
+        tasks are finished, full screen will be exited.
+      </li>
+      <li>
         Complete each task holding and using the phone with only the instructed
         hand. You can't hold the phone with one hand and use the other to
         complete the task. To make sure you are using the correct hand, you can

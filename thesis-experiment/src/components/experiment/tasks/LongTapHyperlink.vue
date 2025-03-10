@@ -28,6 +28,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 
 defineProps<{
   interfaceOrientation: string;
@@ -64,6 +65,9 @@ function openPopUp(): void {
   // Emit finished task after seeing the pop-up
   setTimeout(() => {
     emit('finishedTask');
+
+    // Enter full screen
+    enterFullScreen();
   }, resultTimer);
 }
 </script>

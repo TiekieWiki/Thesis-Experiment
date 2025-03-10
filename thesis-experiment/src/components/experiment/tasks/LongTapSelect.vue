@@ -17,6 +17,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
 import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
@@ -65,6 +66,9 @@ function detectSelectionChange(): void {
     // Emit finished task after seeing the selection
     setTimeout(() => {
       emit('finishedTask');
+
+      // Enter full screen
+      enterFullScreen();
     }, resultTimer);
   }
 }

@@ -15,8 +15,8 @@ export function userClick(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX: window.screen.width - window.innerWidth + clickEvent.clientX,
-    touchY: window.screen.height - window.innerHeight + clickEvent.clientY,
+    touchX: clickEvent.clientX,
+    touchY: clickEvent.clientY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: clickTime,
@@ -44,10 +44,8 @@ export function userTouchStart(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX:
-      window.screen.width - window.innerWidth + touchEvent.touches[0].clientX,
-    touchY:
-      window.screen.height - window.innerHeight + touchEvent.touches[0].clientY,
+    touchX: touchEvent.touches[0].clientX,
+    touchY: touchEvent.touches[0].clientY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,
@@ -57,10 +55,8 @@ export function userTouchStart(
     (currentTask === 'MultiTouchZoom' || currentTask === 'MultiTouchRotate') &&
     touchEvent.touches.length > 1
   ) {
-    measurement.touchX =
-      window.screen.width - window.innerWidth + touchEvent.touches[1].clientX;
-    measurement.touchY =
-      window.screen.height - window.innerHeight + touchEvent.touches[1].clientY;
+    measurement.touchX = touchEvent.touches[1].clientX;
+    measurement.touchY = touchEvent.touches[1].clientY;
   }
 
   // showMeasurementPoints(measurement.touchX, measurement.touchY, false);
@@ -83,14 +79,8 @@ export function userTouchEnd(
 ): Measurement {
   const measurement: Measurement = {
     action: currentAction.action,
-    touchX:
-      window.screen.width -
-      window.innerWidth +
-      touchEvent.changedTouches[0].clientX,
-    touchY:
-      window.screen.height -
-      window.innerHeight +
-      touchEvent.changedTouches[0].clientY,
+    touchX: touchEvent.changedTouches[0].clientX,
+    touchY: touchEvent.changedTouches[0].clientY,
     centerX: currentAction.centerX,
     centerY: currentAction.centerY,
     timestamp: touchTime,

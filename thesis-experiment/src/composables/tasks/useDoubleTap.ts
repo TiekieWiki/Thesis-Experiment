@@ -1,3 +1,4 @@
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { resetTimer, resultTimer } from '@/utils/logic/timers';
 import type { EmitFunction, EventMap } from '@/utils/types/emits';
 import type { Action } from '@/utils/types/measurements';
@@ -29,6 +30,9 @@ export function useDoubleTap(
     // Emit finished task after seeing the zoomed image
     setTimeout(() => {
       emit('finishedTask', undefined);
+
+      // Enter full screen
+      enterFullScreen();
     }, resultTimer);
   } else {
     firstClicked.value = true;

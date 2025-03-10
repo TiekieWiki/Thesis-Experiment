@@ -29,6 +29,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import type { Action } from '@/utils/types/measurements';
 import { nextTick, ref, useTemplateRef } from 'vue';
 
@@ -70,15 +71,11 @@ async function menuClicked(): Promise<void> {
   currentAction.value = {
     action: 'clickMenuItem',
     centerX: menuItemRef.value
-      ? window.screen.width -
-        window.innerWidth +
-        menuItemRef.value.getBoundingClientRect().left +
+      ? menuItemRef.value.getBoundingClientRect().left +
         menuItemRef.value.getBoundingClientRect().width / 2
       : 0,
     centerY: menuItemRef.value
-      ? window.screen.height -
-        window.innerHeight +
-        menuItemRef.value.getBoundingClientRect().top +
+      ? menuItemRef.value.getBoundingClientRect().top +
         menuItemRef.value.getBoundingClientRect().height / 2
       : 0,
   };
@@ -89,5 +86,8 @@ async function menuClicked(): Promise<void> {
  */
 function finishTask(): void {
   emit('finishedTask');
+
+  // Enter full screen
+  enterFullScreen();
 }
 </script>

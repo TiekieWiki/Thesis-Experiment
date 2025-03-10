@@ -20,6 +20,7 @@ import {
   useEmitCurrentAction,
   useOnMountedCurrentAction,
 } from '@/composables/useTasks';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { calculateAngle } from '@/utils/logic/math';
 import { resultTimer } from '@/utils/logic/timers';
 import type { Action } from '@/utils/types/measurements';
@@ -108,6 +109,9 @@ function endRotate(): void {
     // Emit finished task after seeing the rotated image
     setTimeout(() => {
       emit('finishedTask');
+
+      // Enter full screen
+      enterFullScreen();
     }, resultTimer);
   } else if (!finished.value) {
     // Reset the image position

@@ -17,15 +17,11 @@ export function useOnMountedCurrentAction(
     currentAction.value = {
       action: action,
       centerX: centerRef.value
-        ? window.screen.width -
-          window.innerWidth +
-          centerRef.value.getBoundingClientRect().left +
+        ? centerRef.value.getBoundingClientRect().left +
           centerRef.value.getBoundingClientRect().width / 2
         : 0,
       centerY: centerRef.value
-        ? window.screen.height -
-          window.innerHeight +
-          centerRef.value.getBoundingClientRect().top +
+        ? centerRef.value.getBoundingClientRect().top +
           centerRef.value.getBoundingClientRect().height / 2
         : 0,
     };

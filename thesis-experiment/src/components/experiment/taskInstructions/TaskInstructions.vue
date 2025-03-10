@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import { getTaskInstruction } from '@/utils/logic/selectTask';
 import type { Measurement } from '@/utils/types/measurements';
 import { computed } from 'vue';
@@ -57,13 +58,16 @@ const videoSrc = computed(
 function startTask(clickEvent: MouseEvent, clickTime: number): void {
   const measurement: Measurement = {
     action: 'startTask',
-    touchX: window.screen.width - window.innerWidth + clickEvent.clientX,
-    touchY: window.screen.height - window.innerHeight + clickEvent.clientY,
+    touchX: clickEvent.clientX,
+    touchY: clickEvent.clientY,
     centerX: 0,
     centerY: 0,
     timestamp: clickTime,
   };
   emit('finishedInstructions', measurement);
+
+  // Enter full screen
+  enterFullScreen();
 }
 
 /**

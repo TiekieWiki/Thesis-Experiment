@@ -14,6 +14,8 @@
 </template>
 
 <script setup lang="ts">
+import { enterFullScreen } from '@/utils/logic/fullScreen';
+
 defineProps<{
   hand: string;
   remainingTaskSets: number;
@@ -25,5 +27,8 @@ const emit = defineEmits<{
 
 function next(): void {
   emit('finishedInstructions');
+
+  // Enter full screen
+  enterFullScreen();
 }
 </script>

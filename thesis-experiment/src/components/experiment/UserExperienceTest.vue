@@ -80,6 +80,7 @@
 <script setup lang="ts">
 import { addData } from '@/utils/db';
 import { getAllCheckpoints, writeCheckpoint } from '@/utils/logic/checkpoints';
+import { enterFullScreen } from '@/utils/logic/fullScreen';
 import type { Checkpoint } from '@/utils/types/checkpoint';
 import type {
   UserExperience,
@@ -147,5 +148,8 @@ async function save(): Promise<void> {
   await writeCheckpoint(checkpoint);
 
   emit('finishedTaskSet');
+
+  // Enter full screen
+  enterFullScreen();
 }
 </script>

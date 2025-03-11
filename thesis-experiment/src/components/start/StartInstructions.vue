@@ -61,7 +61,7 @@
       </li>
       <li>
         The tasks will open in full-screen. Please keep it that way. After all
-        tasks are finished, full screen will be exited.
+        tasks are finished, full screen will be closed.
       </li>
       <li>
         Complete each task holding and using the phone with only the instructed

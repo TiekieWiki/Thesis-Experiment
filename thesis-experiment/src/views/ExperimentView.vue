@@ -3,19 +3,22 @@
     class="experiment"
     @click.capture="
       oneClickFilter
-        ? measurements.push(userClick($event, Date.now(), currentAction))
+        ? (measurements.push(userClick($event, Date.now(), currentAction)),
+          clickCount++)
         : ''
     "
     @touchstart="
       twoClickFilter
-        ? measurements.push(
+        ? (measurements.push(
             userTouchStart($event, Date.now(), currentAction, currentTask),
-          )
+          ),
+          clickCount++)
         : ''
     "
     @touchend="
       twoClickFilter
-        ? measurements.push(userTouchEnd($event, Date.now(), currentAction))
+        ? (measurements.push(userTouchEnd($event, Date.now(), currentAction)),
+          clickCount++)
         : ''
     "
   >
@@ -42,10 +45,22 @@
           "
           @finished-task="() => nextTask()"
         >
-          <p class="task-instruction">
-            {{ getTaskInstruction(currentTask) }}. Use your
-            {{ currentHand }} hand.
-          </p>
+          <div class="task-instruction">
+            <p>
+              {{ getTaskInstruction(currentTask) }}. Use your
+              {{ currentHand }} hand.
+            </p>
+            <p v-show="taskSkippable(currentTask, clickCount)">
+              Is the task too difficult to finish? Skip the task by clicking the
+              button below.
+            </p>
+            <button
+              v-show="taskSkippable(currentTask, clickCount)"
+              @click="skipTask"
+            >
+              Skip task
+            </button>
+          </div>
         </component>
         <UserExperienceTest
           v-else-if="showComponent == 'userExperienceTest'"
@@ -112,6 +127,7 @@ import {
 import { addData } from '@/utils/db';
 import { getTaskInstruction } from '@/utils/logic/selectTask';
 import { exitFullScreen } from '@/utils/logic/fullScreen';
+import { taskSkippable } from '@/utils/logic/skipTask';
 // import { clearMeasurementPoints } from '@/utils/logic/tests';
 
 // Check if device and orientation is correct
@@ -196,6 +212,9 @@ const currentInterfaceOrientation = computed((): string => {
 const oneClickFilter = useFilters(showComponent, currentTask).oneClickFilter;
 const twoClickFilter = useFilters(showComponent, currentTask).twoClickFilter;
 
+// Click count
+const clickCount = ref<number>(0);
+
 /**
  * Go to next task
  */
@@ -222,6 +241,28 @@ async function nextTask(): Promise<void> {
     // Show user experience questionnaire
     showComponent.value = 'userExperienceTest';
   }
+}
+
+/**
+ * Skip task
+ */
+function skipTask(): void {
+  // Add skip task measurement
+  const measurement: Measurement = {
+    action: 'skipTask',
+    touchX: 0,
+    touchY: 0,
+    centerX: 0,
+    centerY: 0,
+    timestamp: 0,
+  };
+  measurements.value.push(measurement);
+
+  // Reset click count
+  clickCount.value = 0;
+
+  // Go to next task
+  nextTask();
 }
 
 /**

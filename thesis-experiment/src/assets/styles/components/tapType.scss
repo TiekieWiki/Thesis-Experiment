@@ -7,14 +7,16 @@
   width: 100%;
   height: 100%;
 
-  p {
+  .sentence {
     position: fixed;
     top: 20vh;
     width: calc(100% - 2 * variables.$spacing-medium);
   }
 
   p.error {
+    position: fixed;
     top: 30vh;
+    width: calc(100% - 2 * variables.$spacing-medium);
   }
 
   .textarea-container {

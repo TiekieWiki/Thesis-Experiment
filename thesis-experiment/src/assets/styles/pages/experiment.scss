@@ -18,6 +18,10 @@ main.experiment {
     top: variables.$spacing-medium;
     left: variables.$spacing-medium;
     font-style: italic;
+
+    p {
+      margin-bottom: variables.$spacing-medium;
+    }
   }
 
   .tap-menu {

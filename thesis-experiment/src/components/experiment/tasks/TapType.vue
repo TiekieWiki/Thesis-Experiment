@@ -1,7 +1,7 @@
 <template>
   <div :class="['tap-type', interfaceOrientation]">
     <slot></slot>
-    <p>{{ sentence }}</p>
+    <p class="sentence">{{ sentence }}</p>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
     <div class="textarea-container">
       <textarea

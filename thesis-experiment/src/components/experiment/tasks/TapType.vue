@@ -173,7 +173,7 @@ function removeCharacter(): void {
       writtenText.value.slice(0, cursorPosition.value - 1) +
       writtenText.value.slice(cursorPosition.value);
   }
-  cursorPosition.value--;
+  cursorPosition.value = Math.max(0, cursorPosition.value - 1);
   capitalization.value = false;
   useNextAction(
     writtenText,

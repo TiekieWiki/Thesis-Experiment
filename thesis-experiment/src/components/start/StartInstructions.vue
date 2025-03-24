@@ -50,7 +50,7 @@
       <li>
         Remove any phone case or pop-socket during the experiment if possible.
       </li>
-      <li>Make sure there is no glare on your screen.</li>
+      <li>Make sure there is no light reflection on your screen.</li>
       <li>
         Set the brightness of your screen to your own comfort, but make sure you
         can see the elements on the screen properly.

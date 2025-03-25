@@ -6,7 +6,7 @@ const skipCutOff = [
   { task: 'FlickLeft', cutOff: 10 },
   { task: 'FlickRight', cutOff: 10 },
   { task: 'LongTapHyperlink', cutOff: 10 },
-  { task: 'LongTapSelect', cutOff: 20 },
+  { task: 'LongTapSelect', cutOff: 10 },
   { task: 'MultiTouchRotate', cutOff: 20 },
   { task: 'MultiTouchZoom', cutOff: 20 },
   { task: 'TapMenu', cutOff: 10 },

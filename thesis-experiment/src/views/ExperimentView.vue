@@ -222,6 +222,9 @@ async function nextTask(): Promise<void> {
   // Save measurements
   await saveMeasurements();
 
+  // Reset click count
+  clickCount.value = 0;
+
   // Write a checkpoint
   const checkpoint: Checkpoint = {
     id: `task-${currentTask.value}`,
@@ -257,9 +260,6 @@ function skipTask(): void {
     timestamp: 0,
   };
   measurements.value.push(measurement);
-
-  // Reset click count
-  clickCount.value = 0;
 
   // Go to next task
   nextTask();

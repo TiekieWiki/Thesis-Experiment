@@ -102,7 +102,7 @@ const userExperienceQuestions = ref<UserExperienceQuestion[]>([
   {
     name: 'meetingRequirements',
     question:
-      'The combination of the used hand and object placement meets my requirements (needs).',
+      'The combination of the used hand and object placement meets my requirements (needs)',
     answer: null,
   },
   {

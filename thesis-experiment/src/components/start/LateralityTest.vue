@@ -211,7 +211,7 @@ async function save(): Promise<void> {
     )!.useOtherHand,
   };
 
-  addData('laterality', laterality);
+  // addData('laterality', laterality);
 
   // Write a checkpoint
   const checkpoint: Checkpoint = {

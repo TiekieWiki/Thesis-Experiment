@@ -88,7 +88,7 @@ async function save(): Promise<void> {
     screenHeight: window.screen.height,
   };
 
-  addData('user', user);
+  // addData('user', user);
 
   // Write a checkpoint
   const checkpoint: Checkpoint = {

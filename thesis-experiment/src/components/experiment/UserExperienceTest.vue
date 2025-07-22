@@ -137,7 +137,7 @@ async function save(): Promise<void> {
     easeOfUse: userExperienceQuestions.value[1].answer!,
   };
 
-  addData('userExperience', uxTest);
+  // addData('userExperience', uxTest);
 
   // Write a checkpoint
   const checkpoint: Checkpoint = {

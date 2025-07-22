@@ -345,7 +345,7 @@ async function saveMeasurements(): Promise<void> {
     measurements: measurements.value,
   };
 
-  addData('measurements', taskMeasurements);
+  // addData('measurements', taskMeasurements);
 
   measurements.value = [];
 }

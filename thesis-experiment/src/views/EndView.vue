@@ -71,7 +71,7 @@ function submitEmail(): void {
       userId: userId.value!,
       email: emailAddress.value,
     };
-    addData('resultEmail', userEmail);
+    // addData('resultEmail', userEmail);
     emailSubmitted.value = true;
   }
 }

@@ -19,6 +19,11 @@ const router = createRouter({
       component: () => import('../views/EndView.vue'),
     },
     {
+      path: '/example',
+      name: 'Example',
+      component: () => import('../views/ExampleView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       redirect: { name: 'Start' },
     },
